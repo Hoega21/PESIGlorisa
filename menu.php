@@ -67,7 +67,7 @@
                             </a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="./MVentas/Clientes/MainClientes.php" target="gloricenter">
+                                    <a href="./modulo-ventas/Clientes/MainClientes.php" target="gloricenter">
                                         <i class="fas fa-tachometer-alt"></i>Clientes</a>
                                 </li>
                                 <li>
