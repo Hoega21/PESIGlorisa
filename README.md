@@ -3,13 +3,8 @@ Trabajo de Planeamiento Estratégico y Sistemas de Información para la empresa 
 
 ## INTEGRANTES
 * ALVARADO ROJAS, ROSA MARÍA.
-
 * BLETRÁN RAMOS, JAVIER.
-
 * DELGADO ROGRIGUEZ, NILSON FREID.
-
 * DIAZ ARGOMEDO, CÉSAR ALEJANDRO.
-
 * SABA SANCHEZ, JHON JAIRO.
-
 * URBINA NARRO, CÉSAR AUGUSTO.
