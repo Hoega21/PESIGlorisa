@@ -15,4 +15,8 @@ myMDLApp.controller("gestorProductosCtrl", ['$scope', '$state', function($scope,
       estado: 1
     }
   ]
+
+  ctrl.regresarProductos = function () {
+    window.location.href = "#!/administrador/productos";
+  }
 }]);

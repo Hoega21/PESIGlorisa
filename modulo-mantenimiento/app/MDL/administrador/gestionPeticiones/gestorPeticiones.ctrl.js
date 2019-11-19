@@ -22,4 +22,9 @@ myMDLApp.controller("gestorPeticionesCtrl", ['$scope', '$state', function($scope
       estado: 1
     }
   ]
+
+  ctrl.regresarPeticiones = function () {
+    window.location.href = "#!/administrador/peticiones";
+  }
+
 }]);

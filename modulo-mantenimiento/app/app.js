@@ -15,10 +15,22 @@ myMDLApp.config(['stateHelperProvider', '$urlRouterProvider', function(stateHelp
         controller: 'gestorProductosCtrl as GPCtrl'
       },
       {
+        name: 'agregar-producto',
+        url: '/productos/agregar',
+        templateUrl: 'app/MDL/administrador/gestionProductos/agregarProducto.html',
+        controller: 'gestorProductosCtrl as GPCtrl'
+      },
+      {
         name: 'gestionar-peticiones',
         url: '/peticiones',
         templateUrl: 'app/MDL/administrador/gestionPeticiones/listarPeticiones.html',
         controller: 'gestorPeticionesCtrl as GPeCtrl',
+      },
+      {
+        name: 'agregar-peticion',
+        url: '/peticiones/agregar',
+        templateUrl: 'app/MDL/administrador/gestionPeticiones/agregarPeticion.html',
+        controller: 'gestorPeticionesCtrl as GPeCtrl'
       },
       {
         name: 'gestionar-ordenes',
