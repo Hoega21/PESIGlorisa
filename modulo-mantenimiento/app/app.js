@@ -19,12 +19,12 @@ myMDLApp.config(['stateHelperProvider', '$urlRouterProvider', function(stateHelp
         url: '/peticiones',
         templateUrl: 'app/MDL/administrador/gestionPeticiones/listarPeticiones.html',
         controller: 'gestorPeticionesCtrl as GPeCtrl',
-  //     },
-  //     {
-  //       name: 'registrar-alumno',
-  //       url: '/registrarAlumno',
-  //       templateUrl: 'app/SGA/administrador/gestionAlumnos/registrarAlumnos.html',
-  //       controller: 'gestorAlumnosCtrl as GACtrl',
+      },
+      {
+        name: 'gestionar-ordenes',
+        url: '/ordenes',
+        templateUrl: 'app/MDL/administrador/gestionOrdenes/listarOrdenes.html',
+        controller: 'gestorOrdenesCtrl as GOCtrl',
   //     },
   //     {
   //       name: 'gestionar-docente',
