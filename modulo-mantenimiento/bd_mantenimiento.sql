@@ -2,25 +2,37 @@ drop database if exists pesi_mantenimiento;
 create database pesi_mantenimiento;
 use pesi_mantenimiento;
 
-create table producto (
-	id VARCHAR(32) PRIMARY KEY,
-    descripcion VARCHAR(32) NOT NULL,
-    tipo VARCHAR(50) DEFAULT NULL, -- consumible o servicio???
-    referencia VARCHAR(200) DEFAULT NULL,
-    codigoSAP VARCHAR(10) DEFAULT NULL, -- 1000???
-    grupo VARCHAR(32) DEFAULT NULL, -- de tabla grupo... muestra: [codigoGrupo] GP[serie]
-    categoria VARCHAR(32) DEFAULT NULL, -- por defecto Todas
-    moneda VARCHAR(3) DEFAULT NULL, -- $ o S/.
-    costo decimal(10,2) DEFAULT NULL,
+CREATE TABLE categoria (
+	id VARCHAR(36) PRIMARY KEY,
+    descripcion VARCHAR(100) NOT NULL,
+    iniciales VARCHAR(5) NOT NULL,
     estado INT(1) NOT NULL
-    -- FOREIGN KEY 
 );
 
-INSERT INTO PRODUCTO VALUES 
-	(uuid(), 'AUTO','CONSUMIBLE', NULL, '1000', '[1000] GP0001', 'TODAS', 'S/.', '100.00', 1);
+insert into categoria values 
+	('727550a8-0c07-11ea-81c6-e4e749869830', 'CARROS', 'CAR', 1),
+    ('214e9ecc-0c08-11ea-81c6-e4e749869830', 'COMPUTADORAS', 'COMP', 1);
 
-CREATE TABLE sector (
-	id VARCHAR(32) PRIMARY KEY,
+create table EQUIPO (
+	id VARCHAR(36) PRIMARY KEY,
+    descripcion VARCHAR(50) NOT NULL,
+    -- tipoEquipo VARCHAR(50) DEFAULT NULL, -- consumible o servicio???
+    idCategoria VARCHAR(36) NOT NULL, -- DE TABLA CATEGORIA
+    serie VARCHAR(5) DEFAULT NULL, -- 1000??? --CODIGOPRODUCTO (CALCULAR AUTOMATICAMENTE EN DISABLED)
+    referencia VARCHAR(200) DEFAULT NULL,
+    -- grupo VARCHAR(32) DEFAULT NULL, -- de tabla grupo... muestra: [codigoGrupo] GP[serie] -- acá puede ir el area de glorisa    
+    costo decimal(10,2) DEFAULT NULL,
+    estado INT(1) NOT NULL,
+    FOREIGN KEY (idCategoria) REFERENCES CATEGORIA(id)
+);
+
+INSERT INTO EQUIPO VALUES 
+	-- (uuid(), 'AUTO','CONSUMIBLE', NULL, '1000', '[1000] GP0001', 'TODAS', 'S/.', '100.00', 1);
+    ('2cf530b6-0c08-11ea-81c6-e4e749869830', 'AUTO SUSUKI','727550a8-0c07-11ea-81c6-e4e749869830', '00001', 'PLACA T1L-554, AÑO 2009', '5300.00', 1),
+    ('f484a2ab-0c08-11ea-81c6-e4e749869830', 'IPHONE XR','214e9ecc-0c08-11ea-81c6-e4e749869830', '00001', 'USO DEL ADMINISTRADOR', '1500.00', 1);
+
+CREATE TABLE sector ( -- PUEDE SER LAS AREAS DE GLORISA
+	id VARCHAR(36) PRIMARY KEY,
     codigo VARCHAR(32) NOT NULL,
     descripcion  VARCHAR(50) NOT NULL,
     estado INT(1) NOT NULL
@@ -30,10 +42,10 @@ INSERT INTO SECTOR VALUES
 	('ddfdf2de-0a72-11ea-9dd4-e4e749869830', '10000', 'no sé qué es esto', 1);
 
 CREATE TABLE ORDENTRABAJO (
-	id VARCHAR(32) PRIMARY KEY,
-    descripcion VARCHAR(32) NOT NULL,
+	id VARCHAR(36) PRIMARY KEY,
+    descripcion VARCHAR(100) NOT NULL,
     fecha DATE NOT NULL,
-    responsable VARCHAR(32) NOT NULL,
+    generadaX VARCHAR(32) NOT NULL,
     presupuesto DECIMAL(10,2) NOT NULL,
     costo DECIMAL(10,2) NULL,
     finalizado int(1) NOT NULL,
@@ -44,20 +56,17 @@ INSERT INTO ORDENTRABAJO VALUES
 	('d80a4015-0a7d-11ea-9dd4-e4e749869830', 'ARREGLAR AUTO', now(), 'ADMINISTRADOR', 1000.00, NULL, 0, 1);
 
 CREATE TABLE peticion (
-	id VARCHAR(32) PRIMARY KEY,
-    descripcion VARCHAR(32) NOT NULL,
-    sector VARCHAR(32) NULL,
-    codigoSAP VARCHAR(32) NULL,
-    idOrdenTrabajo VARCHAR(32) NULL,
+	id VARCHAR(36) PRIMARY KEY,
+    descripcion VARCHAR(100) NOT NULL,
+    tipoMantenimiento VARCHAR(10) NOT NULL, -- CORRECTIVO, preventido
+    -- areas VARCHAR(32) NULL, -- evaluar para eliminar
+    -- categoriaEquipo VARCHAR(32) NULL, -- categoria producto
+    idEquipo VARCHAR(36) NULL, -- codigo producto
+    idOrdenTrabajo VARCHAR(36) NULL,
     solicitadoX VARCHAR(32) NOT NULL,
     fecha date NOT NULL,
     fechaPrevista DATE NULL, -- fecha de cierre eliminado
-    tipoMantenimiento VARCHAR(10) NOT NULL,
-    equipo VARCHAR(32) NULL,
-    -- responsable VARCHAR(32) NULL, -- eliminar
-    fechaPrevista DATE NULL,
-    prioridad int(1) NULL,
-    -- peticionInicial VARCHAR(32) NULL, -- eliminar
+    prioridad int(1) NULL, -- 1 2 3
     nota VARCHAR(500) NULL,
     progreso VARCHAR(32) NULL,
     estado INT(1) NOT NULL,
@@ -65,15 +74,16 @@ CREATE TABLE peticion (
 );
 
 INSERT INTO PETICION VALUES
-	(uuid(), 'SE ROMPIÓ AUTO 1000', '[10000] MA00001', '100000', NULL, 'Administrador', NOW(), NULL, 'CORRECTIVO', 'MANTENIMIENTO INTERNO', 1, NULL, 'INICIO', 1);
+	('987cf827-0c0a-11ea-81c6-e4e749869830', 'SE ROMPIÓ PARABRISA DE AUTO SUSUKI', 'CORRECTIVO', '2cf530b6-0c08-11ea-81c6-e4e749869830', NULL, 'ADMINISTRADOR', NOW(), '2019-11-27', 1, NULL, 'INICIO', 1);
 
 CREATE TABLE tarea (
-	id VARCHAR(32) PRIMARY KEY,
-    idOrdenTrabajo VARCHAR(32) NOT NULL,
-    descripcion VARCHAR(32) NOT NULL,
+	id VARCHAR(36) PRIMARY KEY,
+    idOrdenTrabajo VARCHAR(36) NOT NULL,
+    descripcion VARCHAR(200) NOT NULL,
     encargado VARCHAR(32) NOT NULL,
     presupuesto DECIMAL(10,2) NOT NULL,
     costo DECIMAL(10,2) NULL,
     finalizado int(1) NOT NULL,
-    estado INT(1) NOT NULL
+    estado INT(1) NOT NULL,
+    FOREIGN KEY (idOrdenTrabajo) REFERENCES ORDENTRABAJO(id)
 );

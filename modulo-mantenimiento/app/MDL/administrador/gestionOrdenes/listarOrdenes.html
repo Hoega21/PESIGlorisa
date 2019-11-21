@@ -1,4 +1,4 @@
-<div class="container m-t-50">
+<div class="container">
   <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -7,7 +7,7 @@
         </div>
         <div class="card-body">
           <div class="table-data__tool">
-            <div class="table-data__tool-left">
+            <!-- <div class="table-data__tool-left">
               <div class="rs-select2--light rs-select2--md">
                 <select class="js-select2" name="property">
                   <option selected="selected">All Properties</option>
@@ -27,9 +27,9 @@
               <button class="au-btn-filter">
                 <i class="zmdi zmdi-filter-list"></i>filtrar
               </button>
-            </div>
+            </div> -->
             <div class="table-data__tool-right">
-              <button class="au-btn au-btn-icon au-btn--green au-btn--small">
+              <button class="au-btn au-btn-icon au-btn--green au-btn--small" ng-click="GOCtrl.irCrearOrden()">
                 <i class="zmdi zmdi-plus"></i> Crear órden de trabajo
               </button>
             </div>
@@ -41,20 +41,20 @@
                 <td data-title="'Nro.'" align="center" width="5%">
                   {{$index + 1}}
                 </td>
-                <!-- <td data-title="'Código'">
-                  {{orden.descripcion}}
-                </td> -->
-                <td data-title="'Descripción'">
-                  {{orden.descripcion}}
+                <td data-title="'Código'">
+                  {{orden.codigo}}
+                </td>
+                <td data-title="'Asunto'">
+                  {{orden.asunto}}
                 </td>
                 <td data-title="'Fecha'" align="center">
                   {{orden.fecha}}
                 </td>
                 <td data-title="'Responsable'" align="center">
-                  {{orden.responsable}}
+                  {{orden.generadaX}}
                 </td>
                 <td data-title="'Finalizado'" align="center">
-                  {{orden.finalizado}}
+                  {{orden.finalizadoStr}}
                 </td>
                 <td data-title="'Acciones'" align="center" width="10%">
                   <div class="col-md-12 table-data-feature" style="justify-content: center;">
@@ -62,12 +62,12 @@
                       <i class="zmdi zmdi-mail-send"></i>
                     </button> -->
                     <div class="col-md-6">
-                      <button class="item" data-toggle="tooltip" data-placement="top" title="Editar">
+                      <button class="item" data-toggle="tooltip" data-placement="top" title="Editar" ng-click="GOCtrl.irEditarOrden(orden)">
                         <i class="zmdi zmdi-edit"></i>
                       </button>
                     </div>
                     <div class="col-md-6">
-                      <button class="item" data-toggle="tooltip" data-placement="top" title="Eliminar">
+                      <button class="item" data-toggle="tooltip" data-placement="top" title="Eliminar" ng-click="GOCtrl.eliminarOrden(orden)">
                         <i class="zmdi zmdi-delete"></i>
                       </button>
                     </div>

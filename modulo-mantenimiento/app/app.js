@@ -45,22 +45,28 @@ myMDLApp.config(['stateHelperProvider', '$urlRouterProvider', function(stateHelp
         controller: 'gestorPeticionesCtrl as GPeCtrl'
       },
       {
+        name: 'editar-peticion',
+        url: '/peticion/editar/:id',
+        templateUrl: 'app/MDL/administrador/gestionPeticiones/editarPeticion.html',
+        controller: 'gestorPeticionesCtrl as GPeCtrl',
+      },
+      {
         name: 'gestionar-ordenes',
         url: '/ordenes',
         templateUrl: 'app/MDL/administrador/gestionOrdenes/listarOrdenes.html',
         controller: 'gestorOrdenesCtrl as GOCtrl',
-  //     },
-  //     {
-  //       name: 'gestionar-curso',
-  //       url: '/gestionCurso',
-  //       templateUrl: 'app/SGA/administrador/gestionCursos/gestorCursos.html',
-  //       controller: 'gestorCursosCtrl as GCCtrl',
-  //     },
-  //     {
-  //       name: 'gestionar-asignacion',
-  //       url: '/gestionAsignacion',
-  //       templateUrl: 'app/SGA/administrador/gestionAsignaciones/gestorAsignaciones.html',
-  //       controller: 'gestorAsignacionesCtrl as GAsCtrl'
+      },
+      {
+        name: 'agregar-orden',
+        url: '/ordenes/agregar',
+        templateUrl: 'app/MDL/administrador/gestionOrdenes/agregarOrden.html',
+        controller: 'gestorOrdenesCtrl as GOCtrl',
+      },
+      {
+        name: 'editar-orden',
+        url: '/ordenes/editar/:id',
+        templateUrl: 'app/MDL/administrador/gestionOrdenes/editarOrden.html',
+        controller: 'gestorOrdenesCtrl as GOCtrl'
   //     },
   //     {
   //       name: 'gestionar-usuario',
