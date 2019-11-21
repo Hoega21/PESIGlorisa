@@ -3,7 +3,7 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h3>Producto nuevo</h3>
+          <h3>Editar producto</h3>
         </div>
         <div class="card-body">
           <div class="row">
@@ -22,14 +22,14 @@
               <div class="col-sm-6">
                 <div class="form-group">
                   <label class="label-letra-prometeo col-sm-10 control-label m-t-10 m-b-0">Categoría del producto<strong class="text-danger">*</strong>: </label>
-                  <div class="col-sm-10 form-inline">
+                  <div class="col-sm-10">
                     <div class="fg-line">
-                      <button type="button" class="btn btn-primary waves-effect float-left m-r-10" ng-click="GPCtrl.irCrearCategoria()"><i class="fa fa-plus"></i> </button>
-                      <div class="select float-right">
+                      <!-- <button type="button" class="btn btn-primary waves-effect float-left m-r-10" ng-click="GPCtrl.irCrearCategoria()"><i class="fa fa-plus"></i> </button> -->
+                      <div class="select">
                         <select class="form-control"
                           placeholder="Seleccione una categoria"
                           ng-model="GPCtrl.producto.categoria"
-                          ng-change="GPCtrl.obtenerSerie()"
+                          ng-change="GPCtrl.obtenerSerie()" disabled
                           ng-options="categoria as categoria.descripcion for categoria in GPCtrl.categoriasLista">
                           <option value="" disabled selected hidden class="placeholder-select">Seleccione una categoría	...</option>
                           <option value="Agregar" class="placeholder-select">Agregar categoría</option>
@@ -77,7 +77,7 @@
           <div class="row">
             <div class="col-md-12" >
               <button type="button" class="btn btn-danger waves-effect float-left" ng-click="GPCtrl.regresarProductos()"><i class="fa fa-times"></i> Regresar</button>
-              <button type="button" class="btn btn-success waves-effect float-right" ng-click="GPCtrl.agregarProducto()"><i class="fa fa-save"></i> Guardar</button>
+              <button type="button" class="btn btn-success waves-effect float-right" ng-click="GPCtrl.editarProducto()"><i class="fa fa-save"></i> Modificar</button>
             </div>
           </div>
         </div>

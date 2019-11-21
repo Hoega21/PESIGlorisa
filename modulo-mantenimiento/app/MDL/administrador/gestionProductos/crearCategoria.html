@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h3>Producto nuevo</h3>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label class="label-letra-prometeo col-sm-10 control-label m-t-10 m-b-0">Categoría<strong class="text-danger">*</strong>: </label>
+                <div class="col-sm-10">
+                  <div class="fg-line">
+                    <input class="form-control input-sm" placeholder="Ingrese el nombre del producto" ng-model = "GPCtrl.categoria.descripcion">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label class="label-letra-prometeo col-sm-10 control-label m-t-10 m-b-0">Iniciales de la categoría<strong class="text-danger">*</strong>: </label>
+                <div class="col-sm-10">
+                  <div class="fg-line">
+                    <input class="form-control input-sm" placeholder="Ingrese las iniciales de la categoría" ng-model = "GPCtrl.categoria.iniciales">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="row">
+            <div class="col-md-12" >
+              <button type="button" class="btn btn-danger waves-effect float-left" ng-click="GPCtrl.regresarProductosAgregar()"><i class="fa fa-times"></i> Regresar</button>
+              <button type="button" class="btn btn-success waves-effect float-right" ng-click="GPCtrl.agregarCategoria()"><i class="fa fa-save"></i> Guardar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -21,6 +21,18 @@ myMDLApp.config(['stateHelperProvider', '$urlRouterProvider', function(stateHelp
         controller: 'gestorProductosCtrl as GPCtrl'
       },
       {
+        name: 'editar-producto',
+        url: '/productos/editar/:id',
+        templateUrl: 'app/MDL/administrador/gestionProductos/editarProducto.html',
+        controller: 'gestorProductosCtrl as GPCtrl',
+      },
+      {
+        name: 'agregar-categoria',
+        url: '/categoria',
+        templateUrl: 'app/MDL/administrador/gestionProductos/crearCategoria.html',
+        controller: 'gestorProductosCtrl as GPCtrl'
+      },
+      {
         name: 'gestionar-peticiones',
         url: '/peticiones',
         templateUrl: 'app/MDL/administrador/gestionPeticiones/listarPeticiones.html',
@@ -37,12 +49,6 @@ myMDLApp.config(['stateHelperProvider', '$urlRouterProvider', function(stateHelp
         url: '/ordenes',
         templateUrl: 'app/MDL/administrador/gestionOrdenes/listarOrdenes.html',
         controller: 'gestorOrdenesCtrl as GOCtrl',
-  //     },
-  //     {
-  //       name: 'gestionar-docente',
-  //       url: '/gestionDocente',
-  //       templateUrl: 'app/SGA/administrador/gestionDocentes/gestorDocentes.html',
-  //       controller: 'gestorDocentesCtrl as GDCtrl',
   //     },
   //     {
   //       name: 'gestionar-curso',

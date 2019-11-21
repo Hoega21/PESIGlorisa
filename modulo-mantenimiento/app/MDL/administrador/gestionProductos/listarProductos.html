@@ -46,14 +46,14 @@
                 <td data-title="'Producto'">
                   {{producto.descripcion}}
                 </td>
-                <td data-title="'Tipo'" align="center">
-                  {{producto.tipo}}
-                </td>
-                <td data-title="'Grupo'" align="center">
-                  {{producto.grupo}}
-                </td>
                 <td data-title="'Categoría'" align="center">
                   {{producto.categoria}}
+                </td>
+                <td data-title="'Código'" align="center">
+                  {{producto.codigo}}
+                </td>
+                <td data-title="'Referencia'" align="center">
+                  {{producto.referencia}}
                 </td>
                 <td data-title="'Costo'" align="center">
                   S/. {{producto.costo}}
@@ -64,12 +64,14 @@
                       <i class="zmdi zmdi-mail-send"></i>
                     </button> -->
                     <div class="col-md-6">
-                      <button class="item" data-toggle="tooltip" data-placement="top" title="Editar">
+                      <!-- <a href=""></a>0 -->
+                      <!-- <button type="button" class="btn btn-primary waves-effect float-left m-r-10" ng-click="GPCtrl.irCrearCategoria()"><i class="zmdi zmdi-edit"></i> </button> -->
+                      <button class="item" data-toggle="tooltip" data-placement="top" title="Editar" type="button" ng-click="GPCtrl.irEditarProducto(producto)">
                         <i class="zmdi zmdi-edit"></i>
                       </button>
                     </div>
                     <div class="col-md-6">
-                      <button class="item" data-toggle="tooltip" data-placement="top" title="Eliminar">
+                      <button class="item" data-toggle="tooltip" data-placement="top" title="Eliminar" ng-click="GPCtrl.eliminarProducto(producto)">
                         <i class="zmdi zmdi-delete"></i>
                       </button>
                     </div>
