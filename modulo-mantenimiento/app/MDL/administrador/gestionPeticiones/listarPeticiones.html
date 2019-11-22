@@ -3,7 +3,7 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h2>Peticiones de mantenimiento</h2>
+          <h3>Peticiones de mantenimiento</h3>
         </div>
         <div class="card-body">
           <div class="row">
@@ -20,17 +20,17 @@
                   <div class="row" ng-repeat="peticion in GPeCtrl.peticionesLista">
                     <div class="col-md-12">
                       <div class="card">
-                        <button>
+                        <button ng-click="GPeCtrl.irEditarPeticion(peticion)">
                           <div class="card-body" style="padding: 5px;" align="left">
                             {{peticion.descripcion}}<br>
                             {{peticion.solicitadoX}}<br>
                             <div class="prioridad" style="float: right">
-                              <input id="radio3" type="radio" name="estrellas" value="3" disabled>
+                              <input id="radio1" type="radio" name="estrellas-{{peticion.id}}" value="3" disabled ng-checked="peticion.prioridad == 3">
+                              <label for="radio1">★</label>
+                              <input id="radio2" type="radio" name="estrellas-{{peticion.id}}" value="2" disabled ng-checked="peticion.prioridad == 2">
+                              <label for="radio2">★</label>
+                              <input id="radio3" type="radio" name="estrellas-{{peticion.id}}" value="1" disabled ng-checked="peticion.prioridad == 1">
                               <label for="radio3">★</label>
-                              <input id="radio4" type="radio" name="estrellas" value="2" disabled>
-                              <label for="radio4">★</label>
-                              <input id="radio5" type="radio" name="estrellas" value="1" disabled>
-                              <label for="radio5">★</label>
                             </div>
                           </div>
                         </button>
@@ -48,21 +48,23 @@
                       <h5>En Proceso</h5>
                     </div>
                   </div>
-                  <div class="row">
+                  <div class="row" ng-repeat="peticion in GPeCtrl.peticionesEnProgresoLista">
                     <div class="col-md-12">
                       <div class="card">
-                        <div class="card-body">
-                          Info
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="card">
-                        <div class="card-body">
-                          Info
-                        </div>
+                        <button ng-click="GPeCtrl.irEditarPeticion(peticion)">
+                          <div class="card-body" style="padding: 5px;" align="left">
+                            {{peticion.descripcion}}<br>
+                            {{peticion.solicitadoX}}<br>
+                            <div class="prioridad" style="float: right">
+                              <input id="radio1" type="radio" name="estrellas-{{peticion.id}}" value="3" disabled ng-checked="peticion.prioridad == 3">
+                              <label for="radio1">★</label>
+                              <input id="radio2" type="radio" name="estrellas-{{peticion.id}}" value="2" disabled ng-checked="peticion.prioridad == 2">
+                              <label for="radio2">★</label>
+                              <input id="radio3" type="radio" name="estrellas-{{peticion.id}}" value="1" disabled ng-checked="peticion.prioridad == 1">
+                              <label for="radio3">★</label>
+                            </div>
+                          </div>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -77,12 +79,23 @@
                       <h5>Reparado</h5>
                     </div>
                   </div>
-                  <div class="row">
+                  <div class="row" ng-repeat="peticion in GPeCtrl.peticionesFinalizadasLista">
                     <div class="col-md-12">
                       <div class="card">
-                        <div class="card-body">
-                          Info
-                        </div>
+                        <button ng-click="GPeCtrl.irEditarPeticion(peticion)">
+                          <div class="card-body" style="padding: 5px;" align="left">
+                            {{peticion.descripcion}}<br>
+                            {{peticion.solicitadoX}}<br>
+                            <div class="prioridad" style="float: right">
+                              <input id="radio1" type="radio" name="estrellas-{{peticion.id}}" value="3" disabled ng-checked="peticion.prioridad == 3">
+                              <label for="radio1">★</label>
+                              <input id="radio2" type="radio" name="estrellas-{{peticion.id}}" value="2" disabled ng-checked="peticion.prioridad == 2">
+                              <label for="radio2">★</label>
+                              <input id="radio3" type="radio" name="estrellas-{{peticion.id}}" value="1" disabled ng-checked="peticion.prioridad == 1">
+                              <label for="radio3">★</label>
+                            </div>
+                          </div>
+                        </button>
                       </div>
                     </div>
                   </div>

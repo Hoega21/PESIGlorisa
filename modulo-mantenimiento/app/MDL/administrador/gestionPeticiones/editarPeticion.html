@@ -3,7 +3,10 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h3>Petición de mantenimiento nueva</h3>
+          <div class="form-group form-inline m-b-0">
+            <h3 class="col-md-10">Editar petición de mantenimiento</h3>
+            <button type="button" class="col-md-2 btn btn-warning waves-effect float-right" ng-click="GPeCtrl.finalizarPeticion()" ng-if="GPeCtrl.peticion.progreso == 'EN PROCESO'"><i class="fa fa-check"></i> Finalizar</button>
+          </div>
         </div>
         <div class="card-body">
           <div class="row">
@@ -12,7 +15,25 @@
                   <label class="label-letra-prometeo col-sm-10 control-label m-t-10 m-b-0">Asunto<strong class="text-danger">*</strong>: </label>
                   <div class="col-sm-10">
                     <div class="fg-line">
-                      <input class="form-control input-sm" placeholder="Ingrese el asunto de la peticion" ng-model = "GPeCtrl.peticion.descripcion">
+                      <input class="form-control input-sm" placeholder="Ingrese el asunto de la peticion" ng-model = "GPeCtrl.peticion.descripcion" ng-readonly="GPeCtrl.peticion.progreso != 'INICIO'">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label class="label-letra-prometeo col-sm-10 control-label m-t-10 m-b-0">Orden de mantenimiento<strong class="text-danger">*</strong>: </label>
+                  <div class="col-sm-10">
+                    <div class="fg-line">
+                      <div class="select">
+                        <select class="form-control"
+                          ng-disabled="GPeCtrl.peticion.progreso != 'INICIO'"
+                          placeholder="Seleccione una orden de mantenimiento"
+                          ng-model="GPeCtrl.peticion.orden"
+                          ng-options="orden as orden.descripcion for orden in GPeCtrl.ordenesLista">
+                          <option value="" selected class="placeholder-select">Seleccione una orden	...</option>
+                        </select>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -25,7 +46,8 @@
                   <div class="col-sm-10">
                     <div class="fg-line">
                       <div class="select">
-                        <select class="form-control" ng-model="GPeCtrl.peticion.tipoMantenimiento">
+                        <select class="form-control" disabled
+                          ng-model="GPeCtrl.peticion.tipoMantenimiento">
                           <option value="" disabled selected hidden class="placeholder-select">Seleccione un tipo de mantenimiento...</option>
                           <option value="CORRECTIVO" class="placeholder-select">CORRECTIVO</option>
                           <option value="PREVENTIVO" class="placeholder-select">PREVENTIVO</option>
@@ -41,13 +63,12 @@
                   <div class="col-sm-10">
                     <div class="fg-line">
                       <div class="select">
-                        <select class="form-control"
+                        <select class="form-control" disabled
                           placeholder="Seleccione una categoria"
                           ng-model="GPeCtrl.peticion.categoria"
                           ng-change="GPeCtrl.obtenerProductos()"
                           ng-options="categoria as categoria.descripcion for categoria in GPeCtrl.categoriasLista">
                           <option value="" disabled selected hidden class="placeholder-select">Seleccione una categoría	...</option>
-                          <option value="Agregar" class="placeholder-select">Agregar categoría</option>
                         </select>
                       </div>
                     </div>
@@ -61,28 +82,11 @@
                   <label class="label-letra-prometeo col-sm-10 control-label m-t-10 m-b-0">Producto<strong class="text-danger">*</strong>: </label>
                   <div class="col-sm-10">
                     <div class="fg-line">
-                      <div class="select">
-                        <select class="form-control"
-                          placeholder="Seleccione un producto"
-                          ng-model="GPeCtrl.peticion.producto"
-                          ng-options="producto as producto.descripcion for producto in GPeCtrl.productosLista">
-                          <option value="" disabled selected hidden class="placeholder-select">Seleccione un producto	...</option>
-                        </select>
-                      </div>
+                      <input class="form-control input-sm" placeholder="Equipo para mantenimiento" ng-model = "GPeCtrl.peticion.producto.descripcion" readonly>
                     </div>
                   </div>
                 </div>
               </div>
-              <!-- <div class="col-sm-6">
-                <div class="form-group">
-                  <label class="label-letra-prometeo col-sm-10 control-label m-t-10 m-b-0">Orden de mantenimiento<strong class="text-danger">*</strong>: </label>
-                  <div class="col-sm-10">
-                    <div class="fg-line">
-                      <input class="form-control input-sm" placeholder="Ingrese el tipo de peticion" ng-model = "GPeCtrl.peticion.descripcion">
-                    </div>
-                  </div>
-                </div>
-              </div> -->
               <div class="col-sm-6">
                 <div class="form-group">
                   <label class="label-letra-prometeo col-sm-10 control-label m-t-10 m-b-0">Solicitado por: </label>
@@ -110,7 +114,7 @@
                   <label class="label-letra-prometeo col-sm-10 control-label m-t-10 m-b-0">Fecha prevista<strong class="text-danger">*</strong>: </label>
                   <div class="col-sm-10">
                     <div class="fg-line">
-                      <input type="date" class="form-control input-sm" ng-model = "GPeCtrl.peticion.fechaPrevista">
+                      <input type="date" class="form-control input-sm" ng-model = "GPeCtrl.peticion.fechaPrevista" ng-readonly="GPeCtrl.peticion.progreso != 'INICIO'">
                     </div>
                   </div>
                 </div>
@@ -123,11 +127,11 @@
                   <div class="col-sm-10">
                     <div class="fg-line">
                       <div class="prioridad">
-                        <input id="radio1" type="radio" name="estrellas" value="3">
+                        <input id="radio1" type="radio" name="estrellas" value="3" ng-checked="GPeCtrl.peticion.prioridad == 3" ng-disabled="GPeCtrl.peticion.progreso != 'INICIO'">
                         <label for="radio1">★</label>
-                        <input id="radio2" type="radio" name="estrellas" value="2">
+                        <input id="radio2" type="radio" name="estrellas" value="2" ng-checked="GPeCtrl.peticion.prioridad == 2" ng-disabled="GPeCtrl.peticion.progreso != 'INICIO'">
                         <label for="radio2">★</label>
-                        <input id="radio3" type="radio" name="estrellas" value="1">
+                        <input id="radio3" type="radio" name="estrellas" value="1" ng-checked="GPeCtrl.peticion.prioridad == 1" ng-disabled="GPeCtrl.peticion.progreso != 'INICIO'">
                         <label for="radio3">★</label>
                       </div>
                     </div>
@@ -139,7 +143,7 @@
                   <label class="label-letra-prometeo col-sm-10 control-label m-t-10 m-b-0">Nota<strong class="text-danger">*</strong>: </label>
                   <div class="col-sm-10">
                     <div class="fg-line">
-                      <textarea class="form-control input-sm" placeholder="Ingrese alguna nota adicional sobre la petición" ng-model = "GPeCtrl.peticion.nota"> </textarea>
+                      <textarea class="form-control input-sm" placeholder="Ingrese alguna nota adicional sobre la petición" ng-model = "GPeCtrl.peticion.nota" ng-readonly="GPeCtrl.peticion.progreso != 'INICIO'"> </textarea>
                     </div>
                   </div>
                 </div>
@@ -152,7 +156,7 @@
           <div class="row">
             <div class="col-md-12" >
               <button type="button" class="btn btn-danger waves-effect float-left" ng-click="GPeCtrl.regresarPeticiones()"><i class="fa fa-times"></i> Regresar</button>
-              <button type="button" class="btn btn-success waves-effect float-right" ng-click="GPeCtrl.agregarPeticion()"><i class="fa fa-save"></i> Guardar</button>
+              <button type="button" class="btn btn-success waves-effect float-right" ng-click="GPeCtrl.editarPeticion()" ng-if="GPeCtrl.peticion.progreso == 'INICIO'"><i class="fa fa-save"></i> Editar</button>
             </div>
           </div>
         </div>
