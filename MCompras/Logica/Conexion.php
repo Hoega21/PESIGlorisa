@@ -3,10 +3,10 @@
 	// define('DB_USERNAME', 'root');
 	// define('DB_PASSWORD', '');
 	// define('DB_DATABASE', 'compras');
-	$DB_HOSTNAME = 'localhost:3307';
-	$DB_USERNAME = 'root';
-	$DB_PASSWORD = '';
-	$DB_DATABASE = 'compras';
+	$DB_HOSTNAME = 'sql10.freesqldatabase.com';
+	$DB_USERNAME = 'sql10313127';
+	$DB_PASSWORD = 'ruVDugdGr1';
+	$DB_DATABASE = 'sql10313127';
 
 	$Conexion = mysqli_connect($DB_HOSTNAME,$DB_USERNAME,$DB_PASSWORD) or die('No se Puede conectar');
 
