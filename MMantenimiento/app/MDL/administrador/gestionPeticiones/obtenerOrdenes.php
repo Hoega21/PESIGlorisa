@@ -11,7 +11,7 @@
   // $username = mysqli_real_escape_string($con, $data->username);
 
   $tildes = $con->query("SET NAMES 'utf8'"); //Para que se muestren las tildes correctamente
-  $query = "select * FROM ordentrabajo where finalizado = 0 and estado = 1";
+  $query = "select * FROM ordentrabajo where estado = 1";
   //
   $result = mysqli_query($con, $query) or die ( "Algo ha ido mal en la consulta a la base de datos");
   // //
