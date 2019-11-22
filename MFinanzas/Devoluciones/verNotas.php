@@ -4,7 +4,7 @@ error_reporting(0);
 include('../../MRecursosHumanos/includes/config.php');
 $corre = $_SESSION["notita"];
 $seriesita=$_SESSION["seriesita"];
-$sql12="select c.TipoComprobante, c.idEmp,c.idSerie,c.Correlativo,c.NroDocCliente,c.FechaEmision,c.ValorVentaTotal,c.PrecioVentaTotal,c.IGVTotal,c.Estado,c.TipoPago,dc.NroItem,dc.idProd,dc.Cantidad,dc.ValorUnitario,dc.PrecioVenta,dc.PrecioVenta,dc.IGV from comprobante c inner join detallecomprobante dc on dc.TipoComprobante=c.TipoComprobante and dc.idSerie=c.idSerie and dc.Correlativo=c.Correlativo where c.idSerie=:serius and c.Correlativo=:corree and c.TipoComprobante=07";
+$sql12="select c.TipoComprobante, c.idEmp,c.idSerie,c.Correlativo,c.NroDocCliente,c.FechaEmision,c.ValorVentaTotal,c.PrecioVentaTotal,c.IGVTotal,c.Estado,c.TipoPago,dc.NroItem,dc.idProd,dc.Cantidad,dc.ValorUnitario,dc.PrecioVenta,dc.PrecioVenta,dc.IGV from comprobante c inner join detalleComprobante dc on dc.TipoComprobante=c.TipoComprobante and dc.idSerie=c.idSerie and dc.Correlativo=c.Correlativo where c.idSerie=:serius and c.Correlativo=:corree and c.TipoComprobante=07";
 $query12 = $dbh->prepare($sql12);
 $query12->bindParam(':serius',$seriesita,PDO::PARAM_STR);
 $query12->bindParam(':corree',$corre,PDO::PARAM_STR);
@@ -84,7 +84,7 @@ foreach($resu13 as $re13){
                       <tr>
                         <td><?php echo htmlentities($re12->NroItem); ?></td>
                         <td colspan="3"><?php 
-                          $sql14="select p.nomProd from producto p where p.idProd=:idipro";
+                          $sql14="select p.nomProd from Producto p where p.idProd=:idipro";
                           $query14 = $dbh->prepare($sql14);
                           $query14->bindParam(':idipro',$re12->idProd,PDO::PARAM_INT);
                           $query14->execute();

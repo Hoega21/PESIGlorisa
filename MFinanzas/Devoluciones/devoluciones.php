@@ -3,7 +3,7 @@ session_start();
 error_reporting(0);
 include('../../MRecursosHumanos/includes/config.php');
 
-$sql12="select* from Devoluciones where estado=1";
+$sql12="select* from devoluciones where estado=1";
 $query12 = $dbh->prepare($sql12);
 $query12->execute();
 $resu12=$query12->fetchAll(PDO::FETCH_OBJ);

@@ -3,7 +3,7 @@ session_start();
 error_reporting(0);
 include('../../MRecursosHumanos/includes/config.php');
 $idDevoluciones = $_SESSION["idDevoluciones"];
-$sql12="select d.TipoComprobante,d.idEmp, d.idSerie, d.Correlativo,d.TotalDevolver,dd.idProd,dd.Cantidad,dd.Observaciones,dd.ValorUnitario,dd.PrecioVenta,dd.IGV from devoluciones d INNER join detalledevoluciones dd on dd.idDevoluciones=d.idDevoluciones where d.idDevoluciones=:idDev";
+$sql12="select d.TipoComprobante,d.idEmp, d.idSerie, d.Correlativo,d.TotalDevolver,dd.idProd,dd.Cantidad,dd.Observaciones,dd.ValorUnitario,dd.PrecioVenta,dd.IGV from devoluciones d INNER join detalleDevoluciones dd on dd.idDevoluciones=d.idDevoluciones where d.idDevoluciones=:idDev";
 $query12 = $dbh->prepare($sql12);
 $query12->bindParam(':idDev',$idDevoluciones,PDO::PARAM_INT);
 $query12->execute();
@@ -89,7 +89,7 @@ foreach($resu12 as $re12){
   $idiPro=$re12->idProd;
   $cc=$re12->Cantidad;
   $vu=$re12->ValorUnitario;
-$sql16="insert into detallecomprobante values (:TipoComprobante, :idSerie, :Correlativo, :NroItem, :idProd, :Cantidad, :ValorUnitario, :ValorVenta, :PrecioVenta, :IGV)";
+$sql16="insert into detalleComprobante values (:TipoComprobante, :idSerie, :Correlativo, :NroItem, :idProd, :Cantidad, :ValorUnitario, :ValorVenta, :PrecioVenta, :IGV)";
 $query16 = $dbh->prepare($sql16);
 $query16->bindParam(':TipoComprobante',$tipoHack1,PDO::PARAM_STR);
 $query16->bindParam(':idSerie',$idSerie,PDO::PARAM_STR);
@@ -105,7 +105,7 @@ $query16->execute();
 $contador++;
 }
     $vala=3;
-  $sql98="update Devoluciones set estado=:nu where TipoComprobante=:tipito and idserie=:serie and Correlativo=:Correlativo";
+  $sql98="update devoluciones set estado=:nu where TipoComprobante=:tipito and idserie=:serie and Correlativo=:Correlativo";
   $query98 = $dbh->prepare($sql98);
   $query98->bindParam(':nu',$vala,PDO::PARAM_INT);
   $query98->bindParam(':tipito',$tipoCom,PDO::PARAM_STR);
@@ -120,7 +120,7 @@ $contador++;
 
 if(isset($_POST['Desaprobar'])){
   $vala=2;
-  $sql98="update Devoluciones set estado=:nu where TipoComprobante=:tipito and idserie=:serie and Correlativo=:Correlativo";
+  $sql98="update devoluciones set estado=:nu where TipoComprobante=:tipito and idserie=:serie and Correlativo=:Correlativo";
   $query98 = $dbh->prepare($sql98);
   $query98->bindParam(':nu',$vala,PDO::PARAM_INT);
   $query98->bindParam(':tipito',$tipoCom,PDO::PARAM_STR);
@@ -185,7 +185,7 @@ if(isset($_POST['Desaprobar'])){
                       <?php foreach($resu12 as $re12){  ?> 
                       <tr>
                         <td colspan="3"><?php 
-                          $sql14="select p.nomProd from producto p where p.idProd=:idipro";
+                          $sql14="select p.nomProd from Producto p where p.idProd=:idipro";
                           $query14 = $dbh->prepare($sql14);
                           $query14->bindParam(':idipro',$re12->idProd,PDO::PARAM_INT);
                           $query14->execute();
