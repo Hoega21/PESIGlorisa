@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="myMDLApp" ng-controller="MDLController as Controller">
+  <head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Title Page-->
+    <title>Glorisa</title>
+    <!-- Fontfaces CSS-->
+    <link href="app/css/font-face.css" rel="stylesheet" media="all">
+    <link href="app/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="app/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="app/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <!-- Bootstrap CSS-->
+    <link href="app/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+    <!-- Vendor CSS-->
+    <link href="app/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="app/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="app/vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="app/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="app/vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="app/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="app/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="app/css/theme.css" rel="stylesheet" media="all">
+
+    <!-- Jquery JS-->
+    <script src="app/lib/jquery-3.4.1.min.js" charset="utf-8"></script>
+
+    <script src="app/lib/angular.min.js"></script>
+    <script src="app/lib/angular-route.min.js"></script>
+    <script src="app/lib/angular-ui.router.stateHelper.js"></script>
+    <script src="app/lib/angular-cookies.min.js" charset="utf-8"></script>
+    <script src="app/lib/sweetalert.min.js"></script>
+    <script src="app/lib/ui-bootstrap-tpls-2.5.0.min.js" charset="utf-8"></script>
+
+    <script src="app/app.js"></script>
+
+    <script src="app/MDL/administrador/gestionProductos/gestorProductos.ctrl.js"></script>
+    <!-- <script src="app/MDL/administrador/gestionProductos/modalCrearCategoria.ctrl.js"></script> -->
+    <script src="app/MDL/administrador/gestionPeticiones/gestorPeticiones.ctrl.js"></script>
+    <script src="app/MDL/administrador/gestionOrdenes/gestorOrdenes.ctrl.js"></script>
+
+  </head>
+  <body class="animsition">
+    <div class="page-wrapper">
+      <!-- MENU SIDEBAR-->
+      <aside class="menu-sidebar2">
+        <div class="logo">
+          <a href="#">
+            <img src="app/images/icon/logo-white.png" alt="Glorisa-logo" />
+          </a>
+        </div>
+        <div class="menu-sidebar2__content js-scrollbar1">
+          <div class="account2">
+            <div class="image img-cir img-120">
+              <img src="app/images/icon/avatar-big-01.jpg" alt="John Doe" />
+            </div>
+            <h4 class="name">Usuario - Administrador</h4>
+            <a href="#" onclick="modalsito('¿Estas seguro que deseas cerrar sesion?','Cerrar Sesion')">Cerrar Sesión</a>
+          </div>
+          <nav class="navbar-sidebar2">
+            <ul class="list-unstyled navbar__list">
+              <li class="has-sub">
+                <a class="js-arrow" href="#">
+                  <i class="fas  fa-adjust"></i>Inventario
+                  <span class="arrow">
+                    <i class="fas fa-angle-down"></i>
+                  </span>
+                </a>
+                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                  <li>
+                    <a href="../principal.php">
+                      <i class="fas fa-dot-circle-o"></i>Gestión de inventario
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <a class="js-arrow" href="#">
+                  <i class="fas fa-chart-bar"></i>Compras
+                  <span class="arrow">
+                    <i class="fas fa-angle-down"></i>
+                  </span>
+                </a>
+                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                  <li>
+                    <a href="../principal.php">
+                      <i class="fas fa-tachometer-alt"></i>Gestión Proveedores
+                    </a>
+                  </li>
+                  <li>
+                    <a href="../principal.php">
+                      <i class="fas fa-tachometer-alt"></i>Gestión Solicitudes de Compra
+                    </a>
+                  </li>
+                  <li>
+                    <a href="../principal.php">
+                      <i class="fas fa-tachometer-alt"></i>Gestión Ordenes de Compra
+                    </a>
+                  </li>
+                </ul>
+
+              </li>
+              <li>
+                <a class="js-arrow" href="#">
+                  <i class="fas fa-shopping-basket"></i>Ventas
+                  <span class="arrow">
+                    <i class="fas fa-angle-down"></i>
+                  </span>
+                </a>
+                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                  <li>
+                    <a href="../principal.php"> Clientes</a>
+                  </li>
+                  <li>
+                    <a href="../principal.php"> Ventas</a>
+                  </li>
+                  <li>
+                    <a href="../principal.php"> Devoluciones</a>
+                  </li>
+                  <li>
+                    <a href="../principal.php"> Recibo de Pago</a>
+                  </li>
+                </ul>
+
+              </li>
+
+              <li class="has-sub">
+                <a class="js-arrow" href="#">
+                  <i class="fas fa-trophy"></i>Recursos Humanos
+                  <span class="arrow">
+                    <i class="fas fa-angle-down"></i>
+                  </span>
+                </a>
+                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                  <li>
+                    <a href="MRecursosHumanos/dashboard.php" target="gloricenter">
+                      <i class="fas fa-tachometer-alt"></i>Dashboard
+                    </a>
+                  </li>
+                  <li class="has-sub">
+                    <a class="js-arrow" href="#">&nbsp&nbsp&nbsp
+                      <i class="fas fa-trophy"></i>Postulantes
+                      <span class="arrow">
+                        <i class="fas fa-angle-down"></i>
+                      </span>
+                    </a>
+                    <ul class="list-unstyled navbar__sub-list js-sub-list">
+                      <li>
+                        <a href="../principal.php">
+                          <i class="fas "></i>Agregar
+                        </a>
+                      </li>
+                      <li>
+                        <a href="../principal.php">
+                          <i class="fas "></i>Administrar
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="has-sub">
+                    <a class="js-arrow" href="#">&nbsp&nbsp&nbsp
+                      <i class="fas fa-trophy"></i>Empleados
+                      <span class="arrow">
+                        <i class="fas fa-angle-down"></i>
+                      </span>
+                    </a>
+                    <ul class="list-unstyled navbar__sub-list js-sub-list">
+                      <li>
+                        <a href="../principal.php">
+                          <i class="fas "></i>Agregar
+                        </a>
+                      </li>
+                      <li>
+                        <a href="../principal.php">
+                          <i class="fas "></i>Administrar
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+
+                  <li class="has-sub">
+                    <a class="js-arrow" href="#">&nbsp&nbsp&nbsp
+                      <i class="fas fa-trophy"></i>Areas
+                      <span class="arrow">
+                        <i class="fas fa-angle-down"></i>
+                      </span>
+                    </a>
+                    <ul class="list-unstyled navbar__sub-list js-sub-list">
+                      <li>
+                        <a href="../principal.php">
+                          <i class="fas "></i>Agregar
+                        </a>
+                      </li>
+                      <li>
+                        <a href="../principal.php">
+                          <i class="fas "></i>Administrar
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="has-sub">
+                    <a class="js-arrow" href="#">&nbsp&nbsp&nbsp
+                      <i class="fas fa-trophy"></i>Permisos
+                      <span class="arrow">
+                        <i class="fas fa-angle-down"></i>
+                      </span>
+                    </a>
+                    <ul class="list-unstyled navbar__sub-list js-sub-list">
+                      <li>
+                        <a href="../principal.php">
+                          <i class="fas "></i>Todos
+                        </a>
+                      </li>
+                      <li>
+                        <a href="../principal.php">
+                          <i class="fas "></i>&nbsp&nbsp&nbsp Pendientes
+                        </a>
+                        <a href="../principal.php">
+                          <i class="fas "></i>&nbsp&nbsp&nbsp Aprobados
+                        </a>
+                        <a href="../principal.php">
+                          <i class="fas "></i>&nbsp&nbsp&nbsp Rechazados
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="has-sub">
+                    <a class="js-arrow" href="#">&nbsp&nbsp&nbsp
+                      <i class="fas fa-trophy"></i>Capacitaciones
+                      <span class="arrow">
+                        <i class="fas fa-angle-down"></i>
+                      </span>
+                    </a>
+                    <ul class="list-unstyled navbar__sub-list js-sub-list">
+                      <li>
+                        <a href="../principal.php">
+                          <i class="fas "></i>&nbsp&nbsp&nbspAgregar Capacitaciones
+                        </a>
+                      </li>
+                      <li>
+                        <a href="../principal.php">
+                          <i class="fas "></i>&nbsp&nbsp&nbspTodas
+                        </a>
+                      </li>
+                      <li>
+                        <a href="../principal.php">
+                          <i class="fas "></i>&nbsp&nbsp&nbspA personal
+                        </a>
+                        <a href="../principal.php">
+                          <i class="fas "></i>&nbsp&nbsp&nbspGenerales
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="has-sub">
+                    <a class="js-arrow" href="#">&nbsp&nbsp&nbsp
+                      <i class="fas fa-trophy"></i>Asistencias
+                      <span class="arrow">
+                        <i class="fas fa-angle-down"></i>
+                      </span>
+                    </a>
+                    <ul class="list-unstyled navbar__sub-list js-sub-list">
+                      <li>
+                        <a href="../principal.php">
+                          <i class="fas "></i>&nbsp&nbsp&nbspAgregar Agregar Asistencia
+                        </a>
+                      </li>
+                      <li>
+                        <a href="../principal.php">
+                          <i class="fas "></i>&nbsp&nbsp&nbspListar
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li class="active has-sub">
+                <a class="js-arrow" href="#">
+                  <i class="fas fa-box-open"></i>Mantenimiento
+                  <span class="arrow">
+                    <i class="fas fa-angle-down"></i>
+                  </span>
+                </a>
+                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                  <li>
+                    <a href="#!/administrador/productos" ng-click="Controller.irProductos()">
+                      <i class="fas fa-tachometer-alt"></i>Inventario de productos
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#!/administrador/peticiones" ng-click="Controller.irPeticiones()">
+                      <i class="fas fa-tachometer-alt"></i>Peticiones de mantenimiento
+                    </a>
+                  </li>
+                  <!-- <li>
+                  <a href="#">
+                  <i class="fas fa-tachometer-alt"></i>Calendario de mantenimiento
+                </a>
+              </li> -->
+              <li>
+                <a href="#!/administrador/ordenes">
+                  <i class="fas fa-tachometer-alt"></i>Órdenes de trabajo
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="has-sub">
+            <a class="js-arrow" href="#">
+              <i class="fas fa-desktop"></i>Financiero
+              <span class="arrow">
+                <i class="fas fa-angle-down"></i>
+              </span>
+            </a>
+            <ul class="list-unstyled navbar__sub-list js-sub-list">
+              <li>
+                <a href="../principal.php">
+                  <i class="fas fa-tachometer-alt"></i>Asientos
+                </a>
+              </li>
+              <li>
+                <a href="../principal.php">
+                  <i class="fas fa-tachometer-alt"></i>Estados Financieros
+                </a>
+              </li>
+              <li>
+                <a href="../principal.php">
+                  <i class="fas fa-tachometer-alt"></i>Devoluciones
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </aside>
+  <!-- END MENU SIDEBAR-->
+
+  <!-- PAGE CONTAINER-->
+  <div class="page-container2">
+    <!-- HEADER DESKTOP-->
+    <header class="header-desktop2">
+      <div class="section__content section__content--p30">
+        <div class="container-fluid">
+          <div class="header-wrap2">
+            <div class="logo d-block d-lg-none">
+              <a href="#">
+                <img src="app/images/icon/logo-white.png" alt="CoolAdmin" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <br><br><br><br>
+    <div ui-view></div>
+
+    </div>
+
+
+
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+    <!-- Jquery JS-->
+    <script src="app/vendor/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap JS-->
+    <script src="app/vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="app/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <!-- Vendor JS       -->
+    <script src="app/vendor/slick/slick.min.js">
+    </script>
+    <script src="app/vendor/wow/wow.min.js"></script>
+    <script src="app/vendor/animsition/animsition.min.js"></script>
+    <script src="app/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    </script>
+    <script src="app/vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="app/vendor/counter-up/jquery.counterup.min.js">
+    </script>
+    <script src="app/vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="app/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="app/vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="app/vendor/select2/select2.min.js">
+    </script>
+    <!-- Main JS-->
+    <script src="app/js/main.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.22/angular-ui-router.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router.statehelper/1.3.1/statehelper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-table/1.0.0/ng-table.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.1/jspdf.debug.js" integrity="sha384-THVO/sM0mFD9h7dfSndI6TS0PgAGavwKvB5hAxRRvc0o9cPLohB0wb/PTA7LdUHs" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
+
+  </body>
+</html>
+<!-- end document-->

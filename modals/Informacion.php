@@ -13,7 +13,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <a  class="btn btn-primary" href="index.php" >Confirmar</a>
+        <a  class="btn btn-primary" href="MRecursosHumanos/logout.php" >Confirmar</a>
       </div>
     </div>
   </div>

@@ -7,6 +7,8 @@
   <link href="../lib/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 <body style="background-color: #e5e5e5">
+<?php include("../Clases/Clientes.php");  $clientes=Clientes::ListarClientes(); ?>
+<?php error_reporting(0); ?>
    <div class="container-fluid">
           <!-- Page Heading -->
           <br><br>
@@ -20,7 +22,7 @@
                   <thead>
                     <tr>
                       <th>Tipo Cliente</th>
-                      <th>Nro Cliente</th>
+                      <th>Nro Documento</th>
                       <th>Cliente</th>
                       <th>Direccion</th>
                       <th>Correo</th>
@@ -38,20 +40,39 @@
                     </tr>
                   </tfoot>
                   <tbody>
+                    <?php foreach($clientes as $cliente){ ?>
                     <tr>
-                      <td>fasdas</td>
-                      <td>dasdas</td>
-                       <td>dasdas</td>
-                        <td>dasdas</td>
-                         <td>dasdas</td>
-                      <td><a href="#">Editar</a></td>
+                      <td><?php echo $cliente->TipoPersona; ?></td>
+                      <td><?php echo $cliente->NroDocumento; ?></td>
+                      <td><?php echo $cliente->NombreCliente; ?></td>
+                      <td><?php echo $cliente->Direccion; ?></td>
+                      <td><?php echo $cliente->Correo; ?></td>
+                      <td>
+                        <span  class="btn btn-warning" onclick="modalsito('<?php echo $cliente->TipoPersona; ?>','<?php echo $cliente->NroDocumento; ?>','<?php echo $cliente->NombreCliente; ?>','<?php echo $cliente->Direccion; ?>',
+                        '<?php echo $cliente->Correo; ?>')"
+                         >Editar</span>
+                      </td>
                     </tr>
+                  <?php } ?>
                   </tbody>
                 </table>
               </div>
             </div>
           </div>
         </div>
+        
+    <script type="text/javascript">
+      function modalsito(tipo,nro,nombre,direc,correo) {
+        $("div").find("h5").text('Editar Cliente');
+        $(".modal-body #text-tipo").val(tipo);
+        $(".modal-body #nro").val(nro);
+        $(".modal-body #text-nombre").val(nombre);
+        $(".modal-body #text-direc").val(direc);
+        $(".modal-body #text-correo").val(correo);
+        $('#exampleModal2').modal('show');
+      }
+    </script>
+    <?php include('modalInfo.php'); ?>
 
    <!-- Bootstrap core JavaScript-->
   <script src="../lib/vendor/jquery/jquery.min.js"></script>

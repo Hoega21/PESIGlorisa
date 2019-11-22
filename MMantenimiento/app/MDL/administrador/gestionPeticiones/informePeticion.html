@@ -1,0 +1,146 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h3>Informe de petición de mantenimiento</h3>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+              <h4 align="center">INFORMACIÓN DEL PRODUCTO O EQUIPO</h4>
+              <div class="table-responsive table-responsive-data2">
+                <table class="table table-data2 table-bordered">
+                  <tr>
+                    <th style="width: 50%">PRODUCTO O EQUIPO</th>
+                    <td>{{GPeCtrl.informe.equipo.descripcion}}</td>
+                  </tr>
+                  <tr>
+                    <th>CATEGORÍA DEL EQUIPO</th>
+                    <td>{{GPeCtrl.informe.categoria.descripcion}}</td>
+                  </tr>
+                  <tr>
+                    <th>CÓDIGO DEL EQUIPO</th>
+                    <td>[{{GPeCtrl.informe.categoria.iniciales}}-{{GPeCtrl.informe.equipo.serie}}]</td>
+                  </tr>
+                  <tr>
+                    <th>REFERENCIA</th>
+                    <td>{{GPeCtrl.informe.equipo.referencia}}</td>
+                  </tr>
+                  <tr>
+                    <th>VALOR</th>
+                    <td>S/. {{GPeCtrl.informe.equipo.costo}}</td>
+                  </tr>
+                </table>
+              </div><br><br>
+            </div>
+            <div class="col-md-1"></div>
+          </div>
+          <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+              <h4 align="center">INFORMACIÓN DE LA PETICIÓN</h4>
+              <div class="table-responsive table-responsive-data2">
+                <table class="table table-data2 table-bordered">
+                  <tr>
+                    <th style="width: 50%">ASUNTO</th>
+                    <td>{{GPeCtrl.informe.peticion.descripcion}}</td>
+                  </tr>
+                  <tr>
+                    <th>TIPO DE MANTENIMIENTO</th>
+                    <td>{{GPeCtrl.informe.peticion.tipoMantenimiento}}</td>
+                  </tr>
+                  <tr>
+                    <th>CÓDIGO DEL EQUIPO O PRODUCTO</th>
+                    <td>[{{GPeCtrl.informe.categoria.iniciales}}-{{GPeCtrl.informe.equipo.serie}}]</td>
+                  </tr>
+                  <tr>
+                    <th>CÓDIGO DE LA ORDEN DE MANTENIMIENTO</th>
+                    <td>{{GPeCtrl.informe.orden.codigo}}</td>
+                  </tr>
+                  <tr>
+                    <th>SOLICITADO POR</th>
+                    <td>{{GPeCtrl.informe.peticion.solicitadoX}}</td>
+                  </tr>
+                  <tr>
+                    <th>FECHA DE LA PETICIÓN</th>
+                    <td>{{GPeCtrl.informe.peticion.fecha}}</td>
+                  </tr>
+                  <tr>
+                    <th>FECHA PREVISTA DE TÉRMINO</th>
+                    <td>{{GPeCtrl.informe.peticion.fechaPrevista}}</td>
+                  </tr>
+                  <tr>
+                    <th>FECHA DE TÉRMINO</th>
+                    <td>{{GPeCtrl.informe.peticion.fechaCierre}}</td>
+                  </tr>
+                  <tr>
+                    <th>PRIORIDAD</th>
+                    <td>{{GPeCtrl.informe.peticion.prioridad}} de 3</td>
+                  </tr>
+                  <tr>
+                    <th>NOTA</th>
+                    <td>{{GPeCtrl.informe.peticion.nota}}</td>
+                  </tr>
+                  <tr>
+                    <th>PROGRESO</th>
+                    <td>{{GPeCtrl.informe.peticion.progreso}}</td>
+                  </tr>
+                </table>
+              </div><br><br>
+            </div>
+            <div class="col-md-1"></div>
+          </div>
+          <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+              <h4 align="center">INFORMACIÓN DE LA ORDEN DE MANTENIMIENTO</h4>
+              <div class="table-responsive table-responsive-data2">
+                <table class="table table-data2 table-bordered">
+                  <tr>
+                    <th style="width: 50%">CÓDIGO DE LA ORDEN</th>
+                    <td>{{GPeCtrl.informe.orden.codigo}}</td>
+                  </tr>
+                  <tr>
+                    <th>ASUNTO</th>
+                    <td>{{GPeCtrl.informe.orden.asunto}}</td>
+                  </tr>
+                  <tr>
+                    <th>FECHA</th>
+                    <td>{{GPeCtrl.informe.orden.fecha}}</td>
+                  </tr>
+                  <tr>
+                    <th>GENERADA POR</th>
+                    <td>{{GPeCtrl.informe.orden.generadaX}}</td>
+                  </tr>
+                  <tr>
+                    <th>PRESUPUESTO</th>
+                    <td>S/. {{GPeCtrl.informe.orden.presupuesto}}</td>
+                  </tr>
+                  <tr>
+                    <th>COSTO REAL</th>
+                    <td>S/. {{GPeCtrl.informe.orden.costo}}</td>
+                  </tr>
+                  <tr>
+                    <th>FINALIZADO</th>
+                    <td ng-if="GPeCtrl.informe.orden.finalizado == 0">AÚN SIN FINALIZAR LA ORDEN</td>
+                    <td ng-if="GPeCtrl.informe.orden.finalizado == 1">ORDEN FINALIZADA</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div class="col-md-1"></div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="row">
+            <div class="col-md-12">
+              <button type="button" class="btn btn-danger waves-effect float-left" ng-click="GPeCtrl.regresarPeticiones()"><i class="fa fa-times"></i> Regresar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

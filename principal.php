@@ -1,5 +1,16 @@
+<?php
+session_start();
+error_reporting(0);
+include('includes/config.php');
+if(strlen($_SESSION['alogin'])==0)
+    {   
+header('location:index.php');
+}
+else{
+
+    ?>
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <!-- Required meta tags-->
@@ -47,7 +58,13 @@
                 </a>
             </div>
             <div class="menu-sidebar2__content js-scrollbar1">
-                <?php include('menu.php');  ?>
+
+                <?php 
+                if ($_SESSION['puesto']=="administrador") {
+                    include('menu.php'); 
+                }
+                else include('menuMortal.php'); 
+                 ?>
             </div>
         </aside>
         <!-- END MENU SIDEBAR-->
@@ -60,27 +77,9 @@
                     <div class="container-fluid">
                         <div class="header-wrap2">
                             <div class="logo d-block d-lg-none">
-                                <a href="#">
+                                <a href="principal.php">
                                    <img src="images/icon/logo-white.png" alt="Glorisa-logo" />
                                 </a>
-                            </div>
-                            <div class="header-button2">
-                                <div class="header-button-item js-item-menu">
-                                    <i class="zmdi zmdi-search"></i>
-                                    <div class="search-dropdown js-dropdown">
-                                        <form action="">
-                                            <input class="au-input au-input--full au-input--h65" type="text" placeholder="Buscador..." />
-                                            <span class="search-dropdown__icon">
-                                                <i class="zmdi zmdi-search"></i>
-                                            </span>
-                                        </form>
-                                    </div>
-                                </div>
-
-                                <div class="header-button-item mr-0 js-sidebar-btn">
-                                    <i class="zmdi zmdi-menu"></i>
-                                </div>
-
                             </div>
                         </div>
                     </div>
@@ -101,16 +100,18 @@
             <!-- BREADCRUMB-->
             <br><br>
             <section>
-                <iframe src="center.html" name="gloricenter" id="gloricenter" width="100%" height="1000px" frameBorder="0"></iframe>
-            </section>
+                <iframe src="center.html" name="gloricenter" id="gloricenter" width="100%" height="1000px" scrolling="no" frameBorder="0"></iframe>
 
+            </section>
+    
 
             <footer>
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="copyright">
-                                <p>Copyright © 2019 Alumnos de la UNT. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                                <span>Copyright © 2019 Alumnos de la UNT. Template by <a href="https://colorlib.com">Colorlib</a>.</span>
+                                
                             </div>
                         </div>
                     </div>
@@ -130,6 +131,7 @@
 
 
     <!-- Jquery JS-->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script src="vendor/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap JS-->
     <script src="vendor/bootstrap-4.1/popper.min.js"></script>
@@ -160,4 +162,4 @@
 </body>
 
 </html>
-<!-- end document-->
+<?php } ?>
