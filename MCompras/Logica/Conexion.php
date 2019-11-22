@@ -3,10 +3,10 @@
 	// define('DB_USERNAME', 'root');
 	// define('DB_PASSWORD', '');
 	// define('DB_DATABASE', 'compras');
-	$DB_HOSTNAME = 'localhost:3306';
+	$DB_HOSTNAME = 'localhost:3307';
 	$DB_USERNAME = 'root';
 	$DB_PASSWORD = '';
-	$DB_DATABASE = 'elms';
+	$DB_DATABASE = 'compras';
 
 	$Conexion = mysqli_connect($DB_HOSTNAME,$DB_USERNAME,$DB_PASSWORD) or die('No se Puede conectar');
 

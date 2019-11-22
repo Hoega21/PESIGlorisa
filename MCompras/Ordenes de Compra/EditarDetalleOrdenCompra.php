@@ -1,14 +1,15 @@
 <?php 
+    session_start();
     require ("../Logica/Conexion.php");
     //if (isset($_POST['BuscarProveedor'])) {
         //$BUSCAR_RUC = $_POST['ruc'];
         $orden = $_GET['idorden'];
-        $producto = $_GET['idproducto'];
-        $Consulta = "select * from detalleingreso where Ingreso_idIngreso=".$orden." AND Producto_idProducto=".$producto."";
+        $_SESSION['idProducto']  = $_GET['idproducto'];
+        $Consulta = "select * from detalleingreso where idIngreso=".$orden." AND idProd=".$_SESSION['idProducto']."";
         $result = mysqli_query($Conexion,$Consulta);        
         //$sql= $conexion->query("SELECT * FROM Proveedor WHERE rucProveedor='".$BUSCAR_RUC."';");
         $row=mysqli_fetch_row($result);
-        $Consulta2 = "select nomProd from producto where idProducto=".$producto."";
+        $Consulta2 = "select nomProd from producto where idProd=".$_SESSION['idProducto']."";
         $result2 = mysqli_query($Conexion,$Consulta2);
         $row2=mysqli_fetch_row($result2);
     //}                                                    

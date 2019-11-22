@@ -1,5 +1,5 @@
 <?php 
-  $orden = $_GET['idcodigo'];
+  $orden = $_GET['idorden'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -37,13 +37,13 @@
                         require ("../Logica/Conexion.php");
                         //$con=mysqli_connect($host,$usuario,$clave,$BaseDatos);
                         //$con->set_charset("utf8");
-                        $Consulta2 = "select * from detalleingreso where Ingreso_idIngreso='".$orden."'";
+                        $Consulta2 = "select * from detalleingreso where idIngreso='".$orden."'";
                         $result2 = mysqli_query($Conexion,$Consulta2);                        
                         while ($row1=mysqli_fetch_row($result2)) {
                         ?>
                         <tr align="center">
                         <td><?php
-                          $Consulta3 = "select nomProd from Producto where idProducto=".$row1[2]."";
+                          $Consulta3 = "select nomProd from Producto where idProd=".$row1[2]."";
                           $result3=mysqli_query($Conexion,$Consulta3);
                           $row2=mysqli_fetch_row($result3);
                           echo $row2[0]; 

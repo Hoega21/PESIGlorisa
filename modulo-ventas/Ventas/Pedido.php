@@ -111,21 +111,7 @@
                       <div class="col-sm-3">
                         <input type="text" name="ComTo" disabled id="ComTo" class="form-control "  value="0.00">
                       </div>
-                      <label for="ComPa" class="col-sm-1 col-form-label"  >Tipo Pago:  </label>
-                      <div class="col-sm-3">
-                        <select id="ComMon" name="ComMon" class="form-control " onchange="CambioTotal();">
-                          <option value="Co" >Contado</option>
-                          <option value="Cr" >Credito</option>
-                        </select>
-                      </div>
-                      <label for="ComMon" class="col-sm-1 col-form-label" >Moneda: </label>
-                      <div class="col-sm-3">
-                        <select id="ComMon" name="ComMon" class="form-control " onchange="CambioTotal();">
-                          <?php foreach($monedas as $moneda){ ?>
-                            <option value="<?php echo $moneda->idMoneda; ?>" ><?php echo $moneda->Monedita; ?></option>
-                          <?php } ?>
-                        </select>
-                      </div>
+                      
                     </div>
                     <br>
                   <div class="col-sm-12">
@@ -172,11 +158,18 @@
         var pr2= $("#ProCant").val(); 
         var pr3= $("#ProTo").val(); 
         var pr4= $("#LProducto").val(); 
+        var pr6= $("#ComTo").val();
+        var combo=document.getElementById("LProducto");
+        pr1=parseFloat(pr1); pr2=parseFloat(pr2);
+        pr6=parseFloat(pr6); 
+        
+        var pr5= combo.options[combo.selectedIndex].text; 
         var parametros = { 
           "ProPre" : pr1,
           "ProCant" : pr2,
           "ProTo" : pr3,
-          "LProducto" : pr4
+          "LProducto" : pr4,
+          "ProdDescr" : pr5
          };
         $.ajax({
             data:  parametros,
@@ -184,6 +177,7 @@
             type:  'post', //método de envio
             success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
               $('#tabla').load('tabla.php');
+              $("#ComTo").val(pr6+pr2*pr1);
             }
         });
     }

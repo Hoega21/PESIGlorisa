@@ -61,7 +61,7 @@
                       <td><?php echo $comprobante->Estado; ?></td>
                       <td><?php echo $comprobante->Pago; ?></td>
                       <td><?php echo $comprobante->PrecioVent; ?></td>
-                      <td><a href="#" class="btn-btn-warning">Ver Factura</a></td>
+                      <td><a href="Factura.php?NroComp='<?php echo $comprobante->NroComp; ?>'" class="btn-btn-warning">Ver Factura</a></td>
                     </tr>
                     <?php } ?>
                   </tbody>

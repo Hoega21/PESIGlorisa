@@ -48,10 +48,12 @@
                         <td><?php echo $row[2]; ?></td>
                         <td><?php echo $row[3]; ?></td>
                         <td><?php
-                          $Consulta2 = "select sum(cantidad*precio) from detalleingreso where Ingreso_idIngreso=".$row[0]."";
-                          $result2=mysqli_query($Conexion,$Consulta2);
+                          $Consulta2 = "select sum(cantidad*precio) from detalleingreso where idIngreso=".$row[0]."";
+                          $result2=mysqli_query($Conexion,$Consulta2);                          
                           $row2=mysqli_fetch_row($result2);
-                          echo $row2[0]; 
+                          $Consulta4 = "update `ingreso` SET `totalIngreso`= ".$row2[0]." WHERE idIngreso =".$row[0]."";
+                          $result4=mysqli_query($Conexion,$Consulta4);
+                          echo $row2[0];                          
                           ?></td>
                         <td><?php 
                             $Consulta3 = "select nomProveedor from Proveedor where idProveedor=".$row[6]."";
@@ -60,7 +62,7 @@
                             echo $row3[0]; ?>                            
                         </td>
                         <td><a href="AgregarProductos.php?idcodigo=<?php echo $row[0]; ?>">Agregar</a></td>
-                        <td><a href="VerDetalleOrdenCompra.php?idcodigo=<?php echo $row[0]; ?>">Ver Detalle</a></td>
+                        <td><a href="VerDetalleOrdenCompra.php?idorden=<?php echo $row[0]; ?>">Ver Detalle</a></td>
                         <td><a href="../Logica/Log_EnviarOrden.php?ruc=<?php echo $row[1]; ?>">Enviar</a></td>
                         </tr>
                         <?php            

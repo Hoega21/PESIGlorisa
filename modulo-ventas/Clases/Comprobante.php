@@ -10,6 +10,25 @@
 			return $query->fetchAll(PDO::FETCH_OBJ);
 		}
 
+		public static function ListarCabecera($NroComp){
+			require("../../MRecursosHumanos/includes/config.php");
+			$sql="SELECT * FROM comprobante c WHERE (CONCAT(c.TipoComprobante,'-',c.idSerie,'-',c.Correlativo)) = ?";
+			$query = $dbh->prepare($sql);
+			$query->bindParam(1, $NroComp);
+			$query -> execute();
+			return $query->fetchAll(PDO::FETCH_OBJ);
+		}
+
+		public static function ListarDetalles($NroComp){
+			require("../../MRecursosHumanos/includes/config.php");
+			$sql="SELECT * FROM detalleComprobante c WHERE (CONCAT(c.TipoComprobante,'-',c.idSerie,'-',c.Correlativo)) = ?";
+			$query = $dbh->prepare($sql);
+			$query->bindParam(1, $NroComp);
+			$query -> execute();
+			return $query->fetchAll(PDO::FETCH_OBJ);
+		}
+
+
 		public static function ListarSerie(){
 			require("../../MRecursosHumanos/includes/config.php");
 			$sql="SELECT * FROM serie;";
@@ -73,7 +92,7 @@
 
 		public static function TodosDetalles(){
 			require("../../MRecursosHumanos/includes/config.php");
-			$sql="SELECT * FROM detallitos";
+			$sql="SELECT * FROM detallitos;";
 			$query = $dbh->prepare($sql);
 			$query -> execute();
 			return $query->fetchAll(PDO::FETCH_OBJ);

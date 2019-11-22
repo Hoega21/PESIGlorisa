@@ -8,7 +8,7 @@
 </head>
 <body style="background-color: #e5e5e5">
     <div class="container-fluid">
-        <?php include("../Clases/Comprobante.php");  $recibos=Comprobante::ListarComprobantes(); ?>
+        <?php include("../Clases/Comprobante.php");  $recibos=Comprobante::ListarComprobanteT(); ?>
           <!-- Page Heading -->
           <br><br>
           <h1 class="h3 mb-2 text-gray-800 " align="center"  ><i>Devoluciones</i></h1>
@@ -20,35 +20,32 @@
                       <div class="form-group row">
                       <label for="NameUser" class="col-sm-2 col-form-label" >Nro Comprobante: </label>
                       <div class="col-sm-7">
-                       <select id="Tip-Cliente" name="Tip-Cliente" class="form-control ">
+                       <select id="TipDev" name="TipDev" class="form-control ">
                         <?php foreach($recibos as $recibo){ 
-                              $Com='B'; $Tip='Boleta';
-                              if($recibo->Tipo=='01'){ $Com='F'; $Tip='Factura'; }
-                              $NroComprobante=$Com.$recibo->Serie.'-'.$recibo->Corr;
-                              $NroComprobante2=$Com.'-'.$recibo->Serie.'-'.$recibo->Corr;
+                              $NroComprobante=$recibo->TipoComprobante.'-'.$recibo->idSerie.'-'.$recibo->Correlativo;
                           ?>
-                           <option value="<?php echo $NroComprobante2; ?>" ><?php echo $NroComprobante; ?></option>
+                           <option value="<?php echo $NroComprobante; ?>" ><?php echo $NroComprobante; ?></option>
                         <?php } ?>
                       </select>
                       </div>
                       <div class="col-sm-3 ">
-                        <button class="btn btn-info btn-block">Buscar</button>
+                        <span type="submit" name="buscar" id="buscar" class="btn btn-info btn-block" onclick="BuscarComprobante()" >Buscar</span>
                       </div>
                     </div>
                     <div class="form-group row">
-                        <label for="CliNom" class="col-sm-2 col-form-label" name="LCliNom" id="LCliNom">DNI:  </label>
+                        <label for="CliDni" class="col-sm-2 col-form-label">Nro Cliente:  </label>
                       <div class="col-sm-10">
-                          <input type="text" name="CliNom" id="CliNom" class="form-control "  value="" disabled>
+                          <input type="text" name="CliDni" id="CliDni" class="form-control "  value="" disabled>
                       </div>
                     </div>
                          <div class="form-group row" >
-                        <label for="CliNom" class="col-sm-2 col-form-label" name="LCliNom" id="LCliNom">Nombre Cliente:  </label>
+                        <label for="CliNom" class="col-sm-2 col-form-label">Nombre Cliente:  </label>
                       <div class="col-sm-10">
                           <input type="text" name="CliNom" id="CliNom" maxlenght="40" required="" class="form-control "  disabled value="" >
                       </div>
                     </div>
                     <div class="form-group row" >
-                        <label for="CliNom" class="col-sm-2 col-form-label" name="LComFecha" id="LComFecha">Fecha:  </label>
+                        <label for="ComFecha" class="col-sm-2 col-form-label">Fecha:  </label>
                       <div class="col-sm-10">
                           <input type="date" name="ComFecha" id="ComFecha" required="" class="form-control " >
                       </div>
@@ -60,13 +57,11 @@
                      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Numero</th>
-                      <th>Fecha</th>
-                      <th>Nro Comprobante</th>
-                      <th>Cliente</th>
-                      <th>Direccion</th>
-                      <th>Ver Pedido</th>
-                      <th>Ver Factura</th>
+                      <th>#</th>
+                      <th>Producto</th>
+                      <th>Cantidad</th>
+                      <th>Precio</th>
+                      <th>Elegir</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -74,9 +69,6 @@
                       <td>fasdas</td>
                       <td>fasdas</td>
                       <td>dasdas</td>
-                       <td>dasdas</td>
-                        <td>dasdas</td>
-                         <td>dasdas</td>
                       <td><a href="EditarCliente.php">Editar</a></td>
                     </tr>
                   </tbody>
@@ -124,6 +116,35 @@
   <!-- Custom scripts for all pages-->
   <script src="../lib/js/sb-admin-2.min.js"></script>
 
+
+<script type="text/javascript">
+  function BuscarComprobante(){
+        var tip= $("#TipoCom").val();
+        var pr= $("#CliDni").val(); pr=pr.trim();
+        if(isNaN(pr)){
+          alertify.alert('Solo ingresar digitos');
+        }else{
+          if(tip=='03' && pr.length!=8){
+            alertify.alert('El DNI consta de 8 digitos');
+          }else{
+            if(tip=='01' && pr.length!=11){
+              alertify.alert('El RUC consta de 11 digitos');
+            }else{
+              $("#NameResguardo").html(pr);
+              var parametros = { "CliDni" : pr };
+              $.ajax({
+                    data:  parametros,
+                    url:   '../AjaxAiua.php', 
+                    type:  'post', //método de envio
+                    success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                    $("#CliNom").val(response.trim());
+                  }
+              });
+            }
+          }
+        }
+    }
+</script>
 
 </body>
 </html>

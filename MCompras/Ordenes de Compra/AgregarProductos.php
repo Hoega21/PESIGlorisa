@@ -99,7 +99,7 @@
                                                         <option value="">Seleccione</option>
                                                         <?php                       
                                                             while ($fila = mysqli_fetch_array($result)) {
-                                                                echo '<option value="'.$fila['idProducto'].'">'.$fila['nomProd'].'</option>';                     
+                                                                echo '<option value="'.$fila['idProd'].'">'.$fila['nomProd'].'</option>';                     
                                                             }
                                                         ?>
                                                     </select>                                                    
