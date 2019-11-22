@@ -2,7 +2,7 @@ myMDLApp.controller("gestorOrdenesCtrl", ['$scope', '$state', 'NgTableParams', '
 function($scope, $state, NgTableParams, $location, $http, $cookies, $stateParams){
 
   var ctrl = this;
-
+  ctrl.informe = [];
   ctrl.orden = {
       id: '',
       serie: '',
@@ -23,6 +23,10 @@ function($scope, $state, NgTableParams, $location, $http, $cookies, $stateParams
 
   ctrl.irEditarOrden = function (orden) {
     $state.go('editar-orden', {id: orden.id});
+  }
+
+  ctrl.irInformeOrden = function (orden) {
+    $state.go('informe-orden', {id: orden.id});
   }
 
   ctrl.regresarOrdenes = function () {
@@ -124,10 +128,39 @@ function($scope, $state, NgTableParams, $location, $http, $cookies, $stateParams
     });
   }
 
+  ctrl.cargarPeticiones = function () {
+    try {
+      $http.get('./app/MDL/administrador/gestionOrdenes/cargarPeticiones.php',{params: {idOrden: ctrl.informe.orden.id}}
+      ).then(function (response) {
+        if (response.data.status != 'Error') {
+          ctrl.peticionesLista = response.data;
+          ctrl.peticionesLista.forEach(function(element) {
+            try {
+              // console.log(element.id);
+              $http.get('./app/MDL/administrador/gestionOrdenes/buscarEquipo.php',{params: {idEquipo: element.idEquipo}}
+              ).then(function (response) {
+                if (response.data.status != 'Error') {
+                  ctrl.peticionesLista[ctrl.peticionesLista.indexOf(element)].equipo = response.data.descripcion;
+                  // console.log(ctrl.peticionesLista[ctrl.peticionesLista.indexOf(element)]);
+                }
+              })
+            } catch (e) {
+              swal("¡Opss!", "Ocurrió un error." + e , "error");
+            }
+          })
+        }
+      })
+    } catch (e) {
+      swal("¡Opss!", "Ocurrió un error." + e , "error");
+    }
+  }
+
   ctrl.cargarInfo = function () {
     ctrl.orden.id = $stateParams.id;
     $http.get('./app/MDL/administrador/gestionOrdenes/buscarOrden.php',{params: {id: ctrl.orden.id}}
     ).then(function (response) {
+      ctrl.informe.orden = response.data;
+      ctrl.cargarPeticiones();
       ctrl.orden.asunto = response.data.asunto
       ctrl.orden.codigo = response.data.codigo
       ctrl.orden.costo = response.data.costo

@@ -73,6 +73,12 @@ myMDLApp.config(['stateHelperProvider', '$urlRouterProvider', function(stateHelp
         url: '/ordenes/editar/:id',
         templateUrl: 'app/MDL/administrador/gestionOrdenes/editarOrden.html',
         controller: 'gestorOrdenesCtrl as GOCtrl'
+      },
+      {
+        name: 'informe-orden',
+        url: '/ordenes/informe/:id',
+        templateUrl: 'app/MDL/administrador/gestionOrdenes/informeOrden.html',
+        controller: 'gestorOrdenesCtrl as GOCtrl'
   //     },
   //     {
   //       name: 'gestionar-grado',

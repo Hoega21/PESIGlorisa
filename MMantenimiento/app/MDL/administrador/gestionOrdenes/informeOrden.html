@@ -1,0 +1,115 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h3>Informe de orden de mantenimiento</h3>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+              <h4 align="center">INFORMACIÓN DE LA ORDEN DE MANTENIMIENTO</h4>
+              <div class="table-responsive table-responsive-data2">
+                <table class="table table-data2 table-bordered">
+                  <tr>
+                    <th style="width: 50%">CÓDIGO DE LA ORDEN</th>
+                    <td>{{GOCtrl.informe.orden.codigo}}</td>
+                  </tr>
+                  <tr>
+                    <th>ASUNTO</th>
+                    <td>{{GOCtrl.informe.orden.asunto}}</td>
+                  </tr>
+                  <tr>
+                    <th>FECHA</th>
+                    <td>{{GOCtrl.informe.orden.fecha}}</td>
+                  </tr>
+                  <tr>
+                    <th>GENERADA POR</th>
+                    <td>{{GOCtrl.informe.orden.generadaX}}</td>
+                  </tr>
+                  <tr>
+                    <th>PRESUPUESTO</th>
+                    <td>S/. {{GOCtrl.informe.orden.presupuesto}}</td>
+                  </tr>
+                  <tr>
+                    <th>COSTO REAL</th>
+                    <td>S/. {{GOCtrl.informe.orden.costo}}</td>
+                  </tr>
+                  <tr>
+                    <th>FINALIZADO</th>
+                    <td ng-if="GOCtrl.informe.orden.finalizado == 0">AÚN SIN FINALIZAR LA ORDEN</td>
+                    <td ng-if="GOCtrl.informe.orden.finalizado == 1">ORDEN FINALIZADA</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div class="col-md-1"></div>
+          </div><br><br>
+          <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+              <h4 align="center">INFORMACIÓN DE LA PETICIONES ASOCIADAS A ESTA ORDEN</h4>
+              <div class="table-responsive table-responsive-data2" ng-repeat="peticion in GOCtrl.peticionesLista">
+                <table class="table table-data2 table-bordered">
+                  <tr>
+                    <th style="width: 50%">ASUNTO</th>
+                    <td>{{peticion.descripcion}}</td>
+                  </tr>
+                  <tr>
+                    <th>TIPO DE MANTENIMIENTO</th>
+                    <td>{{peticion.tipoMantenimiento}}</td>
+                  </tr>
+                  <tr>
+                    <th>CÓDIGO DEL EQUIPO O PRODUCTO</th>
+                    <td>{{peticion.equipo}}</td>
+                  </tr>
+                  <tr>
+                    <th>CÓDIGO DE LA ORDEN DE MANTENIMIENTO</th>
+                    <td>{{GOCtrl.informe.orden.codigo}}</td>
+                  </tr>
+                  <tr>
+                    <th>SOLICITADO POR</th>
+                    <td>{{peticion.solicitadoX}}</td>
+                  </tr>
+                  <tr>
+                    <th>FECHA DE LA PETICIÓN</th>
+                    <td>{{peticion.fecha}}</td>
+                  </tr>
+                  <tr>
+                    <th>FECHA PREVISTA DE TÉRMINO</th>
+                    <td>{{peticion.fechaPrevista}}</td>
+                  </tr>
+                  <tr>
+                    <th>FECHA DE TÉRMINO</th>
+                    <td>{{peticion.fechaCierre}}</td>
+                  </tr>
+                  <tr>
+                    <th>PRIORIDAD</th>
+                    <td>{{peticion.prioridad}} de 3</td>
+                  </tr>
+                  <tr>
+                    <th>NOTA</th>
+                    <td>{{peticion.nota}}</td>
+                  </tr>
+                  <tr>
+                    <th>PROGRESO</th>
+                    <td>{{peticion.progreso}}</td>
+                  </tr>
+                </table><br>
+              </div>
+            </div>
+            <div class="col-md-1"></div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="row">
+            <div class="col-md-12">
+              <button type="button" class="btn btn-danger waves-effect float-left" ng-click="GOCtrl.regresarPeticiones()"><i class="fa fa-times"></i> Regresar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

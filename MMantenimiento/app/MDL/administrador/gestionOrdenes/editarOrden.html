@@ -11,7 +11,10 @@
       </div>
       <div class="card">
         <div class="card-header">
-          <h3>Edita orden de mantenimiento</h3>
+          <div class="form-group form-inline m-b-0">
+            <h3 class="col-md-10">Editar orden de mantenimiento</h3>
+            <button type="button" class="col-md-2 btn btn-warning waves-effect float-right" ng-click="GOCtrl.finalizarOrden()" ng-if="GOCtrl.orden.finalizado == 0"><i class="fa fa-check"></i> Finalizar</button>
+          </div>
         </div>
         <div class="card-body">
           <div class="row">
