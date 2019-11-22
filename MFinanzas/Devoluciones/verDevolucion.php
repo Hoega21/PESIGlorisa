@@ -64,7 +64,7 @@ $tipoPa="Contado";
 
 
 
-$sql15="insert into comprobante VALUES (:tipo,:idEmpleado, :idSerie,:Correlativo,:NroDocCliente,:fecha,:hora,:moneda,:valoVentaTotal,:PrecioVenta,:IGV,:Estado,:TipoPago)";
+$sql15="insert into comprobante VALUES (:tipo,:idEmpleado, :idSerie,:Correlativo,:NroDocCliente,:fecha,:moneda,:valoVentaTotal,:PrecioVenta,:IGV,:Estado,:TipoPago)";
 $query15 = $dbh->prepare($sql15);
 $query15->bindParam(':tipo',$tipoHack1,PDO::PARAM_STR);
 $query15->bindParam(':idEmpleado',$idEmple,PDO::PARAM_INT);
@@ -72,7 +72,7 @@ $query15->bindParam(':idSerie',$idSerie,PDO::PARAM_STR);
 $query15->bindParam(':Correlativo',$maxCo1,PDO::PARAM_STR);
 $query15->bindParam(':NroDocCliente',$cliente,PDO::PARAM_STR);
 $query15->bindParam(':fecha',$fecha,PDO::PARAM_STR);
-$query15->bindParam(':hora',$horas,PDO::PARAM_STR);
+//$query15->bindParam(':hora',$horas,PDO::PARAM_STR);
 $query15->bindParam(':moneda',$moneda,PDO::PARAM_INT);
 $query15->bindParam(':valoVentaTotal',$precioV,PDO::PARAM_STR);
 $query15->bindParam(':PrecioVenta',$TotalDevolver,PDO::PARAM_STR);
