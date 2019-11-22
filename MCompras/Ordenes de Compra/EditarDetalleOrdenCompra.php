@@ -5,7 +5,7 @@
         //$BUSCAR_RUC = $_POST['ruc'];
         $orden = $_GET['idorden'];
         $_SESSION['idProducto']  = $_GET['idproducto'];
-        $Consulta = "select * from detalleingreso where idIngreso=".$orden." AND idProd=".$_SESSION['idProducto']."";
+        $Consulta = "select * from detalleingreso where Ingreso_idIngreso=".$orden." AND Producto_idProducto=".$_SESSION['idProducto']."";
         $result = mysqli_query($Conexion,$Consulta);        
         //$sql= $conexion->query("SELECT * FROM Proveedor WHERE rucProveedor='".$BUSCAR_RUC."';");
         $row=mysqli_fetch_row($result);

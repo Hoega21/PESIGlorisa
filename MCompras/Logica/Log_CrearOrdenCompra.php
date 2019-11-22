@@ -14,7 +14,7 @@
 	}else{
 		//mysqli_free_result($Conexion);
 		//require('Conexion.php');
-		$Consulta ="call proc_registrar_ingreso('".$fecha_pedido."','".$fecha_ingreso."','orden',0.0,'pendiente',".$idempleado.",".$proveedor.")";
+		$Consulta ="insert into `ingreso`(`fecIngreso`, `fecPedido`, `estado`, `totalIngreso`, `factura`, `tblemployees_id`, `Proveedor_idProveedor`) values ('".$fecha_ingreso."','".$fecha_pedido."','orden',0,'pendiente',1,".$proveedor.")";
 		$result=mysqli_query($Conexion,$Consulta);
 		if($result){
 		echo "<script>

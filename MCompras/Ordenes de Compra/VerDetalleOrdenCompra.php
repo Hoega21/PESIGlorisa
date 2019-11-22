@@ -37,7 +37,7 @@
                         require ("../Logica/Conexion.php");
                         //$con=mysqli_connect($host,$usuario,$clave,$BaseDatos);
                         //$con->set_charset("utf8");
-                        $Consulta2 = "select * from detalleingreso where idIngreso='".$orden."'";
+                        $Consulta2 = "select * from detalleingreso where Ingreso_idIngreso='".$orden."'";
                         $result2 = mysqli_query($Conexion,$Consulta2);                        
                         while ($row1=mysqli_fetch_row($result2)) {
                         ?>

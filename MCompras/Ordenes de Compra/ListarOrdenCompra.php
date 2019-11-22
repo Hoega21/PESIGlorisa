@@ -48,7 +48,7 @@
                         <td><?php echo $row[2]; ?></td>
                         <td><?php echo $row[3]; ?></td>
                         <td><?php
-                          $Consulta2 = "select sum(cantidad*precio) from detalleingreso where idIngreso=".$row[0]."";
+                          $Consulta2 = "select sum(cantidad*precio) from detalleingreso where Ingreso_idIngreso=".$row[0]."";
                           $result2=mysqli_query($Conexion,$Consulta2);                          
                           $row2=mysqli_fetch_row($result2);
                           $Consulta4 = "update `ingreso` SET `totalIngreso`= ".$row2[0]." WHERE idIngreso =".$row[0]."";
