@@ -59,7 +59,7 @@
                 <td data-title="'Acciones'" align="center" width="10%">
                   <div class="col-md-12 table-data-feature" style="justify-content: center;">
                     <div class="col-md-4">
-                      <button class="item" data-toggle="tooltip" data-placement="top" title="Editar" ng-click="GOCtrl.irEditarOrden(orden)">
+                      <button class="item" data-toggle="tooltip" data-placement="top" title="Editar" ng-click="GOCtrl.irEditarOrden(orden)" ng-if="orden.finalizadoStr == 'SIN FINALIZAR'">
                         <i class="zmdi zmdi-edit"></i>
                       </button>
                     </div>
