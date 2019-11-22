@@ -9,7 +9,7 @@
         $result = mysqli_query($Conexion,$Consulta);        
         //$sql= $conexion->query("SELECT * FROM Proveedor WHERE rucProveedor='".$BUSCAR_RUC."';");
         $row=mysqli_fetch_row($result);
-        $Consulta2 = "select nomProd from producto where idProd=".$_SESSION['idProducto']."";
+        $Consulta2 = "select nomProd from Producto where idProd=".$_SESSION['idProducto']."";
         $result2 = mysqli_query($Conexion,$Consulta2);
         $row2=mysqli_fetch_row($result2);
     //}                                                    

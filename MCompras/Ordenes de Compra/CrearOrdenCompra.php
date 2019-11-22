@@ -96,7 +96,7 @@
                                                 </div>
                                                 <?php
                                                     require('../Logica/Conexion.php'); 
-                                                    $result=mysqli_query($Conexion,"select * from proveedor");
+                                                    $result=mysqli_query($Conexion,"select * from Proveedor");
                                                 ?>
                                                 <div class="col-12 col-md-9">
                                                     <select name="proveedor" id="proveedor">

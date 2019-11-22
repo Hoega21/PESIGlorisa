@@ -92,7 +92,7 @@
                                                 </div>
                                                 <?php
                                                     require('../Logica/Conexion.php'); 
-                                                    $result=mysqli_query($Conexion,"select * from producto");
+                                                    $result=mysqli_query($Conexion,"select * from Producto");
                                                 ?>
                                                 <div class="col-12 col-md-9">
                                                     <select name="producto" id="producto">

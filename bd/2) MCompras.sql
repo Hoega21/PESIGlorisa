@@ -47,7 +47,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Ingreso`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Ingreso` (
+CREATE TABLE IF NOT EXISTS `ingreso` (
   `idIngreso` INT NOT NULL AUTO_INCREMENT,
   `fecIngreso` DATE NOT NULL,
   `fecPedido` DATE NOT NULL,
@@ -75,20 +75,20 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `DetalleIngreso`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `DetalleIngreso` (
+CREATE TABLE IF NOT EXISTS `detalleingreso` (
   `iddetalle_ingreso` INT NOT NULL AUTO_INCREMENT,
   `Ingreso_idIngreso` INT NOT NULL,
   `Producto_idProducto` INT NOT NULL,
   `cantidad` INT NOT NULL,
   `precio` DECIMAL(18,2) NOT NULL,
   PRIMARY KEY (`iddetalle_ingreso`, `Ingreso_idIngreso`, `Producto_idProducto`),
-  FOREIGN KEY (`Ingreso_idIngreso`) REFERENCES `Ingreso` (`idIngreso`),
+  FOREIGN KEY (`Ingreso_idIngreso`) REFERENCES `ingreso` (`idIngreso`),
   FOREIGN KEY (`Producto_idProducto`) REFERENCES `Producto` (`idProd`)
 )
 ENGINE = InnoDB;
 
 
-CREATE PROCEDURE `proc_actualizar_proveedor` (`_ruc` VARCHAR(11), `_nombre` VARCHAR(50), `_direccion` VARCHAR(100), `_telefono` VARCHAR(30), `_ciudad` VARCHAR(50), `_pais` VARCHAR(50), `_correo` VARCHAR(50))  UPDATE `proveedor` SET `nomProveedor`=_nombre,`dirProveedor`=_direccion,`telProveedor`=_telefono,`ciuProveedor`=_ciudad,`paiProveedor`=_pais,`corProveedor`=_correo WHERE rucProveedor=_ruc;
+CREATE PROCEDURE `proc_actualizar_proveedor` (`_ruc` VARCHAR(11), `_nombre` VARCHAR(50), `_direccion` VARCHAR(100), `_telefono` VARCHAR(30), `_ciudad` VARCHAR(50), `_pais` VARCHAR(50), `_correo` VARCHAR(50))  UPDATE `Proveedor` SET `nomProveedor`=_nombre,`dirProveedor`=_direccion,`telProveedor`=_telefono,`ciuProveedor`=_ciudad,`paiProveedor`=_pais,`corProveedor`=_correo WHERE rucProveedor=_ruc;
 
 CREATE PROCEDURE `proc_actualizar_totalingreso` (`_idIngreso` INT, `_totaldetalle` DECIMAL(18,2))  UPDATE `ingreso` SET `totalIngreso`= `totalIngreso`+_totaldetalle WHERE idIngreso = _idIngreso;
 
@@ -98,9 +98,9 @@ CREATE PROCEDURE `proc_buscar_Empleado` (IN `_emailid` VARCHAR(200), IN `_passwo
 
 CREATE PROCEDURE `proc_buscar_Producto_Repetido` (`_idIngreso` INT, `_idproducto` INT)  SELECT * FROM `detalleingreso` WHERE iddetalle_ingreso = _idIngreso AND Producto_idProducto = _idproducto;
 
-CREATE PROCEDURE `proc_buscar_Proveedor_Repetido` (IN `_nombre` VARCHAR(50), IN `_direccion` VARCHAR(100), IN `_RUC` VARCHAR(11))  SELECT * FROM proveedor WHERE (nomProveedor = _nombre OR dirProveedor = _direccion OR rucProveedor = _RUC);
+CREATE PROCEDURE `proc_buscar_Proveedor_Repetido` (IN `_nombre` VARCHAR(50), IN `_direccion` VARCHAR(100), IN `_RUC` VARCHAR(11))  SELECT * FROM Proveedor WHERE (nomProveedor = _nombre OR dirProveedor = _direccion OR rucProveedor = _RUC);
 
-CREATE PROCEDURE `proc_deshabilitar_proveedor` (`_ruc` VARCHAR(11))  UPDATE `proveedor` SET `estProveedor`='deshabilitado' WHERE rucProveedor = _ruc;
+CREATE PROCEDURE `proc_deshabilitar_proveedor` (`_ruc` VARCHAR(11))  UPDATE `Proveedor` SET `estProveedor`='deshabilitado' WHERE rucProveedor = _ruc;
 
 CREATE PROCEDURE `proc_registrar_ingreso` (`_fecIngreso` DATE, `_fecPedido` DATE, `_estado` VARCHAR(20), `_total` DECIMAL(18,2), `_factura` VARCHAR(50), `_idempleado` INT, `_idproveedor` INT)  INSERT INTO `ingreso`(`fecIngreso`, `fecPedido`, `estado`, `totalIngreso`, `factura`, `tblemployees_id`, `Proveedor_idProveedor`) VALUES (_fecIngreso,_fecPedido,_estado,_total,_factura,_idempleado,_idproveedor);
 
