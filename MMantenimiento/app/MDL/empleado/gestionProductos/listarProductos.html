@@ -29,7 +29,7 @@
               </button>
             </div> -->
             <div class="table-data__tool-right">
-              <a href="#!/raiz/administrador/productos/agregar">
+              <a href="#!/raiz/empleado/productosE/agregar">
                 <button class="au-btn au-btn-icon au-btn--green au-btn--small">
                   <i class="zmdi zmdi-plus"></i> Agregar producto
                 </button>
@@ -38,8 +38,8 @@
           </div>
 
           <div class="table-responsive table-responsive-data2">
-            <table class="table table-data2 table-bordered" ng-table="GPCtrl.productosTabla">
-              <tr ng-repeat="producto in GPCtrl.productosLista">
+            <table class="table table-data2 table-bordered" ng-table="GPEmpCtrl.productosTabla">
+              <tr ng-repeat="producto in GPEmpCtrl.productosLista">
                 <td data-title="'Nro.'" align="center" width="5%">
                   {{$index + 1}}
                 </td>
@@ -65,16 +65,16 @@
                     </button> -->
                     <div class="col-md-6">
                       <!-- <a href=""></a>0 -->
-                      <!-- <button type="button" class="btn btn-primary waves-effect float-left m-r-10" ng-click="GPCtrl.irCrearCategoria()"><i class="zmdi zmdi-edit"></i> </button> -->
-                      <button class="item" data-toggle="tooltip" data-placement="top" title="Editar" type="button" ng-click="GPCtrl.irEditarProducto(producto)">
+                      <!-- <button type="button" class="btn btn-primary waves-effect float-left m-r-10" ng-click="GPEmpCtrl.irCrearCategoria()"><i class="zmdi zmdi-edit"></i> </button> -->
+                      <button class="item" data-toggle="tooltip" data-placement="top" title="Editar" type="button" ng-click="GPEmpCtrl.irEditarProducto(producto)">
                         <i class="zmdi zmdi-edit"></i>
                       </button>
                     </div>
-                    <div class="col-md-6">
-                      <button class="item" data-toggle="tooltip" data-placement="top" title="Eliminar" ng-click="GPCtrl.eliminarProducto(producto)">
+                    <!-- <div class="col-md-6">
+                      <button class="item" data-toggle="tooltip" data-placement="top" title="Eliminar" ng-click="GPEmpCtrl.eliminarProducto(producto)">
                         <i class="zmdi zmdi-delete"></i>
                       </button>
-                    </div>
+                    </div> -->
                     <!-- <button class="item" data-toggle="tooltip" data-placement="top" title="Más">
                       <i class="zmdi zmdi-more"></i>
                     </button> -->

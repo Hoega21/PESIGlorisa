@@ -217,22 +217,22 @@
                             </a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
 							  <li>
-								<a href="MMantenimiento/#!/administrador/productos">
+								<a href="MMantenimiento/#!/raiz/administrador/productos">
 								  <i class="fas fa-tachometer-alt"></i>Inventario de productos
 								</a>
 							  </li>
 							  <li>
-								<a href="MMantenimiento/#!/administrador/peticiones">
+								<a href="MMantenimiento/#!/raiz/administrador/peticiones">
 								  <i class="fas fa-tachometer-alt"></i>Peticiones de mantenimiento
 								</a>
 							  </li>
-							  <!-- <li>
-								<a href="#">
+							  <li>
+								<a href="MMantenimiento/#!/raiz/administrador/mantenimientos">
 								  <i class="fas fa-tachometer-alt"></i>Calendario de mantenimiento
 								</a>
-							  </li> -->
+							  </li>
 							  <li>
-								<a href="MMantenimiento/#!/administrador/ordenes">
+								<a href="MMantenimiento/#!/raiz/administrador/ordenes">
 								  <i class="fas fa-tachometer-alt"></i>Órdenes de trabajo
 								</a>
 							  </li>

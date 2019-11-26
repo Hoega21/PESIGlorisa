@@ -3,7 +3,7 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h3>Productos</h3>
+          <h3>Órdenes de trabajo</h3>
         </div>
         <div class="card-body">
           <div class="table-data__tool">
@@ -29,50 +29,36 @@
               </button>
             </div> -->
             <div class="table-data__tool-right">
-              <a href="#!/raiz/administrador/productos/agregar">
-                <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                  <i class="zmdi zmdi-plus"></i> Agregar producto
-                </button>
-              </a>
+              
             </div>
           </div>
 
           <div class="table-responsive table-responsive-data2">
-            <table class="table table-data2 table-bordered" ng-table="GPCtrl.productosTabla">
-              <tr ng-repeat="producto in GPCtrl.productosLista">
+            <table class="table table-data2 table-bordered" ng-table="GOEmpCtrl.ordenesTabla">
+              <tr ng-repeat="orden in GOEmpCtrl.ordenesLista">
                 <td data-title="'Nro.'" align="center" width="5%">
                   {{$index + 1}}
                 </td>
-                <td data-title="'Producto'">
-                  {{producto.descripcion}}
+                <td data-title="'Código'">
+                  {{orden.codigo}}
                 </td>
-                <td data-title="'Categoría'" align="center">
-                  {{producto.categoria}}
+                <td data-title="'Asunto'">
+                  {{orden.asunto}}
                 </td>
-                <td data-title="'Código'" align="center">
-                  {{producto.codigo}}
+                <td data-title="'Fecha'" align="center">
+                  {{orden.fecha}}
                 </td>
-                <td data-title="'Referencia'" align="center">
-                  {{producto.referencia}}
+                <td data-title="'Responsable'" align="center">
+                  {{orden.generadaX}}
                 </td>
-                <td data-title="'Costo'" align="center">
-                  S/. {{producto.costo}}
+                <td data-title="'Finalizado'" align="center">
+                  {{orden.finalizadoStr}}
                 </td>
                 <td data-title="'Acciones'" align="center" width="10%">
                   <div class="col-md-12 table-data-feature" style="justify-content: center;">
-                    <!-- <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
-                      <i class="zmdi zmdi-mail-send"></i>
-                    </button> -->
-                    <div class="col-md-6">
-                      <!-- <a href=""></a>0 -->
-                      <!-- <button type="button" class="btn btn-primary waves-effect float-left m-r-10" ng-click="GPCtrl.irCrearCategoria()"><i class="zmdi zmdi-edit"></i> </button> -->
-                      <button class="item" data-toggle="tooltip" data-placement="top" title="Editar" type="button" ng-click="GPCtrl.irEditarProducto(producto)">
-                        <i class="zmdi zmdi-edit"></i>
-                      </button>
-                    </div>
-                    <div class="col-md-6">
-                      <button class="item" data-toggle="tooltip" data-placement="top" title="Eliminar" ng-click="GPCtrl.eliminarProducto(producto)">
-                        <i class="zmdi zmdi-delete"></i>
+                    <div class="col-md-4">
+                      <button class="item" data-toggle="tooltip" data-placement="top" title="Informe" ng-click="GOEmpCtrl.irInformeOrden(orden)">
+                        <i class="zmdi zmdi-mail-send"></i>
                       </button>
                     </div>
                     <!-- <button class="item" data-toggle="tooltip" data-placement="top" title="Más">

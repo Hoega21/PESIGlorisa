@@ -1,0 +1,126 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          ADVERTENCIA:
+        </div>
+        <div class="card-body">
+          Si desea modificar el asunto o presupuesto o el costo no olvide dar click en el botón 'Guardar' y para guardar el costo final gastado debe dar click en el botón 'Finalizar' (solo si todas las peticiones asignadas a esta orden ha finalizado).
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="form-group form-inline m-b-0">
+            <h3 class="col-md-10">Editar orden de mantenimiento</h3>
+            <button type="button" class="col-md-2 btn btn-warning waves-effect float-right" ng-click="GOEmpCtrl.finalizarOrden()" ng-if="GOEmpCtrl.orden.finalizado == 0"><i class="fa fa-check"></i> Finalizar</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label class="label-letra-prometeo col-sm-10 control-label m-t-10 m-b-0">Asunto<strong class="text-danger">*</strong>: </label>
+                  <div class="col-sm-10">
+                    <div class="fg-line">
+                      <input class="form-control input-sm" placeholder="Ingrese el asunto de la orden" ng-model = "GOEmpCtrl.orden.asunto">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label class="label-letra-prometeo col-sm-10 control-label m-t-10 m-b-0">Código de orden<strong class="text-danger">*</strong>: </label>
+                  <div class="col-sm-10">
+                    <div class="fg-line">
+                      <input class="form-control input-sm" placeholder="Ingrese alguna referencia del orden" ng-model = "GOEmpCtrl.orden.codigo" readonly>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label class="label-letra-prometeo col-sm-10 control-label m-t-10 m-b-0">Generada por<strong class="text-danger">*</strong>: </label>
+                  <div class="col-sm-10">
+                    <div class="fg-line">
+                      <input class="form-control input-sm" placeholder="Ingrese alguna referencia del orden" ng-model = "GOEmpCtrl.orden.generadaX" readonly>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label class="label-letra-prometeo col-sm-10 control-label m-t-10 m-b-0">Fecha<strong class="text-danger">*</strong>: </label>
+                  <div class="col-sm-10">
+                    <div class="fg-line">
+                      <input type="date" class="form-control input-sm" ng-model = "GOEmpCtrl.orden.fecha" readonly>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label class="label-letra-prometeo col-sm-10 control-label m-t-10 m-b-0">Presupuesto a entregar<strong class="text-danger">*</strong>: </label>
+                  <div class="col-sm-10">
+                    <div class="fg-line">
+                      <input class="form-control input-sm" placeholder="Ingrese el presupuesto en soles destinado a la orden de mantenimiento" ng-model = "GOEmpCtrl.orden.presupuesto" ng-change="GOEmpCtrl.verificarPresupuesto()">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label class="label-letra-prometeo col-sm-10 control-label m-t-10 m-b-0">Costo real<strong class="text-danger">*</strong>: </label>
+                  <div class="col-sm-10">
+                    <div class="fg-line">
+                      <input class="form-control input-sm" placeholder="Ingrese el monto del costo hasta el momento para esta orden" ng-model = "GOEmpCtrl.orden.costo" ng-change="GOEmpCtrl.verificarCosto()">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="card-footer">
+          <div class="row">
+            <div class="col-md-12" >
+              <button type="button" class="btn btn-danger waves-effect float-left" ng-click="GOEmpCtrl.regresarOrdenes()"><i class="fa fa-times"></i> Regresar</button>
+              <button type="button" class="btn btn-success waves-effect float-right" ng-click="GOEmpCtrl.editarOrden()"><i class="fa fa-save"></i> Guardar cambios</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .prioridad {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    margin: 0px;
+  }
+
+  .prioridad input {
+      position: absolute;
+      top: -100px;
+      margin: 0px;
+  }
+
+  .prioridad label {
+      float: right;
+      color: #c1b8b8;
+      font-size: 40px;
+      margin: 0px;
+  }
+
+  .prioridad label:hover,
+  .prioridad label:hover ~ label,
+  .prioridad input:checked ~ label {
+      color: orange;
+  }
+</style>

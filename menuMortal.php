@@ -51,6 +51,31 @@
                                 </li>
                             </ul>
                         </li>
+                        <li class="has-sub">
+                <a class="js-arrow" href="#">
+                  <i class="fas fa-box-open"></i>Mantenimiento
+                  <span class="arrow">
+                    <i class="fas fa-angle-down"></i>
+                  </span>
+                </a>
+                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                  <li>
+                    <a href="MMantenimiento/#!/raiz/empleado/productosE">
+                      <i class="fas fa-tachometer-alt"></i>Inventario de productos
+                    </a>
+                  </li>
+                  <li>
+                    <a href="MMantenimiento/#!/raiz/empleado/peticionesE">
+                      <i class="fas fa-tachometer-alt"></i>Peticiones de mantenimiento
+                    </a>
+                  </li>
+              <li>
+                <a href="MMantenimiento/#!/raiz/empleado/ordenesE">
+                  <i class="fas fa-tachometer-alt"></i>Órdenes de trabajo
+                </a>
+              </li>
+            </ul>
+          </li>
     </nav>
 
 <?php

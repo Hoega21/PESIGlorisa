@@ -1,4 +1,4 @@
-myMDLApp.controller("gestorProductosCtrl", ['$scope', '$state', 'NgTableParams', '$location', '$http', '$cookies', '$stateParams',
+myMDLApp.controller("gestorProductosEmpCtrl", ['$scope', '$state', 'NgTableParams', '$location', '$http', '$cookies', '$stateParams',
 function($scope, $state, NgTableParams, $location, $http, $cookies, $stateParams){
   var ctrl = this;
   ctrl.producto = {
@@ -11,21 +11,20 @@ function($scope, $state, NgTableParams, $location, $http, $cookies, $stateParams
   };
 
   ctrl.regresarProductos = function () {
-    $state.go('gestion-productos');
+    $state.go('gestion-productos-e');
   }
 
   ctrl.regresarProductosAgregar = function () {
-    $state.go('agregar-producto');
+    $state.go('agregar-producto-e');
   }
 
   ctrl.irCrearCategoria = function () {
-    $state.go('agregar-categoria');
+    $state.go('agregar-categoria-e');
   }
 
   ctrl.irEditarProducto = function (producto) {
-    $state.go('editar-producto', {id: producto.id})
+    $state.go('editar-producto-e', {id: producto.id})
   }
-
   ctrl.cargarProductos = function () {
     $http.get('./app/MDL/administrador/gestionProductos/cargarProductos.php',{params: {}}
     ).then(function (response) {
@@ -88,7 +87,7 @@ function($scope, $state, NgTableParams, $location, $http, $cookies, $stateParams
       if (response.data == 'HECHO SIN ERRORES') {
         // console.log(ctrl.alumnoNuevo.correo);
         // ctrl.cancelar();
-        $state.go('gestion-productos');
+        $state.go('gestion-productos-e');
         swal("¡Bien hecho!", "El producto fue registrado exitosamente" , "success");
       } else {
         swal("¡Opss!", "No se pudo registrar el alumno." , "error");
@@ -102,7 +101,7 @@ function($scope, $state, NgTableParams, $location, $http, $cookies, $stateParams
       // console.log(response);
       if (response.data == 'HECHO SIN ERRORES') {
         ctrl.cancelar();
-        $state.go('gestion-productos');
+        $state.go('gestion-productos-e');
         swal("¡Bien hecho!", "El producto fue editado exitosamente" , "success");
       } else {
         swal("¡Opss!", "No se pudo editar el alumno." , "error");
