@@ -1,9 +1,9 @@
 <?php 
 
-define('DB_HOST','sql10.freesqldatabase.com');
-define('DB_USER','sql10313127');
-define('DB_PASS','ruVDugdGr1');
-define('DB_NAME','sql10313127');
+define('DB_HOST','127.0.0.1');
+define('DB_USER','root');
+define('DB_PASS','');
+define('DB_NAME','pesiglorisa');
 
 try
 {
