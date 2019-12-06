@@ -54,7 +54,6 @@
       </li>
     </ul>
   </li>
-  javier
 
   <li>
     <a class="js-arrow" href="#">
