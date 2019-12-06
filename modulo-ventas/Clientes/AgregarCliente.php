@@ -29,25 +29,25 @@
                     <div class="form-group row">
                         <label for="CliDni" class="col-sm-2 col-form-label" name="LCliDni" id="LCliDni" >DNI:  </label>
                       <div class="col-sm-10">
-                          <input type="text" name="CliDni" id="CliDni"  required="" maxlength="8" class="form-control "  value="" placeholder="Escribir ...">
+                          <input type="text" name="CliDni" id="CliDni"  required="" minlength="8" maxlength="8" class="form-control "  pattern="[0-9]+" title="Ayuda: Solo se aceptan digitos" value="" placeholder="Escribir ...">
                       </div>
                     </div>
                     <div class="form-group row">
                         <label for="CliNom" class="col-sm-2 col-form-label" name="LCliNom" id="LCliNom">Nombre Completo:  </label>
                       <div class="col-sm-10">
-                          <input type="text" name="CliNom" id="CliNom" maxlength="150" required="" class="form-control "  value="" placeholder="Escribir Cliente...">
+                          <input type="text" name="CliNom" id="CliNom" maxlength="150" required="" class="form-control "  pattern="[a-zA-Z ]+" title="Ayuda: Solo se aceptan letras" value="" placeholder="Escribir Cliente...">
                       </div>
                     </div>
                     <div class="form-group row">
                         <label for="CliCor" class="col-sm-2 col-form-label" name="LCliCor" id="LCliCor">Correo:  </label>
                       <div class="col-sm-10">
-                          <input type="text" name="CliCor" id="CliCor" maxlength="150" class="form-control "  value="" placeholder="Escribir Correo...">
+                          <input type="email" name="CliCor" id="CliCor" maxlength="150" class="form-control "  value="" placeholder="Escribir Correo...">
                       </div>
                     </div>
                     <div class="form-group row">
                         <label for="CliCel" class="col-sm-2 col-form-label" name="LCliCel" id="LCliCel" >Celular:  </label>
                       <div class="col-sm-10">
-                          <input type="text" name="CliCel" id="CliCel" maxlength="12"  class="form-control "  value="" placeholder="Escribir Celular...">
+                          <input type="text" name="CliCel" id="CliCel" maxlength="12"  pattern="[0-9]+" title="Ayuda: Solo se aceptan digitos" class="form-control "  value="" placeholder="Escribir Celular...">
                       </div>
                     </div>
                      <div class="form-group row"> 
@@ -67,6 +67,7 @@
         <?php 
             if(isset($_POST["Save"])){
               include ("../Clases/Clientes.php");
+              
               Clientes::AgregarCliente($_POST['Tip-Cliente'],$_POST['CliDni'],$_POST['CliNom'],$_POST['CliCor'],$_POST['CliCel'],$_POST['CliDir']);
             } 
         ?>
@@ -78,10 +79,12 @@
             document.getElementById("LCliDni").innerHTML='Dni: ';                 
             document.getElementById("LCliNom").innerHTML='Nombre Completo: ';        
              document.getElementById("CliDni").setAttribute("maxlength","8");
+             document.getElementById("CliDni").setAttribute("minlength","8");
           }else{
             document.getElementById("LCliDni").innerHTML='Ruc: ';                 
             document.getElementById("LCliNom").innerHTML='Razon Social: ';    
              document.getElementById("CliDni").setAttribute("maxlength","11");
+             document.getElementById("CliDni").setAttribute("minlength","11");
           }
       } 
   </script>

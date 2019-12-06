@@ -12,16 +12,16 @@
 
 		public static function ListarCabecera($NroComp){
 			require("../../MRecursosHumanos/includes/config.php");
-			$sql="SELECT * FROM comprobante c WHERE (CONCAT(c.TipoComprobante,'-',c.idSerie,'-',c.Correlativo)) = ?";
+			$sql="call ListarCabecera(?);";
 			$query = $dbh->prepare($sql);
 			$query->bindParam(1, $NroComp);
 			$query -> execute();
 			return $query->fetchAll(PDO::FETCH_OBJ);
 		}
 
-		public static function ListarDetalles($NroComp){
+		public static function ListarDetalle($NroComp){
 			require("../../MRecursosHumanos/includes/config.php");
-			$sql="SELECT * FROM detalleComprobante c WHERE (CONCAT(c.TipoComprobante,'-',c.idSerie,'-',c.Correlativo)) = ?";
+			$sql="call ListarDetalles(?);";
 			$query = $dbh->prepare($sql);
 			$query->bindParam(1, $NroComp);
 			$query -> execute();
@@ -39,7 +39,7 @@
 
 		public static function ListarComprobanteT(){
 			require("../../MRecursosHumanos/includes/config.php");
-			$sql="SELECT * FROM comprobante;";
+			$sql="SELECT * FROM comprobante c WHERE (c.TipoComprobante ='01' OR c.TipoComprobante ='03') AND c.Estado='Pagado';";
 			$query = $dbh->prepare($sql);
 			$query -> execute();
 			return $query->fetchAll(PDO::FETCH_OBJ);
@@ -90,8 +90,8 @@
 			$query -> execute();
 		}
 
-		public static function TodosDetalles(){
-			require("../../MRecursosHumanos/includes/config.php");
+		public static function TodosDetalles($tip){
+			require("../".$tip."MRecursosHumanos/includes/config.php");
 			$sql="SELECT * FROM detallitos;";
 			$query = $dbh->prepare($sql);
 			$query -> execute();
@@ -99,30 +99,35 @@
 		}
 
 		public static function EliminarDetalles($idDetalle){
-			require("../../MRecursosHumanos/includes/config.php");
-			$Datos=Comprobante::TodosDetalles();
-			$sql="DELETE FROM detallitos;";
+			require("../MRecursosHumanos/includes/config.php");
+			$sql="DELETE FROM detallitos WHERE idDetallitos=?;";
 			$query = $dbh->prepare($sql);
+			$query->bindParam(1, $idDetalle);
 			$listas=$query -> execute();
-			foreach($listas as $lista){ 
-				if($lista->idDetallitos!=$idDetalle){
-					Comprobante::AgregarDetalle($lista->idProd,$lista->Cantidad,$lista->ValorUnitario,$lista->PrecioVenta);	
-				}
-			}
 		}
 
 		public static function InsertarComprobante($TipCom,$eid,$Serie,$Cor,$Cli,$Fecha,$Moneda,$Total,$Pago){
-			require("../../MRecursosHumanos/includes/config.php");
-			$Datos=Comprobante::TodosDetalles();
-			$sql="DELETE FROM detallitos;";
-			$query = $dbh->prepare($sql);
-			$listas=$query -> execute();
-			foreach($listas as $lista){ 
-				if($lista->idDetallitos!=$idDetalle){
-					Comprobante::AgregarDetalle($lista->idProd,$lista->Cantidad,$lista->ValorUnitario,$lista->PrecioVenta);	
-				}
+			error_reporting(0);
+			require("../MRecursosHumanos/includes/config.php");
+			$datos=Comprobante::TodosDetalles('');
+			$i=0; foreach($datos as $dato){ $i++;}
+			if($i==0){ return 'No se ha ingresado ningun producto a comprar';
+			}else{
+				$sql="call InsertarComprobante(?,?,?,?,?,?,?,?,?);";
+				$query = $dbh->prepare($sql);
+				$query->bindParam(1, $TipCom);
+				$query->bindParam(2, $eid);
+				$query->bindParam(3, $Serie);
+				$query->bindParam(4, $Cor);
+				$query->bindParam(5, $Cli);
+				$query->bindParam(6, $Fecha);
+				$query->bindParam(7, $Moneda);
+				$query->bindParam(8, $Total);
+				$query->bindParam(9, $Pago);
+				$listas=$query -> execute();
+				if($listas==1) return 'Se ingreso el comprobante correctamente';
+				else return 'Hubo problemas con el guardado del comprobante';
 			}
-
 		}
 	}
 ?>

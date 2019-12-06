@@ -22,7 +22,7 @@ foreach($resu as $re){
 $pasarvalor=$re->idLibroM;
 }
 
-$sql="select c.codCuenta,c.resultado from cbalance c where c.idLibroM=:lib";
+$sql="select c.codCuenta,c.resultado from cBalance c where c.idLibroM=:lib";
 $query = $dbh->prepare($sql);
 $query->bindParam(':lib',$pasarvalor,PDO::PARAM_STR);
 $query->execute();

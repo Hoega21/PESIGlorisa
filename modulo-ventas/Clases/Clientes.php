@@ -9,7 +9,9 @@
 			$query->bindParam(2, $Direccion);
 			$query->bindParam(3, $Correo);
 			$query->bindParam(4, $NroDocumento);
-			$query -> execute();
+			$listas=$query -> execute();
+			if($listas==1) echo "<script>alert('Se actualizo los datos  del cliente correctamente');</script>";
+						else echo "<script>alert('Hubo problemas con la actualizacion de datos');</script>";
 		}
 
 		public static function ListarClientes(){
@@ -49,8 +51,9 @@
 						$query->bindParam(4, $VCelular);
 						$query->bindParam(5, $VDireccion);
 						$query->bindParam(6, $VCorreo);
-						$query -> execute();
-						echo "<script>alert('Cliente ingresado con exito');</script>";
+						$listas=$query -> execute();
+						if($listas==1) echo "<script>alert('Se ingreso el cliente correctamente');</script>";
+						else echo "<script>alert('Hubo problemas con el guardado del cliente');</script>";
 	                }
 	            }
  			}

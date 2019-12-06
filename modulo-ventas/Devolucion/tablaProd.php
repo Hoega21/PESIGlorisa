@@ -9,41 +9,41 @@
                       <th>#</th>
                       <th>Producto</th>
                       <th>Cantidad</th>
-                      <th>Precio Unitario</th>
                       <th>Total</th>
+                      <th>Observacion</th>
                       <th>Eliminar</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <?php include("../Clases/Comprobante.php");  $detallitos=Comprobante::TodosDetalles('../'); $i=0;
-                    foreach($detallitos as $detallito){ $i++;?>
+                  <?php include("../Clases/Recibo.php");  $detallitos=Recibo::TodosDetalles('../'); $i=0;
+                    foreach($detallitos as $detallito){ $i++;
+                      $porciones = explode(",", $detallito->Descrip);
+                  ?>
                     <tr>
                       <td><?php echo $i; ?></td>
-                      <td><?php echo $detallito->Descrip; ?></td>
+                      <td><?php echo $porciones[0]; ?></td>
                       <td><?php echo $detallito->Cantidad; ?></td>
-                      <td><?php echo $detallito->ValorUnitario; ?></td>
                       <td><?php echo $detallito->PrecioVenta; ?></td>
-                      <td><span onclick="EliminarDetalle(<?php echo $detallito->idDetallitos; ?>,<?php echo $detallito->PrecioVenta; ?>)" class="btn btn-warning">Eliminar</span></td>
+                      <td><?php echo $porciones[1]; ?></td>
+                      <td><span onclick="EliminarDetalle(<?php echo $detallito->idDetallitos; ?>)" class="btn btn-warning">Eliminar</span></td>
                     </tr>
-                    <?php } ?>
+                    <?php } ?> 
                   </tbody>
                 </table>
 
                 </div>
 
               <script type="text/javascript">
-                function EliminarDetalle(idDetallitos,total){
+                function EliminarDetalle(idDetallitos){
                       var parametros = { 
                         "idDetallitos" : idDetallitos
                        };
                       $.ajax({
                           data:  parametros,
-                          url:   '../AjaxAiua.php', 
+                          url:   'Ajax.php', 
                           type:  'post', //método de envio
                           success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-                            $('#tabla').load('tabla.php');
-                            var pr6=$("#ComTo").val();
-                            $("#ComTo").val(pr6-total);
+                            $('#tablaDevolver').load('tablaProd.php');
                           }
                       });
                   }

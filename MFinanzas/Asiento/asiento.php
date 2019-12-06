@@ -7,7 +7,7 @@ if($contadorcito==2){
   $numerito=intval($_GET['nroAs']);
   $numb=$numerito;
 
-  $sql81="select *from tmovimiento tm inner join asiento a on a.nroAsiento=tm.nroAsiento where tm.nroAsiento=:asie and a.estado=1 ";
+  $sql81="select *from tMovimiento tm inner join asiento a on a.nroAsiento=tm.nroAsiento where tm.nroAsiento=:asie and a.estado=1 ";
   $query81 = $dbh->prepare($sql81);
   $query81->bindParam(':asie',$numb,PDO::PARAM_INT);
   $query81->execute();
@@ -198,7 +198,7 @@ if (isset($_POST['guarda'])) {
     }
   }
 
-$sql71="select *from tmovimiento tm inner join asiento a on a.nroAsiento=tm.nroAsiento where tm.nroAsiento=:asie and a.estado=2 ";
+$sql71="select *from tMovimiento tm inner join asiento a on a.nroAsiento=tm.nroAsiento where tm.nroAsiento=:asie and a.estado=2 ";
 $query71 = $dbh->prepare($sql71);
 $query71->bindParam(':asie',$asie,PDO::PARAM_INT);
 $query71->execute();

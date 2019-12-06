@@ -26,7 +26,7 @@ $libAnio=$re56->año;
 if(isset($_POST['add']))
 {
 $taa=$_POST['tasa'];
-$sql88="select c.codCuenta,c.resultado from cbalance c where c.idLibroM=:lib";
+$sql88="select c.codCuenta,c.resultado from cBalance c where c.idLibroM=:lib";
 $query88 = $dbh->prepare($sql88);
 $query88->bindParam(':lib',$pasarvalor,PDO::PARAM_STR);
 $query88->execute();

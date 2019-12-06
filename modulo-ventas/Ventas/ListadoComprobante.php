@@ -58,7 +58,15 @@
                       <td><?php echo $comprobante->Fecha; ?></td>
                       <td><?php echo $comprobante->Client; ?></td>
                       <td><?php echo $comprobante->Mone; ?></td>
-                      <td><?php echo $comprobante->Estado; ?></td>
+                      <td style="
+                      <?php  if($comprobante->Estado=='Pagado'){ ?>
+                        background-color: #dfffe5; 
+                        color: #389401;  
+                      <?php }else{?> 
+                        background-color: #ffd0d2; 
+                        color: #9c0007;  
+                      <?php } ?> " >
+                      <?php echo $comprobante->Estado; ?></td>
                       <td><?php echo $comprobante->Pago; ?></td>
                       <td><?php echo $comprobante->PrecioVent; ?></td>
                       <td><a href="Factura.php?NroComp='<?php echo $comprobante->NroComp; ?>'" class="btn-btn-warning">Ver Factura</a></td>

@@ -22,38 +22,30 @@
                     <tr>
                       <th>Fecha Pagado</th>
                       <th>Nro Comprobante</th>
-                      <th>Tipo Comprobante</th>
                       <th>Cliente</th>
                       <th>Cantidad Pagada</th>
                       <th>Saldo Pendiente</th>
-                      <th>Visualizar</th>
-                    </tr>
+                                          </tr>
                   </thead>
                   <tfoot>
                      <tr>
                       <th>Fecha Pagado</th>
                       <th>Nro Comprobante</th>
-                      <th>Tipo Comprobante</th>
                       <th>Cliente</th>
                       <th>Cantidad Pagada</th>
                       <th>Saldo Pendiente</th>
-                      <th>Visualizar</th>
                     </tr>
                   </tfoot>
                   <tbody>
                     <?php foreach($recibos as $recibo){ 
-                      $Com='B'; $Tip='Boleta';
-                      if($recibo->Tipo=='01'){ $Com='F'; $Tip='Factura'; }
-                      $NroComprobante=$Com.$recibo->Serie.'-'.$recibo->Corr;
+                       $NroComprobante=$recibo->Tipo.'-'.$recibo->Serie.'-'.$recibo->Corr;
                       ?>
                     <tr>
                       <td><?php echo $recibo->Fecha ?></td>
                       <td><?php echo $NroComprobante ?></td>
-                      <td><?php echo $Tip ?></td>
                       <td><?php echo $recibo->Cliente ?></td>
                       <td><?php echo $recibo->Pagado ?></td>
                       <td><?php echo $recibo->Saldo ?></td>
-                      <td><a href="Perfil.php">Ver</a></td>
                     </tr>
                   <?php } ?>
                   </tbody>

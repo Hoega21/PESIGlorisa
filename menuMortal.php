@@ -55,21 +55,60 @@
     </ul>
   </li>
 
-  <li>
-    <a class="js-arrow" href="#">
-      <i class="fas fa-chart-bar"></i>Compras
-      <span class="arrow">
-        <i class="fas fa-angle-down"></i>
-      </span>
-    </a>
-    <ul class="list-unstyled navbar__sub-list js-sub-list">
-      <li>
-        <a href="./MCompras/Ordenes de Compra/OrdenesCompra_Mortal.php" target="gloricenter">
-          <i class="fas fa-tachometer-alt"></i>Gestión Ordenes de Compra
-        </a>
-      </li>
-    </ul>
-  </li>
+  <?php
+  if ($_SESSION['puesto']=="Compras") {
+    ?>
+    <li class="has-sub">
+      <a class="js-arrow" href="#">
+        <i class="fas fa-chart-bar"></i>Compras
+        <span class="arrow">
+          <i class="fas fa-angle-down"></i>
+        </span>
+      </a>
+      <ul class="list-unstyled navbar__sub-list js-sub-list">
+        <li>
+          <a href="./MCompras/Ordenes de Compra/OrdenesCompra_Mortal.php" target="gloricenter">
+            <i class="fas fa-tachometer-alt"></i>Gestión Ordenes de Compra
+          </a>
+        </li>
+      </ul>
+    </li>
+    <?php
+  }
+  ?>
+
+  <?php
+  if ($_SESSION['puesto']=="Finanzas") {
+    ?>
+    <li class="has-sub">
+      <a class="js-arrow" href="#">
+        <i class="fas fa-desktop"></i>Financiero
+        <span class="arrow">
+          <i class="fas fa-angle-down"></i>
+        </span>
+      </a>
+      <ul class="list-unstyled navbar__sub-list js-sub-list">
+        <li>
+          <a href="MFinanzas/Asiento/mainAsiento.php" target="gloricenter">
+            <i class="fas fa-tachometer-alt"></i>Asientos
+          </a>
+        </li>
+        <li>
+          <a href="MFinanzas/Estados/mainEstados.php" target="gloricenter">
+            <i class="fas fa-tachometer-alt"></i>Estados Financieros
+          </a>
+        </li>
+        <li>
+          <a href="MFinanzas/Devoluciones/mainDevoluciones.php" target="gloricenter">
+            <i class="fas fa-tachometer-alt"></i>Devoluciones
+          </a>
+        </li>
+      </ul>
+    </li>
+    <?php
+  }
+  ?>
+
 
   <li class="has-sub">
     <a class="js-arrow" href="#">

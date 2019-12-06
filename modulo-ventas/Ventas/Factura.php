@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- Custom styles for this template -->
   <link href="../lib/css/sb-admin-2.min.css" rel="stylesheet">
-  <!-- Custom styles for this page -->
   <link href="../lib/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 <body style="background-color: #e5e5e5">
+  <?php  error_reporting(0); ?>
   <?php include("../Clases/Comprobante.php");  
     if (isset($_GET['NroComp'])) {
       $NroComp=$_GET['NroComp'];
-       $NroComp=substr($NroComp,1,12);
-       echo $NroComp;
+      $NroComp=substr($NroComp,1,15);
       $cabecera=Comprobante::ListarCabecera($NroComp);
-      $detalle=Comprobante::ListarDetalles($NroComp);
+      $detalle=Comprobante::ListarDetalle($NroComp);
+ 
     }
   ?>
 
@@ -25,34 +24,28 @@
           <div class="card shadow mb-4">
             <div class="card-body">
                <div class="p-5">
-                <?php foreach($cabecera as $cab){ ?>
-                      <div class="form-group row">
-                      <label for="NameUser" class="col-sm-12 col-form-label" >Nro Comprobante: <?php echo ' '.$NroComp; ?> </label>
-                    </div>
-                    <div class="form-group row">
-                        <label for="CliNom" class="col-sm-12 col-form-label" name="LCliNom" id="LCliNom">NroCliente:  <?php echo ' '.$cab->NroDocCliente; ?> </label>
-                    </div>
-                    <div class="form-group row" >
-                        <label for="CliNom" class="col-sm-12 col-form-label" name="LComFecha" id="LComFecha">Fecha Emision:<?php echo ' '.$cab->FechaEmision; ?> </label>
-                    </div>
-                     <div class="form-group row" >
-                        <label for="CliNom" class="col-sm-12 col-form-label" name="LCliNom" id="LCliNom">Moneda: <?php echo ' '.$cab->idMoneda; ?>  </label>
-                    </div>
-                     <div class="form-group row" >
-                        <label for="CliNom" class="col-sm-12 col-form-label" name="LComFecha" id="LComFecha">Tipo Pago: <?php echo ' '.$cab->TipoPago; ?> </label>
-                    </div>
-                    <div class="form-group row" >
-                        <label for="CliNom" class="col-sm-2 col-form-label" name="LComFecha" id="LComFecha">Estado: <?php echo ' '.$cab->Estado; ?> </label>
-                    </div>     
-                    <div class="form-group row" >
-                        <label for="CliNom" class="col-sm-2 col-form-label" name="LComFecha" id="LComFecha">Valor Venta Total: <?php echo ' '.$cab->ValorVentaTotal; ?> </label>
-                    </div>  
-                    <div class="form-group row" >
-                        <label for="CliNom" class="col-sm-2 col-form-label" name="LComFecha" id="LComFecha">IGV total <?php echo ' '.$cab->FechaEmision; ?> </label>
-                    </div>  <div class="form-group row" >
-                        <label for="CliNom" class="col-sm-2 col-form-label" name="LComFecha" id="LComFecha">Precio Venta Total: <?php echo ' '.$cab->PrecioVentaTotal; ?> </label>
-                    </div>      
-                <?php } ?>
+                 <?php foreach($cabecera as $cab){  ?>
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead style="background-color: gray; color: white;">
+                      <tr> <th>Empresa: Glorisa</th> </tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>Nro Comprobante: <?php echo ' '.$NroComp; ?> </td></tr>
+                      <tr><td>Tipo Pago: <?php echo ' '.$cab->Tipo; ?></td></tr>
+                      <tr><td>Fecha Emision: <?php echo ' '.$cab->Fecha; ?> </td></tr>
+                      <tr><td>Moneda: <?php echo ' '.$cab->monedas; ?> </td></tr>
+                    </tbody>
+                  </table>
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead style="background-color: gray; color: white;">
+                      <tr> <th>Cliente: <?php echo ' '.$cab->Namecitos; ?></th> </tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>Nro Documento:  <?php echo ' '.$cab->NroDoc; ?>  </td></tr>
+                      <tr><td>Direccion:  <?php echo ' '.$cab->Lugar; ?> </td></tr>
+                      <tr><td>Telefono: <?php echo ' '.$cab->Telefonito; ?>  </td></tr>
+                    </tbody>
+                  </table>
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
@@ -61,22 +54,32 @@
                       <th>Cantidad</th>
                       <th>Valor Unitario</th>
                       <th>Valor Venta</th>
-                      <th>Precio Venta</th>
                       <th>IGV</th>
+                      <th>Precio Venta</th>
                     </tr>
                   </thead>
                   <tbody>
+                    <?php $i=1; foreach($detalle as $det){ ?>
                     <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td><?php echo ' '.$i; ?></td>
+                      <td><?php echo ' '.$det->productito; ?></td>
+                      <td><?php echo ' '.$det->cantidad; ?></td>
+                      <td><?php echo ' '.$det->VUni; ?></td>
+                      <td><?php echo ' '.$det->VVenta; ?></td>
+                      <td><?php echo ' '.$det->IGV; ?></td>
+                      <td><?php echo ' '.$det->PrVenta; ?></td>
                     </tr>
+                    <?php $i++; }  ?>
                   </tbody>
                 </table>
+                  <div style="float: right;">
+                    <label class="col-sm-12 col-form-label" ><b>Valor Venta Total:</b> <?php echo ' '.$cab->VVenta; ?> </label>
+                    <label class="col-sm-12 col-form-label" ><b>IGV total </b><?php echo ' '.$cab->IGV; ?> </label>
+                    <label class="col-sm-12 col-form-label" ><b>Precio Venta Total:</b> <?php echo ' '.$cab->VPrecio; ?> </label>
+                  </div>
+                  
+                  <?php } ?>
+
                 </div>
             </div>
           </div>

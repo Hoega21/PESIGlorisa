@@ -45,7 +45,7 @@
                       </div>
                        <label for="LCorr" class="col-sm-1 col-form-label" >Correlativo:  </label>
                        <div class="col-sm-3">
-                          <input type="text" name="LCorr" id="LCorr" disabled class="form-control "  value="<?php echo $Corr; ?>" >
+                          <input type="text" name="LCorr" id="LCorr" class="form-control "  value="<?php echo $Corr; ?>" disabled>
                       </div>
                     </div>
                     <div class="form-group row">
@@ -54,7 +54,7 @@
                           <input type="text" name="CliDni" id="CliDni" maxlength="8" required="" class="form-control "  value="" placeholder="Escribir ...">
                       </div>
                       <div class="col-sm-3">
-                           <span type="submit" name="buscar" id="buscar" class="btn btn-info btn-block" onclick="BuscarPersona()" >Buscar</span>
+                           <span name="buscar" id="buscar" class="btn btn-info btn-block" onclick="BuscarPersona()" >Buscar</span>
                       </div>
                     </div>
                     <div class="form-group row">
@@ -67,7 +67,7 @@
                      <div class="form-group row" >
                         <label for="ComFec" class="col-sm-2 col-form-label" >Fecha:  </label>
                       <div class="col-sm-10">
-                          <input type="date" name="ComFec" id="ComFec" required="" class="form-control " value="<?php echo getdate();?>" >
+                          <input type="date" min="2019-10-01" max="2020-12-31" name="ComFec" id="ComFec" required="" class="form-control " value="<?php echo date("Y-m-d");?>" >
                       </div>
                     </div>
                     <hr>
@@ -84,18 +84,14 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="ProCant"  class="col-sm-1 col-form-label">Cantidad:  </label>
-                      <div class="col-sm-2">
-                          <input type="number" onkeypress="ObtenerTotal();" name="ProCant" id="ProCant" min="0" max="999" required="" class="form-control "  value="" placeholder="Escribir ...">
+                        <label for="ProCant"  class="col-sm-2 col-form-label">Cantidad:  </label>
+                      <div class="col-sm-3">
+                          <input type="number" name="ProCant" id="ProCant" min="0" max="999" class="form-control "  value="" placeholder="Escribir ...">
                       </div>
                        <label for="ProPre" class="col-sm-1 col-form-label">Precio:  </label>
-                      <div class="col-sm-2">
+                      <div class="col-sm-3">
                           <input type="text" name="ProPre" id="ProPre" class="form-control "  value="<?php echo $prec; ?>" disabled>
 
-                      </div>
-                       <label for="ProTo" class="col-sm-1 col-form-label">Total:  </label>
-                      <div class="col-sm-2">
-                          <input type="text" name="ProTo" id="ProTo" class="form-control "  >
                       </div>
                       <div class="col-sm-3">
                       <span class="btn btn-info btn-block" onclick="AgregarDetallitos()">Agregar</span>
@@ -114,8 +110,8 @@
                       <label for="ComPa" class="col-sm-1 col-form-label"  >Tipo Pago:  </label>
                       <div class="col-sm-3">
                         <select id="ComPa" name="ComPa" class="form-control " onchange="CambioTotal();">
-                          <option value="Co" >Contado</option>
-                          <option value="Cr" >Credito</option>
+                          <option value="Contado" >Contado</option>
+                          <option value="Credito" >Credito</option>
                         </select>
                       </div>
                       <label for="ComMon" class="col-sm-1 col-form-label" >Moneda: </label>
@@ -129,7 +125,7 @@
                     </div>
                     <br>
                   <div class="col-sm-12">
-                      <input type="submit" name="Save" id="Save" class="btn btn-outline-danger btn-block" value="Guardar">
+                      <span onclick="InsertarComprobante();" class="btn btn-danger btn-block" >Guardar</span>
                   </div>
                 </form>
                 </div>
@@ -137,13 +133,44 @@
           </div>
         </div>
 
-        <?php 
-            session_start();
-            if (isset($_POST['Save'])) {
-              Comprobante::InsertarComprobante($_POST['TipoCom'],$_SESSION['eid'],$_POST['LSerie'],$_POST['LCorr'],$_POST['CliNom'],
-                  $_POST['ComFec'],$_POST['ComMon'],$_POST['ComTo'],$_POST['ComPa']);
-            }
-         ?>
+
+  <script type="text/javascript">
+      function  InsertarComprobante(){
+          var tipo= document.getElementById('TipoCom').value;
+          var nom=document.getElementById('CliNom').value;
+
+          if(tipo=='01' && (nom.length==0 || nom=='No se encontro cliente')){
+             alert('Las facturas siempre deben tener cliente');
+          }else{
+              var serie=document.getElementById('LSerie').value;
+              var corr= document.getElementById('LCorr').value;
+              var dni=document.getElementById('CliDni').value;
+              var fecha= document.getElementById('ComFec').value;
+              var mon=document.getElementById('ComMon').value;
+              var total= document.getElementById('ComTo').value;
+              var pa=document.getElementById('ComPa').value;
+            var parametros = { "Tipito" : tipo,
+                               "Serita" : serie,
+                               "Corrito" : corr,
+                               "Dnito" : dni,
+                               "Fechita" : fecha,
+                               "Monedita" : mon,
+                               "Totalsito" : total,
+                               "Paguito" : pa
+             };
+            $.ajax({
+                    data:  parametros,
+                    url:   '../AjaxAiua.php', 
+                    type:  'post', //método de envio
+                    success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                           alert(response);
+                    }
+            });
+          }
+      } 
+  </script>
+
+
 
     <script type="text/javascript">
       function  TypeClient(){
@@ -191,13 +218,13 @@
         var tip= $("#TipoCom").val();
         var pr= $("#CliDni").val(); pr=pr.trim();
         if(isNaN(pr)){
-          alertify.alert('Solo ingresar digitos');
+          alert('Solo ingresar digitos');
         }else{
           if(tip=='03' && pr.length!=8){
-            alertify.alert('El DNI consta de 8 digitos');
+            alert('El DNI consta de 8 digitos');
           }else{
             if(tip=='01' && pr.length!=11){
-              alertify.alert('El RUC consta de 11 digitos');
+              alert('El RUC consta de 11 digitos');
             }else{
               $("#NameResguardo").html(pr);
               var parametros = { "CliDni" : pr };
@@ -214,48 +241,43 @@
         }
     }
 </script>
-
-   <script type="text/javascript">
-      function ObtenerTotal(){
-          var precio=document.getElementById("ProPre").val();
-          var cant=document.getElementById("ProCant").val();
-          cant=cant.trim();
-          if(cant.length!=0){
-            h=precio*cant;
-            document.getElementById("ProTo").val(h);
-          }
-      } 
-  </script>
-
+ 
 <script type="text/javascript">
   function AgregarDetallitos(){
         var pr1= $("#ProPre").val();
         var pr2= $("#ProCant").val(); 
-        var pr3= $("#ProTo").val(); 
-        var pr4= $("#LProducto").val(); 
-        var pr6= $("#ComTo").val();
-        var combo=document.getElementById("LProducto");
-        pr1=parseFloat(pr1); pr2=parseFloat(pr2);
-        pr6=parseFloat(pr6); 
-        
-        var pr5= combo.options[combo.selectedIndex].text; 
-        var parametros = { 
-          "ProPre" : pr1,
-          "ProCant" : pr2,
-          "ProTo" : pr3,
-          "LProducto" : pr4,
-          "ProdDescr" : pr5
-         };
-        $.ajax({
-            data:  parametros,
-            url:   '../AjaxAiua.php', 
-            type:  'post', //método de envio
-            success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-              $('#tabla').load('tabla.php');
-              $("#ComTo").val(pr6+pr2*pr1);
-            }
-        });
-    }
+        var pr3=0;
+        if(pr2.length==0){
+          alert("La cantidad no puede ser 0");
+        }else{
+          if(pr2==0 ){
+            alert("La cantidad no puede ser 0");
+          }else{
+            var pr4= $("#LProducto").val(); 
+            var pr6= $("#ComTo").val();
+            var combo=document.getElementById("LProducto");
+            pr1=parseFloat(pr1); pr2=parseFloat(pr2);
+            pr6=parseFloat(pr6); 
+            var pr5= combo.options[combo.selectedIndex].text; 
+            var parametros = { 
+              "ProPre" : pr1,
+              "ProCant" : pr2,
+              "ProTo" : pr3,
+              "LProducto" : pr4,
+              "ProdDescr" : pr5
+            };
+            $.ajax({
+                data:  parametros,
+                url:   '../AjaxAiua.php', 
+                type:  'post', //método de envio
+                success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                  $('#tabla').load('tabla.php');
+                  $("#ComTo").val(pr6+pr2*pr1);
+                }
+            });
+          }
+        }
+  }
 </script>
 
    <!-- Bootstrap core JavaScript-->

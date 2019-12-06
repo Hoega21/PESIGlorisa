@@ -31,8 +31,6 @@
                       <th>Direccion</th>
                       <th>Estado</th>
                       <th>Total</th>
-                      <th>Ver pedido</th>
-                      <th>Hacer Comprobante</th>
                     </tr>
                   </thead>
                   <tfoot>
@@ -45,8 +43,6 @@
                       <th>Fecha Entrega</th>
                       <th>Estado</th>
                       <th>Total</th>
-                      <th>Ver pedido</th>
-                      <th>Hacer Comprobante</th>
                     </tr>
                   </tfoot>
                   <tbody>
@@ -60,8 +56,6 @@
                       <td><?php echo $pedido->FechaEntrega; ?></td>
                       <td><?php echo $pedido->Estado; ?></td>
                       <td><?php echo $pedido->PrecioVentaTotal; ?></td>
-                      <td><a href="#" class="btn-btn-warning">Ver Pedido</a></td>
-                      <td><a href="#" class="btn-btn-warning">Realizarlo</a></td>
                     </tr>
                     <?php } ?>
                   </tbody>

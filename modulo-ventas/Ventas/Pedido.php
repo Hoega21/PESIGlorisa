@@ -36,7 +36,7 @@
                           <input type="text" name="CliDni" id="CliDni" maxlength="8" required="" class="form-control "  value="" placeholder="Escribir ...">
                       </div>
                       <div class="col-sm-3">
-                          <a type="submit" name="buscar" id="buscar" class="btn btn-info btn-block" onclick="BuscarPersona()" href="#">Buscar</a>
+                          <span name="buscar" id="buscar" class="btn btn-info btn-block" onclick="BuscarPersona()" >Buscar</span>
                       </div>
                     </div>
                     <div class="form-group row">
@@ -46,29 +46,29 @@
                       </div>
                     </div>
                     <div class="form-group row">
-                        <label for="CliDni" class="col-sm-2 col-form-label" name="LCliDni" id="LCliDni" >Departamento:  </label>
+                        <label for="CliDep" class="col-sm-2 col-form-label" >Departamento:  </label>
                       <div class="col-sm-3">
-                          <input type="text" name="CliDni" id="CliDni" maxlenght="11" required="" class="form-control "  value="" placeholder="Escribir ...">
+                          <input type="text" name="CliDep" id="CliDep" maxlenght="20" required="" class="form-control "  value="La Libertad" placeholder="Escribir ...">
                       </div>
-                       <label for="CliDni" class="col-sm-1 col-form-label" name="LCliDni" id="LCliDni" >Provincia:  </label>
+                       <label for="CliProv" class="col-sm-1 col-form-label" >Provincia:  </label>
                       <div class="col-sm-3">
-                          <input type="text" name="CliDni" id="CliDni" maxlenght="11" required="" class="form-control "  value="" placeholder="Escribir ...">
+                          <input type="text" name="CliProv" id="CliProv" maxlenght="20" required="" class="form-control "  value="Trujillo" placeholder="Escribir ...">
                       </div>
-                       <label for="CliDni" class="col-sm-1 col-form-label" name="LCliDni" id="LCliDni" >Distrito:  </label>
+                       <label for="CliDis" class="col-sm-1 col-form-label">Distrito:  </label>
                       <div class="col-sm-2">
-                          <input type="text" name="CliDni" id="CliDni" maxlenght="11" required="" class="form-control "  value="" placeholder="Escribir ...">
+                          <input type="text" name="CliDis" id="CliDis" maxlenght="20" required="" class="form-control "  value="Trujillo" placeholder="Escribir ...">
                       </div>
                     </div>
                       <div class="form-group row" >
-                        <label for="CliNom" class="col-sm-2 col-form-label" name="LComFecha" id="LComFecha">Direccion:  </label>
+                        <label for="CliDire" class="col-sm-2 col-form-label">Direccion:  </label>
                       <div class="col-sm-10">
-                          <input type="text" name="ComFecha" id="ComFecha" required="" class="form-control " >
+                          <input type="text" name="CliDire" id="CliDire" maxlenght="100" required="" class="form-control " >
                       </div>
                     </div>
                       <div class="form-group row" >
-                        <label for="CliNom" class="col-sm-2 col-form-label" name="LComFecha" id="LComFecha">Fecha de entrega:  </label>
+                        <label for="ComFec" class="col-sm-2 col-form-label" >Fecha:  </label>
                       <div class="col-sm-10">
-                          <input type="date" name="ComFecha" id="ComFecha" required="" class="form-control " >
+                          <input type="date" min="<?php echo date("Y-m-d");?>" max="2020-12-31" name="ComFec" id="ComFec" required="" class="form-control " value="<?php echo date("Y-m-d");?>" >
                       </div>
                     </div>
                     <hr>
@@ -85,21 +85,17 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="ProCant" onkeyup="ObtenerTotal();" class="col-sm-1 col-form-label">Cantidad:  </label>
-                      <div class="col-sm-2">
-                          <input type="number" name="ProCant" id="ProCant" min="0" max="999" required="" class="form-control "  value="" placeholder="Escribir ...">
+                        <label for="ProCant"  class="col-sm-2 col-form-label">Cantidad:  </label>
+                      <div class="col-sm-3">
+                          <input type="number" name="ProCant" id="ProCant" min="0" max="999" class="form-control "  value="" placeholder="Escribir ...">
                       </div>
                        <label for="ProPre" class="col-sm-1 col-form-label">Precio:  </label>
-                      <div class="col-sm-2">
+                      <div class="col-sm-3">
                           <input type="text" name="ProPre" id="ProPre" class="form-control "  value="<?php echo $prec; ?>" disabled>
 
                       </div>
-                       <label for="ProTo" class="col-sm-1 col-form-label">Total:  </label>
-                      <div class="col-sm-2">
-                          <input type="text" name="ProTo" id="ProTo" class="form-control "  value="12.6" disabled>
-                      </div>
                       <div class="col-sm-3">
-                      <a href="#" class="btn btn-info btn-block" onclick="AgregarDetallitos()">Agregar</a>
+                      <span class="btn btn-info btn-block" onclick="AgregarDetallitos()">Agregar</span>
                       </div>
                     </div>
                     <br>
@@ -111,17 +107,52 @@
                       <div class="col-sm-3">
                         <input type="text" name="ComTo" disabled id="ComTo" class="form-control "  value="0.00">
                       </div>
-                      
                     </div>
                     <br>
                   <div class="col-sm-12">
-                      <input type="submit" name="Save" id="Save" class="btn btn-outline-danger btn-block" value="Agregar">
+                      <span onclick="InsertarPedido();" class="btn btn-danger btn-block" >Guardar</span>
                   </div>
                 </form>
                 </div>
             </div>
           </div>
         </div>
+
+
+  <script type="text/javascript">
+      function  InsertarPedido(){
+          var nom=document.getElementById('CliNom').value;
+          if(nom.length==0 || nom=='No se encontro cliente'){
+             alert('Digitar cliente');
+          }else{
+              var Dep=document.getElementById('CliDep').value;
+              var Prov= document.getElementById('CliProv').value;
+              var Dis=document.getElementById('CliDis').value;
+              var dni= document.getElementById('CliDni').value;
+              var Dir=document.getElementById('CliDire').value;
+              var Fecha= document.getElementById('ComFec').value;
+              var Totl=document.getElementById('ComTo').value;
+            var parametros = { "Depati" : Dep,
+                               "Provati" : Prov,
+                               "Distrati" : Dis,
+                               "Dniti" : dni,
+                               "Directi" : Dir,
+                               "Fechiti" : Fecha,
+                               "Totiti" : Totl
+            };
+            $.ajax({
+                    data:  parametros,
+                    url:   '../AjaxAiua.php', 
+                    type:  'post', //método de envio
+                    success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                           alert(response);
+                    }
+            });
+          }
+      } 
+  </script>
+
+
 
   <script type="text/javascript">
       function  TypeClient(){
@@ -152,36 +183,45 @@
         });
 }
 </script>
+
 <script type="text/javascript">
   function AgregarDetallitos(){
         var pr1= $("#ProPre").val();
         var pr2= $("#ProCant").val(); 
-        var pr3= $("#ProTo").val(); 
-        var pr4= $("#LProducto").val(); 
-        var pr6= $("#ComTo").val();
-        var combo=document.getElementById("LProducto");
-        pr1=parseFloat(pr1); pr2=parseFloat(pr2);
-        pr6=parseFloat(pr6); 
-        
-        var pr5= combo.options[combo.selectedIndex].text; 
-        var parametros = { 
-          "ProPre" : pr1,
-          "ProCant" : pr2,
-          "ProTo" : pr3,
-          "LProducto" : pr4,
-          "ProdDescr" : pr5
-         };
-        $.ajax({
-            data:  parametros,
-            url:   '../AjaxAiua.php', 
-            type:  'post', //método de envio
-            success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-              $('#tabla').load('tabla.php');
-              $("#ComTo").val(pr6+pr2*pr1);
-            }
-        });
-    }
+        var pr3=0;
+        if(pr2.length==0){
+          alert("La cantidad no puede ser 0");
+        }else{
+          if(pr2==0 ){
+            alert("La cantidad no puede ser 0");
+          }else{
+            var pr4= $("#LProducto").val(); 
+            var pr6= $("#ComTo").val();
+            var combo=document.getElementById("LProducto");
+            pr1=parseFloat(pr1); pr2=parseFloat(pr2);
+            pr6=parseFloat(pr6); 
+            var pr5= combo.options[combo.selectedIndex].text; 
+            var parametros = { 
+              "ProPre" : pr1,
+              "ProCant" : pr2,
+              "ProTo" : pr3,
+              "LProducto" : pr4,
+              "ProdDescr" : pr5
+            };
+            $.ajax({
+                data:  parametros,
+                url:   '../AjaxAiua.php', 
+                type:  'post', //método de envio
+                success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                  $('#tabla').load('tabla.php');
+                  $("#ComTo").val(pr6+pr2*pr1);
+                }
+            });
+          }
+        }
+  }
 </script>
+
     <script type="text/javascript">
     function BuscarPersona(){
           var tip= $("#Tip-Cliente").val();
@@ -209,20 +249,6 @@
             }
           }
       }
-  </script>
-
-
-  <script type="text/javascript">
-    function  TypeEntrega(){
-          var tipo= document.getElementById('Tip-Entrega').value;
-          if(tipo=='EN'){
-            $("#DivLugar").hide(100);           
-          }else{
-            $("#DivLugar").show("slow");          
-          }
-
-      } 
-
   </script>
 
    <!-- Bootstrap core JavaScript-->

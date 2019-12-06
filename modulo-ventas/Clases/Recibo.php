@@ -17,33 +17,114 @@
 			return $query->fetchAll(PDO::FETCH_OBJ);
 		}
 
-		public static function AgregarCliente($VTipo,$VDNI,$VNombre,$VCorreo,$VCelular,$VDireccion){
-			$VDNI=trim($VDNI);$VNombre=trim($VNombre);$VCorreo=trim($VCorreo);$VCelular=trim($VCelular);$VDireccion=trim($VDireccion);
- 			if(is_numeric($VDNI)){
-				if(strlen($VDNI)!=8 and $VTipo=='PN'){ echo "<script>alert('El DNI consta de 8 digitos');</script>";
-	            }else{
-	                if(strlen($VDNI)!=11 and $VTipo=='PJ'){ echo "<script>alert('El RUC consta de 11 digitos');</script>";
-	                }else{
-	                	$Tip='1'; if($VTipo=='PJ'){$Tip='2';}
-	                	require("../../MRecursosHumanos/includes/config.php");
-						$sql="call AgregarCliente(?,?,?,?,?,?);";
-						$query = $dbh->prepare($sql);
-						$query->bindParam(1, $VDNI);
-						$query->bindParam(2, $Tip);
-						$query->bindParam(3, $VNombre);
-						$query->bindParam(4, $VCelular);
-						$query->bindParam(5, $VDireccion);
-						$query->bindParam(6, $VCorreo);
-						$query -> execute();
-						echo "<script>alert('Cliente ingresado con exito');</script>";
-	                }
-	            }
- 			}
- 			else{echo "<script>alert('Solo se ingresa numeros en el documento del cliente');</script>";
- 			}
- 		
+		public static function ObtenerDatos($NroDocumento,$tip){
+			require("../".$tip."MRecursosHumanos/includes/config.php");
+			$sql="call ObtenerDatosDeuda(?)";
+			$query = $dbh->prepare($sql);
+			$query->bindParam(1, $NroDocumento);
+			$query -> execute();
+			return $query->fetchAll(PDO::FETCH_OBJ);
+		}
+
+		public static function ObtenerDatosDevolucion($NroDocumento,$tip){
+			require("../".$tip."MRecursosHumanos/includes/config.php");
+			$sql="call ObtenerDatosDeuda(?)";
+			$query = $dbh->prepare($sql);
+			$query->bindParam(1, $NroDocumento);
+			$query -> execute();
+			return $query->fetchAll(PDO::FETCH_OBJ);
+		}
+
+		public static function ObtenerCliente($NroDocumento,$tip){
+			require("../".$tip."MRecursosHumanos/includes/config.php");
+			$sql="SELECT cl.NroDocumento as nro,cl.NombreCliente as cli FROM comprobante c INNER JOIN cliente cl ON c.NroDocCliente=cl.NroDocumento  WHERE (CONCAT(c.TipoComprobante,'-',c.idSerie,'-',c.Correlativo)) =?;";
+			$query = $dbh->prepare($sql);
+			$query->bindParam(1, $NroDocumento);
+			$query -> execute();
+			return $query->fetchAll(PDO::FETCH_OBJ);
+		}
+
+		public static function AgregarDetalle($idProd,$Obsv,$NroComp,$VProd){
+			require("../../MRecursosHumanos/includes/config.php");
+			$sql="call InsertarDetallito2(?,?,?,?);";
+			$query = $dbh->prepare($sql);
+			$query->bindParam(1, $idProd);
+			$query->bindParam(2, $Obsv);
+			$query->bindParam(3, $NroComp);
+			$query->bindParam(4, $VProd);
+			$list=$query -> execute();
+			if(!$list){
+				return 'Error al grabar observacion';	
+			}
+		}
+
+		public static function ElimTodoDetalle (){
+			require("../../MRecursosHumanos/includes/config.php");
+			$sql="DELETE FROM detallitos";
+			$query = $dbh->prepare($sql);
+			$query -> execute();
+		}
+
+		public static function EliminarDetalle($idDet){
+			require("../../MRecursosHumanos/includes/config.php");
+			$sql="DELETE FROM detallitos WHERE idDetallitos=?;";
+			$query = $dbh->prepare($sql);
+			$query->bindParam(1, $idDet);
+			$list=$query -> execute();
+			if(!$list){
+				return 'Error al eliminar observacion';	
+			}
+		}
+
+		public static function InsertarDevolucion($NroComp){
+			require("../../MRecursosHumanos/includes/config.php");
+			$sql="call InsertarDevolucion(?)";
+			$query = $dbh->prepare($sql);
+			$query->bindParam(1, $NroComp,PDO::PARAM_STR,20);
+			$query -> execute();
+			if(!$list){
+				return 'Error al grabar la devolucion';	
+			}else{
+				return 'Se realizo con exito la operacion';	
+			}
+		}
+
+		public static function TodosDetalles($tip){
+			require("../".$tip."MRecursosHumanos/includes/config.php");
+			$sql="SELECT * FROM detallitos;";
+			$query = $dbh->prepare($sql);
+			$query -> execute();
+			return $query->fetchAll(PDO::FETCH_OBJ);
+		}
+
+		public static function ObtenerDetalle($NroDocumento,$tip){
+			require("../".$tip."MRecursosHumanos/includes/config.php");
+			$sql="SELECT p.nomProd AS nomPro, d.Cantidad AS VCant, d.PrecioVenta AS VPre
+					FROM detalleComprobante d INNER JOIN Producto p
+					ON d.idProd=p.idProd
+					WHERE (CONCAT(d.TipoComprobante,'-',d.idSerie,'-',d.Correlativo)) = ?;";
+			$query = $dbh->prepare($sql);
+			$query->bindParam(1, $NroDocumento);
+			$query -> execute();
+			return $query->fetchAll(PDO::FETCH_OBJ);
+		}
+
+
+		public static function InsertarRecibo($Compb,$Fechoto,$Pagado,$Totalo){
+			
+	       	require("../MRecursosHumanos/includes/config.php");
+			$sql="call InsertarRecibo(?,?,?,?);";
+			$query = $dbh->prepare($sql);
+			$query->bindParam(1, $Compb);
+			$query->bindParam(2, $Fechoto);
+			$query->bindParam(3, $Pagado);
+			$query->bindParam(4, $Totalo);
+			$listas=$query -> execute();
+			if($listas==1) return 'Se ingreso el recibo correctamente';
+			else return 'Hubo problemas con el guardado del recibo';
 		}
 
 
 	}
 ?>
+
