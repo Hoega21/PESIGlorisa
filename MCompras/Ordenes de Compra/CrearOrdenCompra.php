@@ -1,3 +1,7 @@
+<?php 
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -106,6 +110,17 @@
                                                                 echo '<option value="'.$fila['idProveedor'].'">'.$fila['nomProveedor'].'</option>';                     
                                                             }
                                                         ?>
+                                                    </select>                                                    
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="text-input" class=" form-control-label">Solicitud de Compra: </label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <select name="solicitud" id="solicitud">
+                                                        <option value="">Seleccione</option>
+                                                        <option value="1">Solicitud 1</option>
                                                     </select>                                                    
                                                 </div>
                                             </div>

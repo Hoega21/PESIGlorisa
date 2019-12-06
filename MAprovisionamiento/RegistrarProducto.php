@@ -79,7 +79,7 @@
                                                     <label for="text-input" class=" form-control-label">Codigo</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" name="codigoProducto" required placeholder="Codigo" class="form-control">
+                                                    <input type="number" min="1" id="text-input" name="codigoProducto" required placeholder="Codigo" class="form-control">
                                                 </div>
                                             </div>
 
@@ -88,7 +88,7 @@
                                                     <label for="text-input" class=" form-control-label">Nombre</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" name="nombreProducto" required placeholder="Nombre" class="form-control">
+                                                    <input type="text" id="text-input" name="nombreProducto" required pattern="[A-Za-z ]+" title="Ayuda: Solo se aceptan letras" placeholder="Nombre" class="form-control">
                                                 </div>
                                             </div>
 
@@ -121,7 +121,7 @@
                                                     <label for="text-input" class=" form-control-label">Marca</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" name="marcaProducto" required placeholder="Marca" class="form-control">
+                                                    <input type="text" id="text-input" name="marcaProducto" required pattern="[A-Za-z ]+" title="Ayuda: Solo se aceptan letras" placeholder="Marca" class="form-control">
                                                 </div>
                                             </div>
                                              <div class="row form-group">
@@ -129,7 +129,7 @@
                                                     <label for="text-input" class=" form-control-label">Cantidad mínima</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" name="canMinima" placeholder="Cantidad Minima" required class="form-control">
+                                                    <input type="number" min="1" id="text-input" name="canMinima" placeholder="Cantidad Minima" required class="form-control">
                                                 </div>
                                             </div>
                                                 <div class="card-footer">

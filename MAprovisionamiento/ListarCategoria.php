@@ -79,7 +79,7 @@
                                                     <label for="text-input" class=" form-control-label">Nombre Categoria</label>
                                                 </div>
                                                 <div class="col-8 col-md-5">
-                                                    <input type="text" id="text-input" name="ListarCategoria" required placeholder="Buscar por nombre" class="form-control" >
+                                                    <input type="text" id="text-input" name="ListarCategoria" required pattern="[A-Za-z ]+" title="Ayuda: Solo se aceptan letras" placeholder="Buscar por nombre" class="form-control" >
                                                         
                                                 </div>
                                                 <div class="col-1 col-md-4">

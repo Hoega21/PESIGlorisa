@@ -21,7 +21,7 @@
                                                     <label for="text-input" class=" form-control-label">Nombre</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-nombre" name="text-nombre" class="form-control">
+                                                    <input type="text" pattern="[A-Za-z ]+" title="Ayuda: Solo se aceptan letras" id="text-nombre" name="text-nombre" class="form-control">
                                                 </div>
                                             </div>
 
@@ -40,7 +40,7 @@
                                                     <label for="text-input" class=" form-control-label">Marca</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-marca" name="text-marca" class="form-control">
+                                                    <input type="text" pattern="[A-Za-z ]+" title="Ayuda: Solo se aceptan letras" id="text-marca" name="text-marca" class="form-control">
                                                 </div>
                                             </div>
                                              <div class="row form-group">
@@ -48,7 +48,7 @@
                                                     <label for="text-input" class=" form-control-label">Cantidad mínima</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-canMin" name="text-canMin"  class="form-control">
+                                                    <input type="number" min="1" id="text-canMin" name="text-canMin"  class="form-control">
                                                 </div>
                                             </div>
                              

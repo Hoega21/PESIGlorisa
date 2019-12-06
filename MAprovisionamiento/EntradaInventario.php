@@ -141,7 +141,7 @@
                                                     <label for="text-input" class=" form-control-label">Cantidad de ingreso</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" name="Cantidad" required placeholder="Cantidad a ingresar" class="form-control">
+                                                    <input type="number" min="1" id="text-input" name="Cantidad" required placeholder="Cantidad a ingresar" class="form-control">
                                                 </div>
                                             </div>
 
@@ -150,7 +150,7 @@
                                                     <label for="text-input" class=" form-control-label">Costo unitario en soles</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" name="Costo" required placeholder="Costo unitario" class="form-control">
+                                                    <input type="number" step="0.01" min="0.01" id="text-input"  name="Costo" required placeholder="Costo unitario" class="form-control">
                                                 </div>
                                             </div>
                                              <div class="row form-group">
@@ -158,7 +158,7 @@
                                                     <label for="text-input" class=" form-control-label">Precio de venta unitario en soles</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" name="Precio" required placeholder="Precio de venta" class="form-control">
+                                                    <input type="number" step="0.01" min="0.01" id="text-input" name="Precio" required placeholder="Precio de venta" class="form-control">
                                                 </div>
                                             </div>
                                                 <div class="card-footer">

@@ -1,5 +1,9 @@
 <?php 
+  session_start();
   $orden = $_GET['idorden'];
+  $_SESSION['idorden'] = $orden;
+  $nomproveedor = $_GET['proveedor'];
+  $_SESSION['proveedor'] = $nomproveedor;
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,6 +19,16 @@
           <br><br>
           <h1 class="h3 mb-2 text-gray-800 " align="center"  ><i>Detalle de Orden de Compra Nº <?php echo $orden ?></i></h1>
           <br>
+          <form action="../Logica/Log_EnviarOrdenCompra.php" method="POST" class="form-horizontal">
+            <div class="row form-group">
+              <div class="col col-md-3">
+                <label for="text-input" class=" form-control-label">Proveedor: </label>
+              </div>
+              <div class="col col-md-3">
+                <label for="text-input" class=" form-control-label"><?php echo $nomproveedor; ?></label>
+              </div>              
+            </div>
+
            <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-body">
@@ -31,7 +45,6 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
                       <?php 
                         //if (isset($_POST['BuscarProveedor'])==false){
                         require ("../Logica/Conexion.php");
@@ -50,7 +63,12 @@
                         ?></td>
                         <td><?php echo $row1[3]; ?></td>
                         <td><?php echo $row1[4]; ?></td>
-                        <td><?php echo $row1[3]*$row1[4]; ?></td>
+                        <td><?php
+                          //$total = $row1[3]*$row1[4];
+                          $monto = number_format($row1[3]*$row1[4], 2, ',', ' ');
+                         echo $monto; 
+
+                        ?></td>
 
                         <td><a href="EditarDetalleOrdenCompra.php?idorden=<?php echo $orden; ?>&idproducto=<?php echo $row1[2]?>">Editar</a></td>
                         </tr>
@@ -58,13 +76,16 @@
                         }
                         mysqli_close($Conexion);
                       ?>
-                    </tr>
                   </tbody>                  
                 </table>
               </div>
             </div>
           </div>
-        </div>
+          <div class="card-footer">
+            <button type="submit" class="btn btn-outline-primary btn-lg btn-block">Enviar</button>
+          </div>
+        </form>
+      </div>
 
    <!-- Bootstrap core JavaScript-->
   <script src="../lib/vendor/jquery/jquery.min.js"></script>

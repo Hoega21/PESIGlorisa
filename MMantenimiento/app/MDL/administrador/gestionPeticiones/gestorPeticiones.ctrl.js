@@ -77,6 +77,23 @@ function($scope, $state, NgTableParams, $location, $http, $cookies, $stateParams
     }
   }
 
+
+
+  ctrl.obtenerOrdenesSF = function () {
+    try {
+      $http.get('./app/MDL/administrador/gestionPeticiones/obtenerOrdenesSF.php',{params: {}}
+      ).then(function (response) {
+        // console.log(response.data)
+        if (response.data.status != 'Error') {
+          ctrl.ordenesSFLista = response.data;
+          // ctrl.ordenesSFTabla = new NgTableParams({ dataset: ctrl.ordenesSFLista });
+        }
+      })
+    } catch (e) {
+      swal("¡Opss!", "Ocurrió un error." + e , "error");
+    }
+  }
+
   ctrl.cargarPeticiones = function () {
     try {
       $http.get('./app/MDL/administrador/gestionPeticiones/cargarPeticionesInicio.php',{params: {}}
@@ -201,7 +218,7 @@ function($scope, $state, NgTableParams, $location, $http, $cookies, $stateParams
 
 
   ctrl.regresarPeticiones = function () {
-    window.location.href = "#!/administrador/peticiones";
+    $state.go('gestionar-peticiones');
   }
 
   ctrl.cargarInfo = function () {
@@ -225,10 +242,18 @@ function($scope, $state, NgTableParams, $location, $http, $cookies, $stateParams
       ctrl.peticion.idEquipo = response.data.idEquipo
       ctrl.peticion.idOrdenTrabajo = response.data.idOrdenTrabajo;
       setTimeout(function(){
+        // console.log(response.data.idOrdenTrabajo);
+        ctrl.ordenesSFLista.find(function(element) {
+          if (element.id == response.data.idOrdenTrabajo) {
+            ctrl.peticion.orden = ctrl.ordenesSFLista[ctrl.ordenesSFLista.indexOf(element)]
+          }
+        });
+      }, 500);
+      setTimeout(function(){
         ctrl.ordenesLista.find(function(element) {
           if (element.id == response.data.idOrdenTrabajo) {
             ctrl.informe.orden = element;
-            ctrl.peticion.orden = ctrl.ordenesLista[ctrl.ordenesLista.indexOf(element)]
+            // ctrl.peticion.orden = ctrl.ordenesLista[ctrl.ordenesLista.indexOf(element)]
           }
         });
       }, 500);
@@ -261,6 +286,7 @@ function($scope, $state, NgTableParams, $location, $http, $cookies, $stateParams
     ctrl.cargarPeticionesEnProgreso();
     ctrl.cargarPeticionesFinalizadas();
     ctrl.obtenerOrdenes();
+    ctrl.obtenerOrdenesSF();
     ctrl.obtenerCategorias();
     if ($stateParams.id)
       ctrl.cargarInfo();

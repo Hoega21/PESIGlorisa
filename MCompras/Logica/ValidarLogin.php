@@ -24,8 +24,8 @@
 		}else{			
 			@mysqli_free_result($Conexion);
 			while($fila = mysqli_fetch_array($result)){
-				$_SESSION['MUsuarioid'] = $fila['id'];
-				$_SESSION['MUsuario'] = $fila['EmplId'];
+				$_SESSION['MUsuarioid'] = $fila['idUsuario'];
+				$_SESSION['MUsuario'] = $fila['username'];
 				//$_SESSION['MFechaingreso'] = getdate();
 			}
 			//echo "<script>

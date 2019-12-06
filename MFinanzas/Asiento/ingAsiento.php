@@ -3,26 +3,27 @@ session_start();
 error_reporting(0);
 include('../../MRecursosHumanos/includes/config.php');
 
-$sql="select max(idLibroM) as max from libroM";
-$query = $dbh->prepare($sql);
-$query->execute();
-$resu=$query->fetchAll(PDO::FETCH_OBJ);
-if($query->rowCount() > 0){
+$sql12="select descripcion from libroM";
+$query12 = $dbh->prepare($sql12);
+$query12->execute();
+
+if(isset($_POST['ver']))
+{
+$libro=$_POST['libro'];
+
+$id="select lm.idLibroM,lm.estado from libroM lm where lm.descripcion=:des";
+$query1 = $dbh->prepare($id);
+$query1->bindParam(':des',$libro,PDO::PARAM_STR);
+$query1->execute();
+$resu=$query1->fetchAll(PDO::FETCH_OBJ);
+if($query1->rowCount() > 0){
 foreach($resu as $re){
-$pasarvalor=$re->max;
-}
-$sql56="select estado from libroM where idLibroM=:id";
-$query56 = $dbh->prepare($sql56);
-$query56->bindParam(':id',$pasarvalor,PDO::PARAM_INT);
-$query56->execute();
-$resu56=$query56->fetchAll(PDO::FETCH_OBJ);
-if($query56->rowCount() > 0){
-foreach($resu56 as $re56){
-$libEstado=$re56->estado;
-}
+$pasarvalor=$re->idLibroM;
+$libroEstado=$re->estado;
 }
 $_SESSION["genial"]=$pasarvalor;
-$sql1="select a.correlativo,a.descripcion from asiento a where a.idLibroM=:idlib";
+
+$sql1="select a.correlativo,a.descripcion, a.nroAsiento from asiento a where a.idLibroM=:idlib and a.estado=1";
 $query2 = $dbh->prepare($sql1);
 $query2->bindParam(':idlib',$pasarvalor,PDO::PARAM_INT);
 $query2->execute();
@@ -34,9 +35,8 @@ else{
   $verte=2;
 }
 }
-else{
-  $verte=3;
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -51,11 +51,24 @@ else{
 </head>
 <body style="background-color: #e5e5e5">          <!-- Page Heading -->
           <h3 class="h3 mb-2 text-gray-800" align="center">Ingresar Asiento</h3>
-          <?php if($verte==3){
-            ?> <h6>Necesita aperturar un libro</h6><?php
-          }
-          else{
-            if($verte==1 || $verte==2){?>
+            <form  method="post">
+            <div class="form-group">
+            <label class="control-label">Seleccione libro diario</label>
+            <select class="form-control" id="libro" name="libro" >
+              <?php $results1=$query12->fetchAll(PDO::FETCH_OBJ);
+                    $cnt=1;
+                    if($query12->rowCount() > 0)
+                    {
+                    foreach($results1 as $result1)
+                  {
+               ?>
+              <option><?php echo htmlentities($result1->descripcion);?></option><?php $cnt++; }}?>
+              </select>
+              <button type="submit" name="ver" class="btn btn-info btn-raised btn-sm"><i class="zmdi zmdi-floppy"></i> Ver</button>
+            </div>
+            </form>
+            <?php 
+            if($verte==1 || $verte==2){ ?>
           <div class="card shadow mb-4">
             <div class="card-body">
                <div class="table-responsive">
@@ -67,6 +80,10 @@ else{
                       <tr>
                         <td>N°</td>
                         <td>Descripción</td>
+                        <td>Ver</td>
+                        <?php if($libroEstado==1){ ?>
+                        <td>Editar</td>
+                      <?php } ?>
                       </tr>
                     </thead>
                     <tbody>
@@ -79,13 +96,17 @@ else{
                       <tr>
                         <td><?php echo htmlentities($r2->correlativo);?></td>
                         <td><?php echo htmlentities($r2->descripcion);?></td>
+                        <td><a href="verAsiento.php?id=<?php echo htmlentities($r2->nroAsiento); ?>">Ver</a></td>
+                        <?php if($libroEstado==1){ ?>
+                        <td><a href="asiento.php?contador=2&nroAs=<?php echo htmlentities($r2->nroAsiento); ?>">Editar</a></td>
+                      <?php } ?>
                       </tr>
                       <?php $co++;}}
                       else{}?>
                     </tbody>
                   </table>
-            <?php if($libEstado==1){ ?>
-            <form action="asiento.php" >
+            <?php if($libroEstado==1){ ?>
+            <form action="asiento.php?contador=1" method="post">
               <p class="text-center">
               <button href="#!" class="btn btn-info btn-raised btn-sm"><i class="zmdi zmdi-floppy"></i> Agregar Asiento</button>
               </p>
@@ -94,7 +115,8 @@ else{
                 </div>
             </div>
           </div>
-<?php }} ?>
+<?php } ?>
+
    <!-- Bootstrap core JavaScript-->
   <script src="../../lib/vendor/jquery/jquery.min.js"></script>
   <script src="../../lib/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -113,9 +135,6 @@ else{
   <script src="../js/ripples.min.js"></script>
   <script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
   <script src="../js/main.js"></script>
-  <script>
-    $.material.init();
-  </script>
 
 </body>
 </html>

@@ -129,6 +129,19 @@ function($scope, $state, NgTableParams, $location, $http, $cookies, $stateParams
   }
 
   ctrl.finalizarOrden = function () {
+    if (ctrl.orden.costo > 0) {
+      $http.get("./app/MDL/administrador/gestionOrdenes/finalizarOrden.php",{params: {id: ctrl.orden.id, asunto: ctrl.orden.asunto, presupuesto: ctrl.orden.presupuesto, costo: ctrl.orden.costo}})
+      .then(function (response) {
+        if (response.data == 'HECHO SIN ERRORES') {
+          $state.go('gestionar-ordenes');
+          swal("¡Bien hecho!", "La orden fue finalizada exitosamente" , "success");
+        } else {
+          swal("¡Opss!", "No se pudo finalizar la orden." , "error");
+        }
+      });
+    } else {
+      swal("¡Opss!", "Debe finalizar la orden con un monto gastado." , "error");
+    }
       // try {
       //   $http.get('./app/MDL/administrador/gestionOrdenes/cargarPeticionesFinalizado.php',{params: {idOrden: ctrl.orden.id}}
       //   ).then(function (response) {
@@ -138,18 +151,7 @@ function($scope, $state, NgTableParams, $location, $http, $cookies, $stateParams
       //     }
       //   })
       // } catch (e) {
-      //   swal("¡Opss!", "Ocurrió un error." + e , "error");
       // }
-
-    $http.get("./app/MDL/administrador/gestionOrdenes/finalizarOrden.php",{params: {id: ctrl.orden.id, asunto: ctrl.orden.asunto, presupuesto: ctrl.orden.presupuesto, costo: ctrl.orden.costo}})
-    .then(function (response) {
-      if (response.data == 'HECHO SIN ERRORES') {
-        $state.go('gestionar-ordenes');
-        swal("¡Bien hecho!", "La orden fue finalizada exitosamente" , "success");
-      } else {
-        swal("¡Opss!", "No se pudo finalizar la orden." , "error");
-      }
-    });
   }
 
   ctrl.cargarPeticiones = function () {

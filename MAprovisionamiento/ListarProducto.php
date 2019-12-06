@@ -103,7 +103,7 @@
                                                     <label for="text-input" class=" form-control-label">Ingresar codigo</label>
                                                 </div>
                                                 <div class="col-8 col-md-5">
-                                                    <input type="text" id="text-input" name="ListarProducto" required placeholder="Buscar por codigo" class="form-control" >
+                                                    <input type="number" min="1" id="text-input" name="ListarProducto" required placeholder="Buscar por codigo" class="form-control" >
                                                         
                                                 </div>
                                                 <div class="col-1 col-md-4">
@@ -138,14 +138,14 @@
                                                                         while ($row1=mysqli_fetch_row($res)) {
                                                                  ?>
                                                                             <tr align=" center">
-                                                                                <th><?php echo $row1[0]; ?></th>
-                                                                                <th><?php echo $row1[1]; ?></th>
-                                                                                <th><?php echo $row1[2]; ?></th>
-                                                                                <th><?php echo $row1[3]; ?></th>
-                                                                                <th><?php echo $row1[4]; ?></th>
-                                                                                <th><?php echo $row1[5]; ?></th>
-                                                                                <th><?php echo $row1[6]; ?></th>
-                                                                                <th><a  href="#" onclick="modalsito('<?php echo $row1[1]; ?>','<?php echo $row1[2]; ?>','<?php echo $row1[4]; ?>','<?php echo $row1[3]; ?>','<?php echo $row1[5]; ?>')" class="btn btn-primary" >Editar</a></th>
+                                                                                <td><?php echo $row1[0]; ?></td>
+                                                                                <td><?php echo $row1[1]; ?></td>
+                                                                                <td><?php echo $row1[2]; ?></td>
+                                                                                <td><?php echo $row1[3]; ?></td>
+                                                                                <td><?php echo $row1[4]; ?></td>
+                                                                                <td><?php echo $row1[5]; ?></td>
+                                                                                <td><?php echo $row1[6]; ?></td>
+                                                                                <td><span  href="#" onclick="modalsito('<?php echo $row1[1]; ?>','<?php echo $row1[2]; ?>','<?php echo $row1[4]; ?>','<?php echo $row1[3]; ?>','<?php echo $row1[5]; ?>')" class="btn btn-primary" >Editar</span></td>
                                                                             </tr>
                                                                  <?php            
                                                                         }
@@ -161,18 +161,18 @@
                                                                     $conexion = mysqli_connect($host,$usuario,$clave,$BaseDatos);
                                                                     $CodigoProducto = $_POST['ListarProducto'];
                                                                     $NomCategoria= $_POST['val-categorias'];
-                                                                    $sql= $conexion->query("SELECT producto.idProd,producto.codProd,producto.nomProd,producto.marProd,categoriap.nomCat,producto.cantMin,producto.cantTotal from producto INNER JOIN  categoriap on producto.idCat=categoriap.idCat WHERE producto.codProd='".$CodigoProducto."' and categoriap.nomCat='".$NomCategoria."';");
+                                                                    $sql= $conexion->query("SELECT Producto.idProd,Producto.codProd,Producto.nomProd,Producto.marProd,Categoriap.nomCat,Producto.cantMin,Producto.cantTotal from Producto INNER JOIN  Categoriap on Producto.idCat=Categoriap.idCat WHERE Producto.codProd=".$CodigoProducto." and Categoriap.nomCat='".$NomCategoria."';");
                                                                    while ($row=mysqli_fetch_row($sql)) {
                                                                      ?>
                                                                                 <tr align="center">
-                                                                                    <th><?php echo $row[0]; ?></th>
-                                                                                    <th><?php echo $row[1]; ?></th>
-                                                                                    <th><?php echo $row[2]; ?></th>
-                                                                                    <th><?php echo $row[3]; ?></th>
-                                                                                    <th><?php echo $row[4]; ?></th>
-                                                                                    <th><?php echo $row[5]; ?></th>
-                                                                                    <th><?php echo $row[6]; ?></th>
-                                                                                    <th><a  href="#" onclick="modalsito('<?php echo $row[1]; ?>','<?php echo $row[2]; ?>','<?php echo $row[4]; ?>','<?php echo $row[3]; ?>','<?php echo $row[5]; ?>')" class="btn btn-primary">Editar</a></th>
+                                                                                    <td><?php echo $row[0]; ?></td>
+                                                                                    <td><?php echo $row[1]; ?></td>
+                                                                                    <td><?php echo $row[2]; ?></td>
+                                                                                    <td><?php echo $row[3]; ?></td>
+                                                                                    <td><?php echo $row[4]; ?></td>
+                                                                                    <td><?php echo $row[5]; ?></td>
+                                                                                    <td><?php echo $row[6]; ?></td>
+                                                                                    <td><span onclick="modalsito('<?php echo $row[1]; ?>','<?php echo $row[2]; ?>','<?php echo $row[4]; ?>','<?php echo $row[3]; ?>','<?php echo $row[5]; ?>')" class="btn btn-primary">Editar</span></td>
                                                                                 </tr>
                                                                      <?php
                                                                      }            

@@ -79,7 +79,7 @@
                                                     <label for="text-input" class=" form-control-label">Nombre: </label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" name="nombre" placeholder="Nombre de Proveedor" class="form-control">
+                                                    <input type="text" id="text-input" name="nombre" placeholder="Nombre de Proveedor" class="form-control" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{14,48}" required>
                                                 </div>
                                             </div>
 
@@ -88,7 +88,7 @@
                                                     <label for="text-input" class=" form-control-label">Dirección: </label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" name="direccion" placeholder="Dirección" class="form-control">
+                                                    <input type="text" id="text-input" name="direccion" placeholder="Dirección" class="form-control" required>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -105,7 +105,7 @@
                                                     <label for="text-input" class=" form-control-label">Teléfono: </label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" name="telefono" placeholder="Teléfono" class="form-control">
+                                                    <input type="text" id="text-input" name="telefono" placeholder="Teléfono" class="form-control" minlength="9" maxlength="20" required pattern="[0-9]+">
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -113,7 +113,7 @@
                                                     <label for="text-input" class=" form-control-label">Ciudad: </label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" name="ciudad" placeholder="Ciudad" class="form-control">
+                                                    <input type="text" id="text-input" name="ciudad" placeholder="Ciudad" class="form-control" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,48}" required>
                                                 </div>
                                             </div>                                            
                                             <div class="row form-group">
@@ -121,7 +121,7 @@
                                                     <label for="text-input" class=" form-control-label">País: </label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" name="pais" placeholder="País" class="form-control">
+                                                    <input type="text" id="text-input" name="pais" placeholder="País" class="form-control" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{3,48}" required>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -129,7 +129,7 @@
                                                     <label for="text-input" class=" form-control-label">Correo: </label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="email" id="text-input" name="correo" placeholder="Correo" class="form-control">
+                                                    <input type="email" id="text-input" name="correo" placeholder="Correo" class="form-control" pattern="^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" required>
                                                 </div>
                                             </div>
                                             <div class="card-footer">

@@ -114,7 +114,7 @@ $error="Error al crear libro diario";
             </div>
             <div class="form-group label-floating">
               <label class="control-label">Escribir año</label>
-              <input class="form-control" type="number" min="1900" id="anio" name="anio" required="">
+              <input class="form-control" type="number" min="2019" id="anio" name="anio" required="">
             </div>
             <div class="form-group label-floating">
               <label class="control-label">Escribir una descripcion del libro</label>

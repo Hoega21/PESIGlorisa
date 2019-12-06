@@ -37,7 +37,7 @@ $resu12=$query12->fetchAll(PDO::FETCH_OBJ);
                       <th>Numero</th>
                       <th>TipoComprobante</th>
                       <th>TotalDevolver</th>
-                      <th>Ver solicitud</th>
+                      <th>Estado</th>
                     </tr>
                   </thead>
                   <tfoot>

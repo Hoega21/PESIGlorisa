@@ -60,11 +60,12 @@ $utilidadEjercicio=$utilidadOperativa-$impuesto;
     $query98->bindParam(':idLib',$pasarvalor,PDO::PARAM_STR);
     $query98->execute();
 
-$sql23="insert into UtlImp(utilidad,impuesto,idLibroM)values(:utilidad,:impuesto,:idLibroM)";
+$sql23="insert into UtlImp(utilidad,impuesto,idLibroM,valor)values(:utilidad,:impuesto,:idLibroM,:valor)";
 $query23 = $dbh->prepare($sql23);
 $query23->bindParam(':utilidad',$utilidadEjercicio,PDO::PARAM_STR);
 $query23->bindParam(':impuesto',$impuesto,PDO::PARAM_STR);
 $query23->bindParam(':idLibroM',$pasarvalor,PDO::PARAM_INT);
+$query23->bindParam(':valor',$taa,PDO::PARAM_STR);
 $query23->execute();
 $lastInsertId = $dbh->lastInsertId();
 if($lastInsertId)
@@ -157,7 +158,7 @@ $query->execute();
                     </tr>
                     <tr>
                       <td>UTILIDAD DEL EJERCICIO</td>
-                      <td><?php echo htmlentities($utilidad) ;?></td>
+                      <td><?php echo htmlentities($utilidadEjercicio) ;?></td>
                     </tr>
                     </tbody>
                   </table>
@@ -165,8 +166,12 @@ $query->execute();
                 <?php }
                 else{  ?>
               <div class="card-body">
+              <div class="col-md-3">
               <p class="text-center">
               <button type="submit"  name="nueva" class="btn btn-info btn-raised btn-sm" data-toggle="modal" data-target="#miModal"><i class="zmdi zmdi-floppy"></i> Nueva tasa </button>
+              </p>
+              </div>
+              <div class="col-md-9">
               <form method="post">
             <label class="control-label">Seleccione tasa de impuesto a la renta</label>
             <select class="form-control" id="tasa" name="tasa">
@@ -186,8 +191,13 @@ $query->execute();
               <button type="submit" name="add" class="btn btn-info btn-raised btn-sm"><i class="zmdi zmdi-floppy"></i> Generar estado</button>
               </p>
             </form>
+          </div>
             </div>
-          <?php }} ?>
+          <?php }
+          else{ ?>
+            <h7>Todos los libros ya cuentan con estados financieros </h7>
+            <?php
+          }} ?>
           </div>
         </div>
 <!-- MODAL -->

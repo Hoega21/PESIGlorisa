@@ -6,7 +6,7 @@
   $json_array = array();
   // $data = json_decode(file_get_contents("php://input"));
   // $username = $_GET['username'];
-  $con = mysqli_connect('sql10.freesqldatabase.com', 'sql10313127', 'ruVDugdGr1', 'sql10313127') or die ( "Upps! Pues va a ser que no se ha podido conectar a la base de datos" );
+  $con = mysqli_connect('70.38.123.185:3306', 'wssac_prueba', 'qweasdzxc123', 'wssac_prueba') or die ( "Upps! Pues va a ser que no se ha podido conectar a la base de datos" );
   // $username = mysqli_real_escape_string($con, $data->username);
 
   $tildes = $con->query("SET NAMES 'utf8'"); //Para que se muestren las tildes correctamente

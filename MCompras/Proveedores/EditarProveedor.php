@@ -93,7 +93,7 @@
                                                     <label for="text-input" class=" form-control-label">RUC</label>
                                                 </div>
                                                 <div class="col-8 col-md-5">
-                                                    <input type="text" id="text-input" name="ruc" placeholder="Buscar por RUC" class="form-control" value="<?php echo $row[1]; ?>" readonly>
+                                                    <input type="text" id="text-input" name="ruc" class="form-control" value="<?php echo $row[1]; ?>" readonly>
                                                 </div>
                                             </div> 
                                             <div class="row form-group">
@@ -101,7 +101,7 @@
                                                     <label for="text-input" class=" form-control-label">Nombre: </label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" name="nombre" placeholder="Nombre de Proveedor" class="form-control" value="<?php echo $row[2]; ?>">
+                                                    <input type="text" id="text-input" name="nombre" class="form-control" value="<?php echo $row[2]; ?>">
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -109,7 +109,7 @@
                                                     <label for="text-input" class=" form-control-label">Dirección: </label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" name="direccion" placeholder="Dirección" class="form-control" value="<?php echo $row[3]; ?>">
+                                                    <input type="text" id="text-input" name="direccion" class="form-control" value="<?php echo $row[3]; ?>">
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -117,7 +117,7 @@
                                                     <label for="text-input" class=" form-control-label">Teléfono: </label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" name="telefono" placeholder="Teléfono" class="form-control" value="<?php echo $row[4]; ?>">
+                                                    <input type="text" id="text-input" name="telefono" class="form-control" value="<?php echo $row[4]; ?>">
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -125,7 +125,7 @@
                                                     <label for="text-input" class=" form-control-label">Ciudad: </label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" name="ciudad" placeholder="Ciudad" class="form-control" value="<?php echo $row[5]; ?>">
+                                                    <input type="text" id="text-input" name="ciudad" class="form-control" value="<?php echo $row[5]; ?>">
                                                 </div>
                                             </div>                                            
                                             <div class="row form-group">
@@ -133,7 +133,7 @@
                                                     <label for="text-input" class=" form-control-label">País: </label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" name="pais" placeholder="País" class="form-control" value="<?php echo $row[6]; ?>">
+                                                    <input type="text" id="text-input" name="pais" class="form-control" value="<?php echo $row[6]; ?>">
                                                 </div>
                                             </div>
                                             <div class="row form-group">

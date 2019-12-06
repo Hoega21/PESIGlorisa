@@ -83,7 +83,7 @@
                                                     <label for="text-input" class=" form-control-label">Orden de Compra: </label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" name="ordencompra" placeholder="" class="form-control" value="<?php echo $orden?>" readonly>
+                                                    <input type="text" id="text-input" name="ordencompra" placeholder="" class="form-control" value="<?php echo $orden;?>" readonly>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -110,7 +110,7 @@
                                                     <label for="text-input" class=" form-control-label">Cantidad: </label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" name="cantidad" placeholder="Cantidad" class="form-control">
+                                                    <input type="number" id="text-input" name="cantidad" placeholder="Cantidad" class="form-control" minlength="0" required pattern="[0-9]+" required>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -118,9 +118,9 @@
                                                     <label for="text-input" class=" form-control-label">Precio: </label>
                                                 </div>                                                
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" name="precio" placeholder="Precio" class="form-control">
+                                                    <input type="text" id="text-input" name="precio" placeholder="Precio" class="form-control" onchange="setTwoNumberDecimal" min="0" max="10" step="0.25" value="0.00" required>
                                                 </div>
-                                            </div>                                           
+                                            </div>
                                             <div class="card-footer">
                                                 <button type="submit" class="btn btn-outline-primary btn-lg btn-block">Agregar</button>
                                             </div>
@@ -134,6 +134,12 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function setTwoNumberDecimal(event) {
+            this.value = parseFloat(this.value).toFixed(2);
+        }
+    </script>
 
     <!-- Jquery JS-->
     <script src="../../vendor/jquery-3.2.1.min.js"></script>

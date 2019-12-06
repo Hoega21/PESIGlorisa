@@ -7,7 +7,7 @@
 	// $result1 = mysqli_query($Conexion,$Consulta1);
 	//if(mysqli_num_rows($result1)==0){
 	//require('Conexion.php');
-	$Consulta ="call proc_deshabilitar_proveedor('".$ruc."')";
+	$Consulta ="update Proveedor SET estProveedor='deshabilitado' WHERE rucProveedor = _ruc";
 	//mysqli_free_result($Conexion);
 	$result=mysqli_query($Conexion,$Consulta);
 	if($result){

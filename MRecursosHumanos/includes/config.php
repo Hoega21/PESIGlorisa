@@ -1,9 +1,9 @@
-<?php 
+<?php
 
-define('DB_HOST','127.0.0.1');
-define('DB_USER','root');
-define('DB_PASS','');
-define('DB_NAME','pesiglorisa');
+define('DB_HOST','70.38.123.185:3306');
+define('DB_USER','wssac_prueba');
+define('DB_PASS','qweasdzxc123');
+define('DB_NAME','wssac_prueba');
 
 try
 {

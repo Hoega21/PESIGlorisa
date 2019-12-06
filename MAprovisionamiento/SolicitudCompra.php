@@ -79,29 +79,32 @@
                                                 <div class="col col-md-13">
                                                     <?php
                                                         require ("../Conexion.php");
+                                                        session_start();
+                                                        $_SESSION['Lian']=0;
                                                         $con = mysqli_connect($host,$usuario,$clave,$BaseDatos);
                                                         $con->set_charset("utf8");
-                                                         $res=$con->query("SELECT count(idDetalleSolicitudCompra) FROM DetalleSolicitudCompra");
+                                                         $res=$con->query("SELECT count(idSolicitud) FROM SolicitudCompra");
+
                                                          while ($row=mysqli_fetch_row($res)) {
+                                                            $isSoli=$row[0]+1;
                                                     ?>
                                                     <h4 align="center">Solicitud de compra</h4> <br>
-                                                    <pre >                               Número: 000<?php echo $row[0]+1;}?>     <label for="text-input" class=" form-control-label">Fecha: <?php echo  date("d/m/Y"); ?></label></pre>
+                                                    <pre >                               Número: 000<?php echo $isSoli;}?>     <label for="text-input" class=" form-control-label">Fecha: <?php echo  date("d/m/Y"); ?></label></pre>
                                                 </div>
                                             </div>
+                                            <?php   $_SESSION['puchis']=$isSoli; ?>
                                             <div class="row form-group">
                                                 <div class="col col-md-3">
                                                     <label for="selectSm" class=" form-control-label">Productos</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
                                                     <?php
-                                                        require ("../Conexion.php");
-                                                        $con = mysqli_connect($host,$usuario,$clave,$BaseDatos);
-                                                        $con->set_charset("utf8");
                                                          $res=$con->query("select * from Producto");
                                                     ?>
                                                         <select class="form-control" id="idProducto" name="idProducto">
                                                     <?php 
                                                         while ($row=mysqli_fetch_row($res)) {
+                                                            $f=$row[2];
                                                     ?>
                                                         <option value=<?php echo $row[0]; ?>><?php echo $row[2]; ?></option>
                                                     <?php
@@ -115,7 +118,7 @@
                                                     <label for="text-input" class=" form-control-label">Cantidad requerida</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" name="CantidadRequerida" placeholder="Cantidad requerida" required class="form-control">
+                                                    <input type="number" min="1" id="CantidadRequerida" name="CantidadRequerida" placeholder="Cantidad requerida" required class="form-control">
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -123,49 +126,33 @@
                                                     <label for="text-input" class=" form-control-label">Observaciones</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <textarea name="textarea-input" id="textarea-input" rows="3" placeholder="Observaciones..." class="form-control"></textarea>
+                                                    <textarea  name="Observaciones" id="Observaciones" rows="3" placeholder="Observaciones..." class="form-control"></textarea><br>
+                                                    <div align="right">
+                                                        <span  class="btn btn-primary"  onclick="Holi();" >Agregar</span>
+                                                    </div>
+                                                   
+                                                </div>
+                                            </div>
+                                            <div >
+                                                <div class="col-lg-20">
+                                                    <div class="table-responsive table--no-card m-b-30" id="tablita" name="tablita">
+                                                        
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="card-footer">
-                                                     <input class="btn btn-outline-primary btn-lg btn-block" type="submit" name="Agregar" value="Agregar producto">
-                                            </div>
-                                            <table class="table table-borderless table-striped table-earning" align="center">
-                                        <thead>
-                                            <tr align="center">
-                                                <th>Producto</th>
-                                                <th>Unidades requeridas</th>
-                                                <th>Descripción</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>            
-                                        </tbody>
-                                            <tr align="center">
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
-                                            </tr>
-                                    </table>
-                                            <div class="card-footer">
-                                                <input class="btn btn-outline-primary btn-lg btn-block" type="submit" name="RegistrarProducto" value="Guardar">
+                                                <input class="btn btn-outline-primary btn-lg btn-block" type="submit" name="GuardarSolicitud" value="Guardar">
                                             </div>
                                 </form>
-                                <?php 
-                                        require ("../Conexion.php");
-                                            $conexion = mysqli_connect($host,$usuario,$clave,$BaseDatos);
-                                            if (isset($_POST['RegistrarProducto'])) {
-                                                $idSolicitud= $_POST['codigoProducto'];
-                                                $idProducto= $_POST['codigoProducto'];
-                                                $CantidaRequerida= $_POST['nombreProducto'];
-                                                $Observacion= $_POST['marcaProducto'];
-                                               
-                                                $sql = $conexion->query("INSERT INTO DetalleSolicitudCompra(idSolicitud,idProd,cantRequerida,Observacion) VALUES ('".$idSolicitud."','".$idProducto."','".$CantidaRequerida."','".$Observacion."')");
-                                                if ($sql) {
-                                                    echo '<script>alert("Registro correcto");</script>';
-                                                }else {
-                                                    echo '<script>alert("Registro incorrecto");</script>';
-                                                }
-                                            }
-                                        ?>
+                              
+                                    <?php
+                                         require ("../Conexion.php");
+                                         $conexion = mysqli_connect($host,$usuario,$clave,$BaseDatos);
+                                         if (isset($_POST['GuardarSolicitud'])) {
+                                            echo '<script>alert("Solicitud guardada");</script>';
+                                         }
+                                    ?>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -174,6 +161,28 @@
             </div>
         </div>
     </div>
+
+    <script>
+    function Holi(){
+        var idProd= $("#idProducto").val();
+        var cantReq= $("#CantidadRequerida").val();
+        var Obs= $("#Observaciones").val();
+        var parametros = { "CodProducto" : idProd,
+            "CantReq": cantReq,
+            "Observ": Obs
+         };
+              $.ajax({
+                    data:  parametros,
+                    url:   'Ajax.php', 
+                    type:  'post', //método de envio
+                    success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                        $('#tablita').load('tablatemp.php');
+                  }
+              });
+
+
+    }
+    </script>
 
     <!-- Jquery JS-->
     <script src="../vendor/jquery-3.2.1.min.js"></script>
@@ -202,4 +211,10 @@
 </body>
 
 </html>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#tablita').load('tablatemp.php');
+  });
+</script>
 <!-- end document-->

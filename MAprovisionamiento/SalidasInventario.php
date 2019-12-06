@@ -117,7 +117,7 @@
                                                     <label for="text-input" class=" form-control-label">Cantidad de salida</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" name="Cantidad" required placeholder="Cantidad a ingresar" class="form-control">
+                                                    <input type="number" min="1" id="text-input" name="Cantidad" required placeholder="Cantidad a ingresar" class="form-control">
                                                 </div>
                                             </div>
                                                 <div class="card-footer">

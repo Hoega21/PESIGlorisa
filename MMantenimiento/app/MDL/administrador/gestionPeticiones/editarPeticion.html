@@ -30,7 +30,7 @@
                           ng-disabled="GPeCtrl.peticion.progreso != 'INICIO'"
                           placeholder="Seleccione una orden de mantenimiento"
                           ng-model="GPeCtrl.peticion.orden"
-                          ng-options="orden as orden.descripcion for orden in GPeCtrl.ordenesLista">
+                          ng-options="orden as orden.descripcion for orden in GPeCtrl.ordenesSFLista">
                           <option value="" selected class="placeholder-select">Seleccione una orden	...</option>
                         </select>
                       </div>

@@ -79,7 +79,7 @@
                                                     <label for="text-input" class=" form-control-label">Categoria</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" name="categoria" required placeholder="Categoria" class="form-control">
+                                                    <input type="text" id="text-input" pattern="[A-Za-z ]+" title="Ayuda: Solo se aceptan letras" name="categoria" required placeholder="Categoria" class="form-control">
                                                 </div>
                                             </div>
 
@@ -88,7 +88,7 @@
                                                     <label for="text-input" class=" form-control-label">Descripción</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" id="text-input" name="descripcion" placeholder="Descripcion" class="form-control">
+                                                    <input type="text" id="text-input" name="descripcion" pattern="[A-Za-z ]+" title="Ayuda: Solo se aceptan letras" placeholder="Descripcion" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="card-footer">

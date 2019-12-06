@@ -16,7 +16,7 @@
 		// $result1 = mysqli_query($Conexion,$Consulta1);
 		//if(mysqli_num_rows($result1)==0){
 		//require('Conexion.php');
-		$Consulta ="update `detalleingreso` set `cantidad`=".$cantidad.",`precio`=".$precio." where Ingreso_idIngreso =".$orden." AND Producto_idProducto=".$_SESSION['idProducto']."";
+		$Consulta ="update `detalleingreso` set `cantidad`=".$cantidad.",`precio`=".$precio." where idIngreso =".$orden." AND idProd=".$_SESSION['idProducto']."";
 		//mysqli_free_result($Conexion);
 		$result=mysqli_query($Conexion,$Consulta);
 		if($result){

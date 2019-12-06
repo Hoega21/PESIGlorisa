@@ -183,7 +183,7 @@ else{
                       <td></td>
                       <td></td>
                       <td>Total Pasivo Corriente</td>
-                      <td><?php echo htmlentities(substr($tPasCo, 1)) ;?></td>
+                      <td><?php echo htmlentities($tPasCo) ;?></td>
                     </tr>
                     <tr>
                       <td colspan="2">Activo No Corriente</td>

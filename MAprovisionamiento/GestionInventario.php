@@ -60,7 +60,7 @@
                         </a>
                         <div class="dropdown-menu">
                           <a class="dropdown-item" href="SolicitudCompra.php" target="Aprovisionamiento">Registro solicitud</a>
-                          
+                          <a class="dropdown-item" href="ListarSolicitud.php" target="Aprovisionamiento">Listado de solicitudes</a>                          
                         </div>
                       </li>
 

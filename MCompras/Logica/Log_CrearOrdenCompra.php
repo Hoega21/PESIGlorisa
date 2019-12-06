@@ -5,8 +5,11 @@
 	$fecha_ingreso = $_POST['fecha_ingreso'];
 	$proveedor = $_POST['proveedor'];
 	$idempleado = $_SESSION['MUsuarioid'];
+	$solicitud = $_POST['solicitud'];
 
-	if($fecha_pedido == '' or $fecha_ingreso == '' or $proveedor == ''){
+	//echo ($fecha_pedido." ".$fecha_ingreso." ".$proveedor." ".$idempleado." ".$solicitud);
+
+	if($fecha_pedido == '' or $fecha_ingreso == '' or $proveedor == '' or $solicitud ==''){
 		echo "<script>
 				alert('Ingrese los datos completos');
 				window.location='../Ordenes de Compra/CrearOrdenCompra.php';
@@ -14,7 +17,7 @@
 	}else{
 		//mysqli_free_result($Conexion);
 		//require('Conexion.php');
-		$Consulta ="insert into `ingreso`(`fecIngreso`, `fecPedido`, `estado`, `totalIngreso`, `factura`, `tblemployees_id`, `Proveedor_idProveedor`) values ('".$fecha_ingreso."','".$fecha_pedido."','orden',0,'pendiente',1,".$proveedor.")";
+		$Consulta ="call proc_registrar_ingreso('".$fecha_ingreso."','".$fecha_pedido."','pendiente',0.0,'pendiente',1,".$proveedor.")";
 		$result=mysqli_query($Conexion,$Consulta);
 		if($result){
 		echo "<script>

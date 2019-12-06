@@ -15,12 +15,12 @@
 				window.location='../Proveedores/AgregarProveedor.php';
 				</script>";		
 	}else{
-		$Consulta1 = "call proc_buscar_Proveedor_Repetido('".$nombre."','".$direccion."','".$ruc."')";
+		$Consulta1 = "select * Proveedor where (nomProveedor ='".$nombre."' or dirProveedor= '".$direccion."' or rucProveedor ='".$ruc."')";
 		$result1 = mysqli_query($Conexion,$Consulta1);
 		if(mysqli_num_rows($result1)==0){
 			//mysqli_free_result($Conexion);
 			require('Conexion.php');
-			$Consulta ="call proc_registrar_proveedor('".$ruc."','".$nombre."','".$direccion."','".$telefono."','".$ciudad."','".$pais."','".$correo."','habilitado')";			
+			$Consulta ="insert into Proveedor(rucProveedor, nomProveedor, dirProveedor, telProveedor, ciuProveedor, paiProveedor, corProveedor,estProveedor) values ('".$ruc."','".$nombre."','".$direccion."','".$telefono."','".$ciudad."','".$pais."','".$correo."','habilitado')";			
 			$result=mysqli_query($Conexion,$Consulta);
 			if($result){
 				echo "<script>

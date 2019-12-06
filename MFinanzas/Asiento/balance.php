@@ -138,18 +138,18 @@ if(isset($_POST['add']))
                       <tr>
                         <td><?php echo htmlentities($result->codCuenta);?></td>
                         <td><?php echo htmlentities($result->descripcion);?></td>
-                        <td><?php echo htmlentities($result->debe);?></td>
-                        <td><?php echo htmlentities($result->haber);?></td>
+                        <td><?php echo htmlentities($result->debe); $suma1+=$result->debe; ?></td>
+                        <td><?php echo htmlentities($result->haber);$suma2+=$result->haber; ?></td>
                         <?php 
                         $comp=$result->Saldo;
                         if($comp<0){ ?>
-                        <td><?php echo htmlentities(substr($comp, 1));?></td>
+                        <td><?php echo htmlentities(substr($comp, 1)); $suma3+=substr($comp, 1); ?></td>
                         <td></td>
                         <?php }
                         else {
                           if($comp>0){?>
                             <td></td>
-                            <td><?php echo htmlentities($result->Saldo);?></td>
+                            <td><?php echo htmlentities($result->Saldo);$suma4+=$result->Saldo; ?></td>
                           <?php }
                           else{ ?>
                             <td>-</td>
@@ -159,13 +159,13 @@ if(isset($_POST['add']))
                         $numCuenta=$result->codCuenta;
                         if($numCuenta<60){
                           if($comp<0){ ?>
-                        <td><?php echo htmlentities(substr($comp, 1));?></td>
+                        <td><?php echo htmlentities(substr($comp, 1));$suma5+=substr($comp, 1); ?></td>
                         <td></td>
                         <?php }
                         else {
                           if($comp>0){?>
                             <td></td>
-                            <td><?php echo htmlentities($result->Saldo);?></td>
+                            <td><?php echo htmlentities($result->Saldo);$suma6+=$result->Saldo; ?></td>
                           <?php }
                           else{ ?>
                             <td>-</td>
@@ -185,13 +185,13 @@ if(isset($_POST['add']))
                           }
                           else{ 
                             if($comp<0){ ?>
-                        <td><?php echo htmlentities(substr($comp, 1));?></td>
+                        <td><?php echo htmlentities(substr($comp, 1));$suma7+=substr($comp, 1); ?></td>
                         <td></td>
                         <?php }
                         else {
                           if($comp>0){ ?>
                             <td></td>
-                            <td><?php echo htmlentities($result->Saldo);?></td>
+                            <td><?php echo htmlentities($result->Saldo);$suma8+=$result->Saldo; ?></td>
                           <?php }
                           else{ ?>
                             <td>-</td>
@@ -204,19 +204,74 @@ if(isset($_POST['add']))
                     }
                     } ?>
                     </tbody>
+                    <tfoot>
+                    <tr>
+                      <th colspan="2">SUMAS:</th>
+                      <th><?php echo htmlentities("$suma1"); ?></th>
+                      <th><?php echo htmlentities("$suma2"); ?></th>
+                      <th><?php echo htmlentities("$suma3"); ?></th>
+                      <th><?php echo htmlentities("$suma4"); ?></th>
+                      <th><?php echo htmlentities("$suma5"); ?></th>
+                      <th><?php echo htmlentities("$suma6"); ?></th>
+                      <th><?php echo htmlentities("$suma7"); ?></th>
+                      <th><?php echo htmlentities("$suma8"); ?></th>
+                    </tr>
+                    <tr>
+                      <th colspan="2">RESULTADOS DEL EJERCICIO:</th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th><?php $suma9=$suma8-$suma7; echo htmlentities("$suma9"); ?></th>
+                      <th><?php echo htmlentities("$suma9"); ?></th>
+                      <th></th>
+                    </tr>
+                    <tr>
+                      <th colspan="2">TOTALES:</th>
+                      <th><?php echo htmlentities("$suma1"); ?></th>
+                      <th><?php echo htmlentities("$suma2"); ?></th>
+                      <th><?php echo htmlentities("$suma3"); ?></th>
+                      <th><?php echo htmlentities("$suma4"); ?></th>
+                      <th><?php echo htmlentities("$suma5"); ?></th>
+                      <th><?php $suma10=$suma6+$suma9; echo htmlentities("$suma10"); ?></th>
+                      <th><?php $suma11=$suma7+$suma9; echo htmlentities("$suma11"); ?></th>
+                      <th><?php echo htmlentities("$suma8"); ?></th>
+                    </tr>
+                  </tfoot>
                   </table>
-            <?php  if($libroEstado==1){ ?>
+            <?php  
+            if($libroEstado==1){
+            if($suma1==0){
+              ?>
+              <label>Debe ingresar asientos</label>
+              <?php
+            } 
+            else if($suma10==0||$suma11==0||$suma8==0){
+              ?>
+              <label>Para que puede guardar el balance le falta agregar algunos asientos</label>
+              <?php 
+              }
+              else if($suma5!=$suma10 || $suma11!=$suma8){
+                ?>
+                <label>Aun no esta balanceado el libro</label>
+                <?php
+              }
+              else{
+              ?>
             <form method="post">
               <p class="text-center">
               <button name="add" class="btn btn-info btn-raised btn-sm"><i class="zmdi zmdi-floppy"></i> Guardar Balance</button>
               </p>
             </form>
+            <?php } }
+                    else{}  ?>
                 </div>
             </div>
           </div>
-                  <?php }}
-                    else{} ?>
+        <?php } ?>
         </div>
+
    <!-- Bootstrap core JavaScript-->
   <script src="../../lib/vendor/jquery/jquery.min.js"></script>
   <script src="../../lib/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

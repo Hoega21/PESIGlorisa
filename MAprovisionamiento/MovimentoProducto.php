@@ -18,7 +18,7 @@
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
-                    <tr>
+                    <tr align="center">
                       <th>#</th>
                       <th>Fecha registro</th>
                       <th>Tipo de movimiento</th>
@@ -28,7 +28,7 @@
                       <th>Salida</th>
                     </tr>
                   </thead>
-                  <tfoot>
+                  <tfoot align="center">
                     <tr>
                       <th>#</th>
                       <th>Fecha registro</th>
@@ -45,25 +45,26 @@
                                     require ("../Conexion.php");
                                     $con=mysqli_connect($host,$usuario,$clave,$BaseDatos);
                                     $con->set_charset("utf8");
-                                    $res=$con->query("SELECT movimientoalmacen.idMovimiento,movimientoalmacen.fecha,movimientoalmacen.idTipo,Producto.nomProd,movimientoalmacen.cantidad FROM movimientoalmacen INNER JOIN producto on movimientoalmacen.idProd=Producto.idProd ;");
+                                    $res=$con->query("SELECT movimientoAlmacen.idMovimiento,movimientoAlmacen.fecha,movimientoAlmacen.idTipo,Producto.nomProd,
+                                      movimientoAlmacen.cantidad FROM movimientoAlmacen INNER JOIN Producto on movimientoAlmacen.idProd=Producto.idProd ;");
                                     while ($row1=mysqli_fetch_row($res)) {
                     ?>
                                       <tr align="center">
-                                      <th><?php echo $row1[0]; ?></th>
-                                      <th><?php echo $row1[1]; ?></th>
-                                      <th><?php echo $row1[2]; ?></th>
-                                      <th><?php echo $row1[3]; ?></th>
+                                      <td><?php echo $row1[0]; ?></td>
+                                      <td><?php echo $row1[1]; ?></td>
+                                      <td><?php echo $row1[2]; ?></td>
+                                      <td><?php echo $row1[3]; ?></td>
                                      
                        <?php                
                                       if ( $row1[2]=='Entrada') {
                        ?> 
-                                        <th><?php echo $row1[4]; ?></th>
-                                        <th>0</th>
+                                        <td><?php echo $row1[4]; ?></td>
+                                        <td>0</td>
                         <?php 
                                       }else{
                         ?>
-                                        <th>0</th>
-                                        <th><?php echo $row1[4]; ?></th>
+                                        <td>0</td>
+                                        <td><?php echo $row1[4]; ?></td>
                                         
                         <?php
                                       }

@@ -20,24 +20,22 @@
                   <thead>
                     <tr>
                       <th>Id</th>
-                      <th>Fecha de Pedido</th>
                       <th>Fecha de Ingreso</th>
+                      <th>Fecha de Pedido</th>
                       <th>Estado</th>
                       <th>Total</th>
                       <th>Proveedor</th>
                       <th>Agregar productos</th>
                       <th>Ver Detalle</th>
-                      <th>Enviar</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
+                  <tbody>                    
                       <?php 
                         //if (isset($_POST['BuscarProveedor'])==false){
                         require ("../Logica/Conexion.php");
                         //$con=mysqli_connect($host,$usuario,$clave,$BaseDatos);
                         //$con->set_charset("utf8");
-                        $Consulta = "select * from ingreso where estado='orden'";
+                        $Consulta = "select * from ingreso where estado='pendiente'";
                         $result = mysqli_query($Conexion,$Consulta);
                         if($result)  {                    
                           while ($row=mysqli_fetch_row($result)) {
@@ -53,7 +51,11 @@
                           $row2=mysqli_fetch_row($result2);
                           $Consulta4 = "update `ingreso` SET `totalIngreso`= ".$row2[0]." WHERE idIngreso =".$row[0]."";
                           $result4=mysqli_query($Conexion,$Consulta4);
-                          echo $row2[0];                          
+                          if($row2[0]>0.0){
+                            echo $row2[0];;
+                          }else{
+                            echo ("0.0");
+                          }
                           ?></td>
                         <td><?php 
                             $Consulta3 = "select nomProveedor from Proveedor where idProveedor=".$row[6]."";
@@ -62,15 +64,13 @@
                             echo $row3[0]; ?>                            
                         </td>
                         <td><a href="AgregarProductos.php?idcodigo=<?php echo $row[0]; ?>">Agregar</a></td>
-                        <td><a href="VerDetalleOrdenCompra.php?idorden=<?php echo $row[0]; ?>">Ver Detalle</a></td>
-                        <td><a href="../Logica/Log_EnviarOrden.php?ruc=<?php echo $row[1]; ?>">Enviar</a></td>
+                        <td><a href="VerDetalleOrdenCompra.php?idorden=<?php echo $row[0]; ?>&proveedor=<?php echo $row3[0]; ?>">Ver Detalle</a></td>
                         </tr>
-                        <?php            
+                        <?php
                         }
                         }
                         mysqli_close($Conexion);
                       ?>
-                    </tr>
                   </tbody>                  
                 </table>
               </div>
