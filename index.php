@@ -5,7 +5,7 @@ if(isset($_POST['signin']))
 {
 $uname=$_POST['username'];
 $password=$_POST['password'];
-$sql ="SELECT id,EmailID,Password,puesto FROM tblemployees WHERE EmailID=:uname and Password=:password";
+$sql ="SELECT id,EmailID,Password,puesto,Department FROM tblemployees WHERE EmailID=:uname and Password=:password";
 $query= $dbh -> prepare($sql);
 $query-> bindParam(':uname', $uname, PDO::PARAM_STR);
 $query-> bindParam(':password', $password, PDO::PARAM_STR);
@@ -15,13 +15,14 @@ if($query->rowCount() > 0)
 {
 $_SESSION['alogin']=$_POST['username'];
 foreach ($results as $result ) {
+    $_SESSION['area']=htmlentities($result->Department);
     $_SESSION['puesto']=htmlentities($result->puesto);
     $_SESSION['eid']=htmlentities($result->id);
 }
 
 echo "<script type='text/javascript'> document.location = 'principal.php'; </script>";
 } else{
-  
+
   echo "<script>alert('Invalid Details');</script>";
 }
 }
